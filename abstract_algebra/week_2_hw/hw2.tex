@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+
+\title{Abstract Algebra\\
+\large{HW 2}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{1.2.9}
+\begin{addmargin}[1em]{0em}
+Using the same reasong for Dihedral groups, determining two adjacent vertices of a solid body in $\mathbb{R}^3$ will determine the body uniquely.\\
+For $G = \{$the group of rigid motions of a tetrahedron in $\mathbb{R}^3\}$, the first vertex can have $4$ different locations, and for each of these locations, there can be $3$ different locations for the second vertex, i.e. $|G| = 3 \cdot 4 = 12$
+\end{addmargin}
+\section{1.3.2}
+\begin{addmargin}[1em]{0em}
+In cycle notation, $\sigma = (1,13,5,10)(3,15,8)(4,14,11,7,12,9)$,\\$\tau = (1,14)(2,9,5,15,13,4)(3,10)(5,12,7)(8,11)$.\\
+Then $\sigma^2 = (1,5)(10,13)(3,8,15)(4,11,12)(14,7,9)$,\\
+$\sigma\tau = (1,4)(2,9)(3,13,12,15,11,5)(8,10,14)$,\\
+$\tau\sigma = (1,11,3)(2,4)(5,9,8,7,15)(13,14)$,\\
+$\tau^2\sigma = (1,13,2,8,3,15,14,11,7,9,5,12,10)$
+\end{addmargin}
+\section{1.3.5}
+\begin{addmargin}[1em]{0em}
+The order of $\sigma = (1,12,8,10,4)(2,13)(5,11,7)(6,9)$ must be a common multiple of $5,2,3,2$, i.e. $|\sigma| = 30$
+\end{addmargin}
+\section{1.3.13}
+\begin{addmargin}[1em]{0em}
+WTS $\sigma \in S_n$ is of 2-cycles $\rightarrow |\sigma| = 2$\\
+Because $\sigma$ contains only 2-cycles, this means $\forall i \in \{1,...,n\}$, either $i$ is in a 2-cycle in $\sigma$ or $i$ is mapped to itself in $\sigma$, i.e., either case $\sigma (\sigma(i)) = i$, therefore $|\sigma| | 2$. Because $\sigma$ contains at least a 2-cycle, this means $\sigma \neq 1$, i.e. $|\sigma| \neq 1$, therefore, $|\sigma| = 2$.\\
+WTS $|\sigma| = 2\rightarrow \sigma$ contains only 2-cycles.\\
+Suppose $\exists i \in \{1,...,n\}$ such that $i$ is in a $n-$cycle in $\sigma$, then $\sigma(\sigma(i)) \neq i$, i.e., $\sigma ^2 != 1$, therefore $|\sigma| \neq 2$. Contradiction.
+\end{addmargin}
+\section{1.3.20}
+\begin{addmargin}[1em]{0em}
+Claim that $\sigma = (1,2,3),\tau = (1,2)$ generates $S_3$:\\
+$\tau^2 = (1,3,2), \sigma\tau = (1,3), \sigma\tau^2=(2,3)$\\
+Because $|\braket{\sigma, \tau}| = 6$, $\braket{\sigma, \tau} = S_3$.
+\end{addmargin}
+\section{1.4.7}
+For $A = \begin{bmatrix}
+a & b\\
+c & d
+\end{bmatrix}$, there are a total of $p^4$ such matrices.\\
+Now need to count matrices where determinant is $0$.\\
+If $a=0, b = 0$, there are a total of $p^2$ such matrices.\\
+If $a=0, b \neq 0$, or $a \neq 0, b=0$, there are a total of $2 \cdot (p-1) \cdot 1 \cdot p = 2p^2 - 2p$ such matrices.\\
+If $a \neq 0, b \neq 0$, there are a total of $(p-1) \cdot (p-1) \cdot p = p^3 - 2p^2 + p$ such matrices.\\
+Therefore, $|GL(\mathbb{F}_p)| = p^4 - p^2 - (2p^2 - 2p) - (p^3 - 2p^2 + p) = p^4 - p^3 - p^2 + p$.
+\section{1.6.1}
+a. We prove $\phi(x^n) = \phi(x)^n$ using induction.\\
+Suppose $\phi(x^{n-1}) = \phi(x)^{n-1}$ is true, then
+\begin{equation*}
+    \phi(x^n) = \phi(x^{n-1} \cdot x) = \phi(x)^{n-1} \cdot \phi(x) = \phi(x)^n
+\end{equation*}
+b. $\phi(1) = \phi(x \cdot x^{-1}) = \phi(x) \cdot \phi(x^{-1}) = 1$, therefore $\phi(x^{-1}) = \phi(x)^{-1}$.\\
+Therefore $\forall n \in \mathbb{Z}^-$, if $\phi(x^{n+1}) = \phi(x)^{n+1}$, then
+\begin{equation*}
+    \phi(x^{n}) = \phi(x^{n+1} \cdot x^{-1}) = \phi(x)^{n+1} \cdot \phi(x)^{-1} = \phi(x)^n
+\end{equation*}
+\end{document}

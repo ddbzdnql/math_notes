@@ -1,0 +1,244 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+
+\title{Linear Algebra Done Right\\
+\large{HW 2}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{2.1}
+(Axler 2A.11)\\
+WTS $w \notin span(v_1, ..., v_m) \rightarrow v_1, ..., v_m, w$ linearly independent.\\
+Suppose $\exists$ a linear combination such that $\sum_{i=1}^{m} a_iv_i + a_{m+1}w = 0$.\\
+If $a_{m+1} = 0$, then $\sum_{i=1}^{m} a_iv_i = 0$, i.e., $v_1, ..., v_m$ linearly independent. Contradiction.\\
+If $a_{m+1} \neq 0$, then $w = \sum_{i=1}^{m} \frac{a_i}{a_{m+1}}v_i$, contradiction.\\
+Therefore $v_1, ..., v_m, w$ is linearly independent.\\
+WTS $v_1,...,v_m,w$ linearly independent $\rightarrow w \notin span(v_1,..., v_m)$.\\
+This is obvious.
+\section{2.2}
+(Axler 2B.5)\\
+Create base $p_3 = x^3, p_2 = x^3+x^2, p_1 = x, p_0 = 1$.\\
+$\forall a,b,c,d \in \textbf{F}, p \in P_3(\textbf{F}) = ax^3 + bx^2 + cx + d$, then $p = (a-b)\cdot p_3 + b\cdot p_2 + c\cdot p_1 + d\cdot p_0$
+\section{2.3}
+(Axler 2B.7)\\
+$V = \textbf{F}^4, U = \{(x, y, z, 0)|x, y, z \in \textbf{F}\}$\\
+Let
+\begin{equation*}
+    v_1 = \begin{pmatrix}
+    1\\
+    0\\
+    0\\
+    0
+    \end{pmatrix}
+    v_2 = \begin{pmatrix}
+    0\\
+    1\\
+    0\\
+    0
+    \end{pmatrix}
+    v_3 = \begin{pmatrix}
+    0\\
+    0\\
+    1\\
+    1
+    \end{pmatrix}
+    v_4 = \begin{pmatrix}
+    0\\
+    0\\
+    0\\
+    1
+    \end{pmatrix}
+\end{equation*}
+$\forall v = (x, y, z, w) \in V, v = x \cdot v_1 + y \cdot v_2 + z \cdot v_3 + (w-z) \cdot v_4$, therefore clearly $v_1, v_2, v_3, v_4$ a basis of $V$.\\
+We can also see that $v_1, v_2 \in U, v_3, v_3 \notin U$. However, $v_1, v_2$ is not a basis of $U$ because $dim\ U = 3$.
+\section{2.4}
+(Axler 2C.1)\\
+We need to show $U \subseteq V$ and $V \subseteq U$. It is clear that $U \subseteq V$. Therefore, only NTS $V \subseteq U$.\\
+Suppose $dim\ U = dim\ V = n$, and $B = \{v_1, ..., v_n\}$ a basis of $U$. We should be able to extend $B$ to a basis of $V$. However, because $|B| = n = dim\ V$, this means $B$ is already a basis of $V$, i.e. $V \subseteq U$. Therefore $U = V$.
+\section{2.5}
+(Axler 2C.7)\\
+We have $16a_4 + 8a_3 + 4a_2 + 2a_1 + a_0 = 625a_4 + 125a_3 + 25a_2 + 5a_1 + a0$, and $16a_4 + 8a_3 + 4a_2 + 2a_1 + a_0 = 1296a_4 + 216a_3 + 36a_2 + 6a_1 + a_0$.\\
+Therefore
+\begin{equation*}
+    \begin{pmatrix}
+    609 & 117 & 21 & 3 & 0\\
+    1280 & 208 & 32 & 4 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    a_4\\
+    a_3\\
+    a_2\\
+    a_1\\
+    a_0
+    \end{pmatrix} =
+    \begin{pmatrix}
+    0\\
+    0
+    \end{pmatrix}
+\end{equation*}
+Solving for this system gives a basis of $U$:
+\begin{equation*}
+    \begin{pmatrix}
+    \frac{1}{31}\\
+    -\frac{154}{481}\\
+    1\\
+    0\\
+    0
+    \end{pmatrix},
+    \begin{pmatrix}
+    \frac{1}{148}\\
+    -\frac{9}{481}\\
+    0\\
+    1\\
+    0
+    \end{pmatrix}
+\end{equation*}
+We can extend this to a basis of $P_4(\textbf{F})$:
+\begin{equation*}
+        \begin{pmatrix}
+    \frac{1}{31}\\
+    -\frac{154}{481}\\
+    1\\
+    0\\
+    0
+    \end{pmatrix},
+    \begin{pmatrix}
+    \frac{1}{148}\\
+    -\frac{9}{481}\\
+    0\\
+    1\\
+    0
+    \end{pmatrix},
+    \begin{pmatrix}
+    1\\
+    0\\
+    0\\
+    0\\
+    0
+    \end{pmatrix},
+    \begin{pmatrix}
+    0\\
+    1\\
+    0\\
+    0\\
+    0
+    \end{pmatrix},
+    \begin{pmatrix}
+    0\\
+    0\\
+    0\\
+    0\\
+    1
+    \end{pmatrix}
+\end{equation*}
+Therefore the subspace $W = \{(a,b,0,0,c)^T|a,b,c \in \textbf{F}\}$ satisfies that $U \oplus W = P_4(\textbf{F})$
+\section{2.6}
+(Axler 2.C.11)\\
+Because $U+W = \mathbf{R}$, we have $dim\ U + dim\ W - dim(U \cap W) = dim\ R \rightarrow 3 + 5 - dim(U \cap W) = 8$, i.e. $dim(U \cap W) = 0$. Therefore, $U, W$ independent and $U \oplus W = \mathbf{R}$
+\section{2.7}
+(Axler 2.C.12)\\
+Similar to the reasoning above, $dim(U \cap W) = 10 - 9 = 1$, therefore $U \cap W \neq \varnothing$
+\section{2.8}
+(Axler 3.A.11)\\
+Suppose $u_1, ..., u_m$ a basis of $U$, and we extend it to a basis of $V, u_1, ..., u_m; v_1, ..., v_n$. Then we define $T$ as $T(a_1u_1 + ... + a_mu_m + b_1v_1 + ... + b_nv_n) = $
+\begin{equation*}
+    a_1Su_1 + ... + a_mSu_m + b_1 + ... + b_n
+\end{equation*}
+i.e. for the base vectors, map those from $U$ to what $S$ will map them to, and map those from $V - U$ to $1$.\\
+Suppose $a,b \in V - U$ and $a+b = u \in U$, this means the coefficients of $v_1, ..., v_m$ for $a, b$ should cancel each other. Therefore $Ta + Tb$ should equal to $Tu$.
+\section{2.9}
+(Axler 3.A.14)
+Suppose $v_1, v_2, ..., v_n$ a basis of $V$. We create a group of linear maps:
+\begin{equation*}
+    G = \{T \in L(V, V)| Tv_i = v_j\}
+\end{equation*}
+These linear maps are isomorphic to $S_n$, the group of permutations of $\{1, ..., n\}$, and because $S_n$ is not commutative, there must exist $S, T \in G$ s.t. $ST \neq TS$
+\section{2.10}
+$V$ a vector space over field $F$, the \textit{dual vector space} $V^*$ is the vector space $L(V, \mathbf{F})$ of linear maps from $V$ to $\mathbf{F}$ where the linear maps $f: V \rightarrow \mathbf{F}$ satisfy:
+\begin{equation*}
+    f(v+w) = f(v) +f(w) \tag{\forall v, w \in V}
+\end{equation*}
+\begin{equation*}
+    f(a\cdot v) = a \cdot f(v) \tag{\forall v \in V, a \in \mathbf{F}}
+\end{equation*}
+Given $v_1, ..., v_n$ a basis of $V$, find a basis for $V^*$.\\\\
+The dimension of $V^*$ is $n$. Define $f_i$ to be
+\begin{equation*}
+    f_i(v) = \begin{cases}
+    1 & v = v_i\\
+    0 & \textrm{otherwise}
+    \end{cases}
+\end{equation*}
+Then $f_1, f_2, ..., f_n$ is a basis of $V^*$.\\
+\textbf{Proof:}\\
+First of all $\forall f \in L(, \mathbf{F})$, $f(0) = 0$:
+$f(0) = f(0+0) = f(0) + f(0) \rightarrow f(0) = 0$\\
+Then given $f \in L(V, \mathbf{F})$, say for $i \in \{1, ..., n\}, f(v_i) = k_i \in \mathbf{F}$, then we claim $f = k_1f_1 + ... + k_nf_n$.\\
+\begin{equation*}
+   \forall v = a_1v_1 + ... + a_nv_n \in V, f(v) = \sum_{i=1}^{n} a_i f(v_i) = \sum_{i=1}^{n} a_ik_i
+\end{equation*}
+\begin{equation*}
+    \forall i, j \in \{1, ..., n\}, f_i(v_j) = \begin{cases}
+    1 & i = j\\
+    0 & \textrm{otherwise}
+    \end{cases}
+\end{equation*}
+Therefore
+\begin{equation*}
+    \sum_{i=1}^{n}k_if_i \left(\sum_{j=1}^{n} a_jv_j\right) = \sum_{i=1}^{n} k_if_i(a_iv_i) = \sum_{i=1}^{n} a_ik_i = f(v)
+\end{equation*}
+\section{2.11}
+$V$ a vector space with basis $v_1, v_2$, $W$ a vector space with basis $w_1, w_2, w_3$. Find a basis for $L(V,W)$.\\\\
+\section{2.12}
+\includegraphics[scale=0.6]{q3.png}\\\\
+a. $\forall x, y \in U, (x+y)_i + (x+y)_{i+2} = x_i + y_i + x_{i+2} + y_{i+2} = x_i + x_{i+2} + y_i + y_{i+2} = x_{i+1} + y_{i+1} = (x+y)_{i+1}$\\
+Other properties can be similarly proven.\\
+b. c. Suppose $\exists ax + by = 0$, then because $0_1 = 0_2 = 0$, we must have $a\cdot 0 + b \cdot 1 = 0 = a \cdot 1 + b \cdot 0$, i.e.
+\begin{equation*}
+    \begin{pmatrix}
+    0 & 1\\
+    1 & 0
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+    a\\
+    b
+    \end{pmatrix} = 0
+\end{equation*}
+But because
+\begin{equation*}
+    \begin{pmatrix}
+    0 & 1\\
+    1 & 0
+    \end{pmatrix}
+\end{equation*}
+is invertible, $a, b$ must be $0$. Therefore $x, y$ independent.\\
+We claim that $\forall u, v \in U, u_1 = v_1, u_2 = v_2 \Leftrightarrow u = v$
+Suppose $u_1 = v_1, u_2 = v_2$. If $u=v$ is true for $i \leq n-1$, then $u_n = u_{n-1} - u_{n-2} = v_{n-1} - v_{n-2} = v_n$. Therefore $v = n$.\\
+Suppose $u = v$, then obviously $u_1 = v_1, u_2 = v_2$.
+Therefore $\forall v \in U$ determined by $v_1, v_2$, $v = v_2\cdot x + v_1\cdot y$\\
+Therefore $x, y$ is a basis for $U$.\\
+d. Given $v \in U \cap W$, therefore $v_1 = v_2 = 0$. We claim that $v_n = 0$. Suppose $v_1 ... v_{n-1} = 0$, then $v_n = v_{n-1} - v_{n-2} = 0-0 = 0$. Therefore $v = 0$, i.e. $U \cap W = \{0\}$.\\
+Also NTS $\mathbb{R}^{\infty} = span(U + W)$.\\
+$\forall v \in \mathbb{R}^{\infty}$, let $u$ be the sequence in $U$ determined by $v_1, v_2$, and let $w=$
+\begin{equation*}
+    w_i = \begin{cases}
+    0 & i \leq 2\\
+    v_i - u_i & \textrm{otherwise}
+    \end{cases}
+\end{equation*}
+Now $u \in U, w \in W$, and $u+w = v$, therefore $U \oplus W = \mathbb{R}^{\infty}$
+\end{document}

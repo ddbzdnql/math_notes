@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+
+\title{Linear Algebra Done Right\\
+\large{HW 1}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\subsection{1.1}
+(Axler 1A.2)\\
+\begin{equation*}
+    \left(\frac{-1+\sqrt{3}i}{2}\right)^3=\frac{-1+\sqrt{3}i}{2} \cdot \left(\frac{-1+\sqrt{3}i}{2}\right)^2
+\end{equation*}
+\begin{equation*}
+    =\frac{-1+\sqrt{3}i}{2} \cdot \frac{-1-\sqrt{3}i}{2} = \frac{1+3}{4} = 1
+\end{equation*}
+\subsection{1.2}
+(Axler 1A.3)\\
+\begin{equation*}
+    (a+bi)^2=i \Rightarrow \left\{
+    \begin{matrix}
+    a^2-b^2=0\\
+    2ab=1
+    \end{matrix}
+\end{equation*}
+i.e. $\frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}i$ and $-\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}i$ both satisfy.
+\subsection{1.3}
+(Axler 1A.10)
+\begin{equation*}
+    x = \begin{pmatrix}
+    \frac{1}{2} \\
+    6 \\
+    -\frac{7}{2} \\
+    \frac{1}{2}
+    \end{pmatrix}
+\end{equation*}
+\subsection{1.4}
+(Axler 1B.1)\\
+$v+(-v) = 0 = -(-v) + (-v)$,\\
+Therefore, according to cancellation theorem: $v = -(-v)$
+\subsection{1.5}
+(Axler 1B.2)\\
+If $a\neq 0$,
+Choose $w \in V \neq 0$, we know that $aw + av = a(w+v) = 0 + aw = aw$, i.e., $w+v = w$.\\
+Because $w \neq 0$, we kow that $v = 0$. 
+\subsection{1.6}
+(Axler 1C.4)\\
+We call this set $A$.\\
+If $b=0$, $f, g \in A$, then $\int f+g = \int f + \int g = 0 +0 = 0$, and $a \int f = a * 0 = 0$.
+If $A$ is a subspace, then $2 \int f = 2 * b = b \Rightarrow b = 0$.
+\subsection{1.7}
+(Axler 1C.20)\\
+Let $W = \{(0,x,0,y) \in \textbf{F}^4: x,y \in \textbf{F}\}$.\\
+First show $W \cap U = \{0\}$:\\
+If $\exists v \in W \cap U$, then $x = a = 0, y = b = 0$, i.e. $v = (0,0,0,0) = 0$.\\
+Then we need to show $U + W = \textbf{F}^4$:\\
+$v = (a, b, c, d) \in \textbf{F}^4$, we can create $u = (a, a, c, c) \in U, w = (0, b-a, 0, d-c) \in W$, it is obvious that $u + v = (a+0, a + b-a, c+0, c + d-c) = (a, b, c, d) = v$.\\
+
+\subsection{1.8}
+(Axler 1C.24)\\
+Given any continuous $f$, we create:
+\begin{equation*}
+    g(x) = \frac{f(x)+f(-x)}{2}
+\end{equation*}
+\begin{equation*}
+    h(x) = \left\{\begin{matrix}
+    \frac{f(x)-f(-x)}{2}, x \geq 0\\
+    -\frac{f(-x)-f(x)}{2}, x < 0
+    \end{matrix}
+\end{equation*}
+It can be verified that $g \in \textbf{even}$ and $h \in \textbf{odd}$, and that $g + h = f$.
+
+\subsection{1.9}
+Let $S$ be a set, and let $U$ be a vector space over $\textbf{F}$. Recall that $U^S$ is the set of function $f:S \rightarrow U$. Given function $f,g \in U^S$ and $a \in \textbf{F}$, we define $f + g \in U^S$ and $a \cdot f \in U^S$ by
+\begin{align*}
+(f+g)(x) = f(x) + g(x) \\
+(a \cdot f)(x) = a \cdot (f(x))
+\end{align*}
+Prove that $U^S$ is a vector space over $\textbf{F}$.\\
+\textbf{Solution:}\\
+Commutativity:\\
+$f,g \in U^S$, then $(f+g)(x) = f(x) + g(x) = (g+f)(x)$, therefore, $f+g = g+f$.\\
+Associativity:\\
+$f,g,h \in U^S$, then $((f+g)+h)(x) = (f(x) + g(x)) + h(x) = f(x) + (g(x) + h(x)) = f+(g+h)$, therefore, $(f+g)+h=f+(g+h)$.\\
+$((ab)f)(x) = (ab)\cdot f(x) = a \cdot (b\cdot f(x)) = a \cdot (bf(x))$, therefore, $(ab)f = a(bf)$.\\
+Additive identity:\\
+Define $f(x) = 0 \in U$, this is the additive identity in $U^S$.\\
+Additive inverse:\\
+Given $f \in U^S$, define $g(x) = -f(x) \in U$, this is the additive inverse in $U^S$.\\
+Distributive properties:\\
+$(a(f+g))(x) = a \cdot (f+g)(x) = a\cdot f(x) + a\cdot g(x)$, therefore $a(f+g) = af + ag$.\\
+
+\subsection{1.10}
+Let $U_1 = \{(a,0,0)|a \in \textbf{F}\}$ and $U_2 = \{(b,b,0)|b \in \textbf{F}\}$. These are both subsets of $\textbf{F}^3$. \\
+\indent a) Prove that $U_1$ and $U_2$ are subspaces of $\textbf{F}^3$. \\
+\indent b) Prove that $U_1 + U_2 = \{(x,y,0)|x,y \in \textbf{F}\}$.\\
+\textbf{Solution:}\\
+a: This is obvious.\\
+b: $\forall (x,y,0)$ where $x,y \in \textbf{F}$, we create $v_1 = (x-y,0,0), v_2 = (y,y,0)$. It is clear that $v_1 + v_2 = (x-y+y, y, 0) = (x, y, 0)$. Also $v_1 \in U_1, v_2 \in U_2$, therefore, $\{(x,y,0)|x,y \in \textbf{F}\} \subseteq U_1 + U_2$.\\
+It is obvious that $U_1 + U_2 \subseteq \{(x,y,0)|x,y \in \textbf{F}\}$.\\
+Therefore, $\{(x,y,0)|x,y \in \textbf{F}\} = U_1 + U_2$
+
+\subsection{1.11}
+Let $V$ be a vector space, and let $U_1$ and $U_2$ be subspaces of $V$.
+\begin{addmargin}[1em]{0em}
+a) Their interscetion $U_1 \cap U_2$ consists of all vectors that belong to \textit{both} subspaces:\\
+    \begin{align*}
+        U_1 \cap U_2 = \{v \in V |v \in U_1\ \textbf{and}\ v \in U_2\}
+    \end{align*}
+Prove that $U_1\cap U_2$ is always a subspace of $V$.\\
+\textbf{Solution:}\\
+$\forall u, v \in U_! \cap U_2,$ because $u, v \in U_1, u+v \in U_1$, similarly, $u+v \in U_2$. Therefore, $u+v \in U_1 \cap U_2$. Other properties can be proven trivially.\\\\
+b) Their union $U_1 \cup U_2$ consists of all vectors that belong to \textit{either} subspace:
+    \begin{align*}
+        U_1 \cup U_2 = \{v \in V|v \in U_1\ \textbf{or}\ v \in U_2\}
+    \end{align*}
+Prove that $U_1 \cup U_2$ is a subspace of $V$ \textit{if and only if} one subspace is contained in the other.\\
+\textbf{Solution:}\\
+If $U_1 \subseteq U_2$, then $\forall u,v \in U_1 \cup U_2$, because $U_1 \subseteq U_2$, this means $u,v \in U_2$, therefore $u + v \in U_2 \subseteq U_2 \cup U_1$.\\
+If $U_1 \cup U_2$ is a subspace, then if $\exists u \in U_1, u \notin U_2, v \in U_1,$ we know that $u+v \in U_1 \cup U_2$. If $u+v \in U_1$, then $u = (u+v) + -v$ should also be in $U_1$, contradiction. Therefore $u + v \in U_2$. Therefore, $v = (u+v) + -u$ should also be in $U_2$, proving $U_1 \subseteq U_2$.
+\end{addmargin}
+
+\subsection{1.12}
+Let $U_1=\{(a,-a,0)|a \in \textbf{F}\}$, let $U_2 = \{(0,b,-b)|b \in \textbf{F}\}$, and let $U_3 = \{(c,0,-c)|c \in \textbf{F}\}$. These are all subspaces of $\textbf{F}^3$ (you may assume this without proof).
+\begin{addmargin}[1em]{0em}
+    a) Describe the subspace $U_1+U_2+U_3$ by filling in the blank by an equation involving $x$, $y$, and $z$:
+    \begin{align*}
+        U_1+U_2+U_3 = \{(x,y,z) \in \textbf{F}^3|\rule{50pt}{0.5pt}\}
+    \end{align*}
+    \textbf{Solution:}\\
+    $U_1+U_2+U_3 = \{(x,y,z) \in \textbf{F}^3|x+y+z = 0\}$\\\\
+    b) Let $W = U_1 + U_2 + U_3$. Is $W$ the direct sum of $U_1$, $U_2$, and $U_3$? Prove or disprove.\\
+    \textbf{Solution:}\\
+    $v = (a, -a, 0) = (0, b, -b) \in U_1 \cap U_2$, therefore, $a = 0, b = 0$, i.e., $v = (0, 0, 0) = 0$.\\
+    Therefore $W = U_1 \bigoplus U_2 \bigoplus U_3$
+\end{addmargin}
+
+\subsection{1.13}
+Let $U$ be the following subset of $\textbf{F}^\infty$:
+\begin{align*}
+    U = \{(v_1, v_2, v_3, ...) \in \textbf{F}^\infty|v_{i+3}=v_i\textrm{ for all \textit{i}}\}
+\end{align*}
+Prove that $U$ is a subspace of $\textbf{F}^\infty$.\\
+\textbf{Solution:}\\
+$u = (u_1, u_2, u_3, ...), v = (v_1, v_2, v_3, ...) \in U, u+v = (u_1+v_1, u_2+v_2, u_3+v_3, ...) \in F^\infty$.\\
+$(u+v)_{i+3} = u_{i+3} + v_{i+3} = u_i + v_i = (u+v)_i$, therefore $u+v \in U$.\\
+
+\subsection{1.14}
+Say that a sequence $v = (v_1, v_2, v_3, ...) \in \textbf{F}^\infty$ is \textit{periodic} if these exists some positive number $k \in \mathbb{N}$ such that $v_{i+k}=v_i$ for all \textit{i}. Let $W$ be the set of all periodic sequences:
+    \begin{align*}
+        W=\{v \in \textbf{F}^\infty|v \textrm{ is periodic}\}
+    \end{align*}
+Is $W$ a subspace of $\textbf{F}^\infty$? Prove or disprove.\\
+\textbf{Solution:}\\
+$W$ is a subspace.\\
+$v \in W$ with $v_{i+k} = v_i$, and $u \in W$ with $u_{i+l} = u_i$.\\
+Then we claim that $(u+v)_{i+k\cdot l} = (u+v)_i$.\\
+$(u+v)_{i+k\cdot l} = u_{i+k\cdot l} + v_{i+k\cdot l}$.\\
+$u_{i+k\cdot l} = u_{i+(l-1)\cdot k} = u_{i+(l-2)\cdot k} = ... = u_i$. Similarly, $v_{i+k\cdot l} = v_i$.\\
+Therefore, $(u+v)_{i + k\cdot l} = u_{i+k\cdot l} + v_{i+k\cdot l} = u_i + v_i = (u+v)_i$.\\
+\end{document}

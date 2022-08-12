@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+
+\title{Linear Algebra Done Right\\
+\large{Week 1 Notes}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{Chapter 2. Finite-Dimensional Vector Spaces}
+\subsection{2.A Span and Independence}
+Span is the smallest containing subspace:\\
+\begin{addmargin}[1em]{0em}
+    The span of a list of vectors in $V$ is the smallest subspace of $V$ that contains all the vectors in that list.
+\end{addmargin}
+\textbf{Proof:}\\
+\begin{addmargin}[1em]{0em}
+    Basically, first need to show that a span is a subspace.\\
+    Then show that $\forall$ subspaces that contains the list, it also contains the span.\\
+\end{addmargin}
+\subsubsection{Polynomials:}
+We use $P(\textbf{F})$ to denote the class of all polynomials with coefficients in $\textbf{F}$.\\
+It can easily verified that $P(\textbf{F})$ is a vector space over $\textbf{F}$.
+We use $P_m(\textbf{F})$ to define the class of polynomials with coefficients in $\textbf{F}$ and degree at most $m$.\\
+\subsubsection{Linear Independence:}
+Linear Dependence Lemma:\\
+\begin{addmargin}[1em]{0em}
+    $v_1, v_2, ..., v_m$ is linearly dependent in $V$. Then $\exists j \in \{1, 2, ..., m\}$ such that:\\
+    $v_j \in \textrm{span}(v_1, ..., v_{j-1})$\\
+    Removing the $j^{th}$ term from $\{v_1, ..., v_m\}$, the span of the remaining entries stays the same.\\
+\end{addmargin}
+\textbf{Proof:}\\
+\begin{addmargin}[1em]{1em}
+    Because $v_1, ..., v_m$ dependent, $\exists a_1v_2 + ... + a_mv_m = 0$. Find an $a_j \neq 0$, then $v_j = \frac{a_i}{a_j}v_j+ ... + \frac{a_{j-1}}{a_j}v_{j-1} + \frac{a_{j+1}}{a_j}v_{j+1} + \frac{a_m}{a_j}v_m$.\\
+    This subsequently shows that the span will stay the same.\\
+\end{addmargin}
+Length of independent lists $\leq$ length of spanning lists:
+\begin{addmargin}[0em]{1em}
+    In a finite-dimensional vector space, the length of a linearly independent list is less than or equal to that of a spanning list of vectors.\\
+\end{addmargin}
+\textbf{Proof:}\\
+\begin{addmargin}[1em]{0em}
+    $u_1, ..., u_m$ independent in $V$, with $B = w_1, ..., w_n$ spans $V$.\\
+    For each step, we put $u_i$ into $B$. If before this step, $B$ spans $V$, then adding $u_i$ still makes $B$ span $V$ and dependent.\\
+    Therefore, by the linear dependence lemma, we know that there $\exists$ a vector $v \in B$ that is in the span of the remaining ones. If $v$ is not one of $w$'s, then that means $\forall$ linear combinations of $B$ that sums up to $0$, all the coefficients of $w$s are $0$, i.e., $\exists$ a linear combination of $u$s that sums up to $0$, which contradicts with the fact that $u$ is independent.
+    This means $v$ can be one of $w$s, then we can remove this $v$, and $B$ will stay spanning $V$.\\
+    Repeating this step until all $m$ of $v$s are in $B$. This means length of $w \geq $ length of $u$.\\
+\end{addmargin}
+Finite-dimensional subspaces:\\
+\begin{addmargin}[1em]{0em}
+    Subspaces of a finite-dimensional vector space is also finite-dimensional.\\
+\end{addmargin}
+\textbf{Proof:}\\
+\begin{addmargin}[1em]{0em}
+    $V$ is finite-dimensional and $U$ a subspace of $V$. We constrcut a list $B$ that spans $U$:\\
+    $B = \{0\}$.
+    At each step, if $B$ spans $U$. then we are done. Otherwise pick $u \in U \notin B$ and put it in $B$.\\
+    Because $u \notin B$, therefore $B$ is still independent after adding $u$.\\
+    We keep repeating this process, because at each step, $B$ is independent, $B$ cannot be longer than a span of $V$, therefore this process must stop. Making $B$ eventually span $U$.\\
+\end{addmargin}
+\subsection{2.B Basis}
+\subsubsection{Definition of a basis}
+\begin{addmargin}[1em]{0em}
+    A \textbf{basis} of $V$ is a list of vectors in $V$ that is both linearly independent and spans $V$.
+\end{addmargin}
+\subsubsection{Criteria for a basis}
+\begin{addmargin}[1em]{0em}
+    $\{v_1, v_2, ..., v_n\} \subseteq V$ is a basis of $V$ iff $\forall v \in V$ can be uniquely written in the form
+    \begin{equation*}
+        v = a_1v_1 + ... + a_nv_n \tag{a1, ..., a_n \in \textbf{F}}
+    \end{equation*}
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First, suppose $v_1, ..., v_n$ is a basis of $V$, WTS given $v \in V$, the linear combination is unique. Therefore, assume
+    \begin{equation*}
+        \sum_{i=1}^{n} a_i v_i = v = \sum_{i=1}^{n} b_i v_i
+    \end{equation*}
+    Then we have:
+    \begin{equation*}
+        \sum_{i=1}^{n} (a_i - b_i) v_i = 0
+    \end{equation*}
+    This conflicts with the face that $v_1, ..., v_n$ is linearly independent.\\
+    Then, suppose $\forall v \in V$ can be represented uniquely by $v_1, ..., v_n$.\\
+    Then clearly $v_1, ..., v_n$ spans $V$. Suppose
+    \begin{equation*}
+        \sum_{i=1}^{n} a_1v_1 + ... + a_nv_n = 0
+    \end{equation*}
+    Because the representation is unique, this means this can only be the $0$ representation. Therefore, $v_1, ..., v_n$ is linearly independent.
+\end{addmargin}
+\subsubsection{Spanning list contains a basis}
+\begin{addmargin}[1em]{0em}
+    Every spanning list in a vector can be reduced to a basis of vector space.
+\end{addmargin}
+\textbf{Proof}
+\begin{addmargin}[1em]{0em}
+    At each step, if the list is still linearly independent, then $\exists v$ that can be represented by the rest of the elements.\\
+    This means removing this element will not change the span of the list.\\
+    Remove this element, until this list is linearly independent.
+\end{addmargin}
+\subsubsection{Basis of finite-dimensional vector space}
+\begin{addmargin}[1em]{0em}
+    Every finite-dimensional vector space has a basis.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Because if a space is finite-dimensional, then it is spanned by a finite list of vector.\\
+    Then we can always reduce this list of vectors into a basis.
+\end{addmargin}
+\subsubsection{Every subspace is part of a direct sum}
+\begin{addmargin}[1em]{0em}
+    Suppose $V$ is finite-dimensional and $U$ is a subspace, then $\exists W$ a subspace of $V$ such that $V = U \bigoplus W$.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    because $V$ finite-dimensional, then so is $U$.\\
+    $\exists u_1, ..., u_m$ a basis of $U$.\\
+    Because this list is also linearly independent in $V$, then iut can be extended to a basis of V:
+    $u_1, ..., u_m, w_1, ..., w_n$.\\
+    We say that $W = \textrm{span}(w_1, ..., w_n)$ is the required $W$.\\
+    First WTS $U, W$ independent:\\
+    Suppose $\exists v \in U \cap W$,
+    Then $v = \sum_{i=1}^{m} a_i u_i = \sum_{i=1}^{n} b_i w_i$.\\
+    Then $a_1u_1 + ... + a_mu_m - b_1w_1 - ... - b_nw_n = 0$. This conflicts with the fact that $u_1, ..., u_m, w_1, ..., w_n$ is linearly independent. Therefore, $U, W$ is independent.\\
+    Then obviously, $U + W = V$.\\
+    Therefore, $U \bigoplus W = V$.
+\end{addmargin}
+\subsection{2.C Dimension}
+\subsubsection{Basis length stays the same}
+\begin{addmargin}[1em]{0em}
+    Any two bases of a finite-dimensional vector space have the same length.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    $B_1, B_2$ two bases of $V$, then because $B_1$ linearly independent and $B_2$ spans $V$, $|B_1| \leq |B_2|$, similarly, $|B_2| \leq |B_1|$.\\
+    Therefore, $|B_1| = |B_2|$
+\end{addmargin}
+\subsubsection{Independent list of dim length is a basis}
+\begin{addmargin}[1em]{0em}
+    Every linearly independent list in $V$ of length $dim(V)$ is a basis.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    If $\exists v \in V$ not spanned by this linearly independent list, then we can add $v$ into it to make it still linearly independent.\\
+    However, this would make the list length exceed the spanning list of $V$, contradication.
+\end{addmargin}
+For the similar reasoning,
+\begin{addmargin}[1em]{0em}
+    Every spanning list of $V$ with length $dim(V)$ is  a basis.
+\end{addmargin}
+\subsubsection{Dimensions of a sum$\ast$}
+\begin{addmargin}[1em]{0em}
+    $U_1$ and $U_2$ are subspaces of a finite-dimensional vector space, then:
+    \begin{equation*}
+        dim(U_1 + U_2) = dim U_2 + dim U_2 - dim(U_1 \cap U_2)
+    \end{equation*}
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Outline:\\
+    Find a basis for the intersection, then extend it in each subspace to get two basis. Say the union of these three is a basis for the space.\\\\
+    Say that $u_1, ..., u_m$ is a basis for $U_1 \cap U_2$, therefore $dim(U_1 \cap U_2) = m$.\\
+    We can then extend it to $(u_1, ..., u_m, v_1, ..., v_j)$ a basis for $U_1$, and $(u_1, ..., u_m, w_1, ..., w_k)$.\\
+    We say that $A = (u_1, ..., u_m, v_1, ..., v_j, w_1, ..., w_k)$ is a basis for $U_1 + U_2$.\\
+    Clearly $A$ spans $U_1 + U_2$. Only need to show $S$ is independent:\\
+    If $\exists$ a linear combination:
+    \begin{equation*}
+        \sum_{i=1}^{m} a_i u_i + \sum_{i=1}^{j} b_iv_i + \sum_{i=1}^{k} c_iw_i = 0
+    \end{equation*}
+    Then $\sum_{i=1}^{k} c_iw_i = - \sum_{i=1}^{m} a_i u_i - \sum_{i=1}^{j} b_iv_i$, meaning $\sum_{i=1}^{k} c_iw_i \in U_1$ and therefore $\in U_1 \cap U_2$.\\
+    Thereofre, $\sum_{i=1}^{k} c_iw_i = \sum_{i=1}^{m}d_iu_i$.\\
+    This means:
+    \begin{equation*}
+        \sum_{i=1}^{m} a_i u_i + \sum_{i=1}^{j} b_iv_i + \sum_{i=1}^{m}d_iu_i = 0
+    \end{equation*}
+    That is to say, $u_1, ..., u_m, v_1, ..., v_j$ is not linearly independent. Contradication.\\
+\end{addmargin}
+\section{Ch 3 Linear Maps}
+\subsection{3.A Vector Space of Linear Maps}
+We denote the set of all linear maps from $V$ to $W$ as $L(V, W)$
+\subsubsection{Linear maps and basis of domains}
+\begin{addmargin}[1em]{0em}
+    $v_1, ..., v_n$ a basis of $V$ and $w_1, ..., w_n$ a basis of $W$. Then $\exists! T:V\rightarrow W$ such that
+    \begin{equation*}
+        \forall j \in \{1,...,n\}, Tv_j = w_j
+    \end{equation*}
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Define $T:V\rightarrow W$ as
+    \begin{equation*}
+        \forall v \in V, v = \sum_{i=1}^{n} a_iv_i,
+        Tv = \sum_{i=1}^{n} a_iw_i
+    \end{equation*}
+    This $T$ is a linear map:\\
+    $\forall u,v \in V, T(u+v) = \sum_{i=1}^{n} a_iw_i + b_iw_i = \sum_{i=1}^{n} a_iw_i + \sum_{i=1}^{n} b_iw_i = Tu+Tv$\\
+    $\forall v \in V, T(\lambda v) = \sum_{i=1}^{n} \lambda a_i w_i = \lambda \sum_{i=1}^{n} a_i w_i = \lambda T(v)$\\\\
+    This $T$ is also unique:\\
+    Suppose there is $T \in L(V,W)$ that satisfies this requirement, then the uniqueness of the basis representation ensures the uniqueness of the linear map.
+\end{addmargin}
+\subsubsection{Algebraic Operations on $L(V,W)$}
+The addition and multiplication on $L(V,W)$ are defined as:
+\begin{equation*}
+    (S+T)v = Sv+Tv, (\lambda T)v = \lambda(Tv)
+\end{equation*}
+The operations above make $L(V,W)$ a vector space.
+\subsubsection{Product of Linear Maps}
+Given $S\in L(V,W), T\in L(U,V)$, the product $ST\in L(U,W)$ is defined by
+\begin{equation*}
+    (ST)u = S(Tu)
+\end{equation*}
+\subsubsection{Linear maps take $0$ to $0$}
+\begin{addmargin}[1em]{0em}
+    $T$ a linear map in $L(V,W)$, then $T(0)=0$
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    $T(0) = T(0+0) = T(0) + T(0) \Rightarrow T(0) = 0$
+\end{addmargin}
+\end{document}
+

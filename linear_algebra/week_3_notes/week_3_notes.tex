@@ -1,0 +1,305 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Linear Algebra Done Right\\
+\large{Week 3 Notes}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{5.A Invariant Subspaces}
+\subsection{Definition of Invariant Subspace}
+\begin{addmargin}[1em]{0em}
+Given $T \in L(V)$, a subspace $U \subseteq V$ is called \textbf{invariant} under $T$ if $\forall u \in U, Tu \in U$
+\end{addmargin}
+\subsection{Eigenvalues and Eigenvectors}
+\subsubsection{Conditions for eigenvalues}
+\begin{addmargin}[1em]{0em}
+$V$ finite-dimensional, $T \in L(V), \lambda \in \textbf{F}$. The follow are equivalent:\\
+$\lambda$ an eigenvalue of $T$.\\
+$T - \lambda I$ is not injective.\\
+$T - \lambda I$ is not surjective.\\
+$T - \lambda I$ is not invertible.
+\end{addmargin}
+\textbf{Proof:}\\
+This is basically saying, in order for $\lambda$ to be an eigenvalue, $(T - \lambda I) \cdot X = 0$ must have an non-trivial solution.
+\subsubsection{Eigenvectors and linear independence}
+\begin{addmargin}[1em]{0em}
+$T \in L(V), \lambda_1, ..., \lambda_m$ are distinct eigenvalues of $T$ with $v_1, ..., v_m$ corresponding eigenvectors. Then $v_1, ..., v_m$ linearly independent.
+\end{addmargin}
+\textbf{Proof:}\\
+Find the smallest $k$ such that $v_1, ..., v_{k-1}$ linearly independent but $v_k \in span(v_1, ..., v_{k-1})$.\\
+Therefore, $v_k = \sum_{i=1}^{k-1} a_i v_i$. Then we have:
+\begin{equation*}
+    Tv_k = \lambda_k v_k = T\left(\sum_{i=1}^{k-1} a_i v_i\right) = \sum_{i=1}^{k-1} a_i Tv_i = \sum_{i=1}^{k-1} a_i \lambda_i v_i
+\end{equation*}
+Combining it with:
+\begin{equation*}
+    \lambda_k v_k = \sum_{i=1}^{k-1} a_i \lambda_k v_i
+\end{equation*}
+we have:
+\begin{equation*}
+    \sum_{i=1}^{k-1} a_i (\lambda_i - \lambda_{k}) v_i = 0
+\end{equation*}
+This contradicts with the fact that $v_1, ..., v_{k-1}$ are linearly independent.\\
+Therefore no such $k$ exists.
+\subsubsection{Number of eigenvalues}
+\begin{addmargin}[1em]{0em}
+$V$ is finite-dimensional, then there are at most $dim\ V$ distinct eigenvalues.
+\end{addmargin}
+\textbf{Proof:}\\
+Because all distinct eigenvalues has corresponding eigenvectors, therefore can only have at most $dim\ V$ eigenvalues.
+\subsubsection{Restriction and quotient operators}
+\begin{addmargin}[1em]{0em}
+Given $T \in L(V), U \subseteq V$ an invariant subspace under $T$.\\
+\textbf{Restriction operator} $T|_U \in L(U)$ is defined by:
+\begin{equation*}
+    T|_U(u) =  Tu
+\end{equation*}
+\textbf{Quotient operator} $T/U \in L(V/U)$ is defined by:
+\begin{equation*}
+    (T/U)(v+U) = Tv+U
+\end{equation*}
+\end{addmargin}
+\subsubsection{Example:}
+\begin{addmargin}[1em]{0em}
+Define $T \in L(\textbf{F}^2)$ by $T(x,y) = (y,0)$. Let $U = \{(x,0)|x \in \textbf{F}\}$.\\
+1. $U$ is invariant under $T$ and $T|_U$ is $0$.\\
+$\forall (x, 0) \in U, T(x,0) = (0, 0) \in U$.\\
+Therefore $U$ is invariant under $U$ and $T|_U$ is $0$.\\
+2. $\nexists W \subseteq \textbf{F}^2$ such that $W$ invariant under $T$ and $\textbf{F}^2 = U \oplus W$.\\
+If such $W$ exists, then $dim\ W = dim\ \textbf{F}^2 - dim\ U = 2 - 1 = 1$. This means every $w \neq 0 \in W$ is an eigenvector. But all eigenvectors are in $U$, therefore no such $W$ exists.\\
+3. $T/U$ is $0$ on $\textbf{F}^2/U$.\\
+\begin{equation*}
+    (T/U)((x,y) + U) = T(x, y) + U = (y, 0) + U = 0 + U
+\end{equation*}
+The last step is because $(y, 0) \in U$.
+\end{addmargin}
+\section{3.E Products and Quotients of Vector Spaces}
+\subsection{Dimension of product of vector spaces}
+\begin{addmargin}[1em]{0em}
+$dim\ V_1 \times V_2 \times ... \times V_m = \sum_{i=1}^{m} dim\ V_i$
+\end{addmargin}
+The proof of this statement is easy.
+\subsection{Product and direct sum}
+Given $U_1, ..., U_m$ subspaces of $V$. Define map $\Gamma: U_1 \times ... \times U_m \rightarrow U_1 + ... + U_m$ as $\Gamma(u_1, ..., u_m) = u_1 + ... + u_m$.\\
+$U_1, ..., U_m$ is a direct sum iff $\Gamma$ is injective.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+If $\Gamma$ injective, then suppose $U_1, ..., U_m$ dependent, i.e. $\exists u_1+ ... + u_m = 0$, then $\forall u \in U_1 + ... + U_m$, because $\Gamma$ injective, $\exists u_1' + ... + u_m' = u$, then we have $(u_1 + u_1') + ... + (u_m + u_m') = u$, contradiction. Therefore $U_1, ..., U_m$ independent.\\
+If $U_1 + ... + U_m$ is a direct sum, then $\forall u \in U_1 + ... + U_m$, by definition $\exists u_1 \in U_1, ..., u_m \in U_m$ such that $u_1 + ... + u_m = u$. If $\exists u_1' \in U_1, ..., u_m' \in U_m$ that also $u_1' + ... + u_m' = u$, then $(u_1 - u_1') + ... + (u_m - u_m') = 0$, making $U_1, ..., U_m$ dependent. Contradiction. Therefore $\Gamma$ injective.\\
+\end{addmargin}
+$V$ finite-dimensional and $U_1, ..., U_m$ subspaces of $V$. Then $U_1 + ... + U_m$ a direct sum iff $dim(U_1 + ... + U_m) = \sum_{i=1}^{m} dim\ U_i$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Using Fundamental Theorem of Linear Map, we know that $dim\ U_1 + ... dim\ U_m = dim\ nul\ \Gamma + dim\ range\ \Gamma$. Because $\Gamma$ is surjective, $dim\ range\ \Gamme = dim(U_1 + ... + U_m)$, i.e. $dim\ U_1 + ... + dim\ U_m = dim\ nul\ \Gamma + dim(U_1 + ... + U_m)$.\\
+Therefore, if $U_1 + ... + U_m$ direct sum, then $\Gamma$ injective, i.e., $dim\ U_1 + ... + dim\ U_m = 0 + dim(U_1 + ... + U_m)$.\\
+If $dim\ U_1 + ... + dim\ U_m = dim(U_1 + ... + U_m)$, then $dim\ nul\ \Gamma = 0$, i.e. $\Gamma$ injective and therefore $U_1 + ... + U_m$ a direct sum.
+\end{addmargin}
+\subsection{Quotient spaces}
+Given $v \in V$ and $U \leq V$, we define $v+U$ as
+\begin{equation*}
+    v + U = \{v+u|u \in U\}
+\end{equation*}
+An \textbf{affine subset} of $V$ is of the form $v + U$ for some $v \in V, U \leq V$.\\
+Such a subset of said to be \textbf{parallet} to $U$.\\
+Then we define the \textbf{quotient space} $V/U$ as the set of all the affine subsets of $V$ parallel to $U$:
+\begin{equation*}
+    V/U = \{v + U | v \in V\}
+\end{equation*}
+\subsubsection{Quotient space is vector space}
+First make sure $v+U$ is well defined: given $U \leq V$ and $\forall v, w \in V$, the following are equivalent:\\
+$v-w \in U$\\
+$v + U = w + U$\\
+$(v+U) \cap (w+U) \neq \varnothing$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Given $v - w \in U$, then $\forall v + u \in U, u + (v-w) \in U \rightarrow w + (u + (v-w)) = v + u \in w + U$. Therefore $v + U = w + U$\\
+Given $v + U = w + U$, then obviously $(v+U) \cap (w+U) \neq \varnothing$\\
+Given $(v+U) \cap (w+U) \neq \varnothing$, then $\exists x \in v+U) \cap (w+U) \rightarrow (x - v) \in U, (w - x) \in U \rightarrow (w - x) + (x - v) = w - v \in U$.
+\end{addmargin}
+Then we can define addition and scalar multiplication on $V/U$:
+\begin{equation*}
+    (v+U) + (w+U) = (v+w) + U
+\end{equation*}
+\begin{equation*}
+    \lambda (v+U) = (\lambda v) + u
+\end{equation*}
+This makes $V/U$ a vector space.\\
+We then define \textbf{quotient map} as $\pi: V \rightarrow V/U$ by $\pi(v) = v + U$. This is a linear map.\\
+With this map, we can see that:
+\begin{equation*}
+    dim\ V/U = dim\ V - dim\ U
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Using the Fundamental Theorem of Linear Map, we see that
+\begin{equation*}
+    dim\ V = dim\ nul\ \pi + dim\ range\ \pi
+\end{equation*}
+Here $nul\ pi$ is just $0 + U = U$.\\
+Because this map is obviously surjective, $dim\ range\ \pi = dim\ V/U$.\\
+Therefore $dim\ V/U = dim\ V - dim\ U$
+\end{addmargin}
+This then creates another mapping: given $T \in L(V, W)$, we can create $\Tilde{T}:V/null\ T \rightarrow W$ by $\Tilde{T}(v + null\ T) = Tv$.\\
+This mapping has the following properties:\\
+$\Tilde{T}$ is injective.\\
+$range\ \Tilde{T} = range\ T$.\\
+$V/null\ T \cong range\ T$.
+\section{3.F}
+A \textbf{linear function} on $V$ a vector space is a linear map from $V$ to \textbf{F}, i.e. all elements in $L(V, \mathbf{F})$.\\
+The \textbf{dual space} of $V$, denoted $V'$ is the vector space of all linear functions on $V$, i.e. $V' = L(V, \mathbf{F})$.\\
+Because $dim\ V = n, dim\ \mathbf{F} = 1$, then $dim\ V' = n \cdot 1 = n$\\
+Given $v_1, ..., v_n$ a basis of $V$, the \textbf{dual basis} of $V'$ are functions $\phi_i$:
+\begin{equation*}
+    \phi_i(v_j) = \begin{cases}
+    1 & i = j\\
+    0 &\textrm{otherwise}
+    \end{cases}
+\end{equation*}
+Proof that this is a basis is in \textbf{HW2.10}.\\
+Given the definition of dual space, we can then define the \textbf{dual map} as follow:\\
+Given $T \in L(V,W)$, the dual map of $T$, $T' \in L(W', V')$ defined by $\forall \phi \in W, T'(\phi) = \phi \circ T$
+\subsection{Properties of dual maps}
+$\forall S', T' \in L(V', W'), (S+T)' = S' + T'$\\
+$\forall T \in L(V', W'), \lambda \in \textbf{F}, (\lambda T)' = \lambda T'$\\
+$\forall T \in L(U, V), S \in L(V, W), (ST)' = T'S'$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Only prove the third one:\\
+$(ST)'(\phi) = \phi \circ (ST) = \phi \circ S \circ T = T'(\phi \circ S) = T'(S'(\phi)) = (T'S')(\phi)$
+\end{addmargin}
+\subsection{Null and Range of a dual map}
+Given $V$ a vector space, we denote the \textbf{annihilator} of $U \subset V$ as $U^0$:
+\begin{equation*}
+    U^0 = \{\phi \in V'|\forall u \in U, \phi(u) = 0\}
+\end{equation*}
+Clearly $U^0$ is a subspace of $V'$.\\
+\subsection{Dimension of annihilator}
+$dim\ U + dim\ U^0 = dim\ V$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Create the inclusion mapping $i:U \rightarrow V$:
+\begin{equation*}
+    \forall u \in U, i(u) = u \in V
+\end{equation*}
+Then $i' \in L(V', U')$ is a linear map, and therefore
+\begin{equation*}
+    dim\ V' = dim\ nul\ i' + dim\ range\ i'
+\end{equation*}
+By definition, $\forall \phi \in nul\ i', \forall u \in U, \phi(u) = \phi(i(u)) = 0$. Therefore $\phi \in U^0$.\\
+$\forall \phi \in U^0, \forall \psi \in V', \psi \circ \phi(u) = \psi(0) = 0$. Therefore $\phi \in nul\ i'$.\\
+Therefore by definiton, $U^0 = nul\ i'$.\\
+$\forall \phi \in U'$, from \textbf{HW 2.9} we know that $\exists \psi \in V'$ that maps $U$ same as $\phi$ does. Therefore $i'(\psi)(u) = \psi \circ i(u) = \phi(u)$, i.e. $i'(\psi) = \phi$. Therefore $range\ i' = U'$.\\
+We have shown the equation holds.
+\end{addmargin}
+Then we can see that given $T \in L(V, W)$
+\begin{equation*}
+    null\ T' = (range\ T)^0
+\end{equation*}
+\begin{equation*}
+    dim\ nul\ T' = dim\ nul\ T + dim\ W - dim\ V
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$\forall \phi \in (range\ T)^0$, we have:
+\begin{equation*}
+    \forall v \in V, \phi \circ T(v) = \phi(u)
+\end{equation*}
+where $u \in range\ T$, therefore $T'(\phi) = 0$, i.e. $\phi \in nul\ T'$.\\
+$\forall \phi \in nul\ T'$, suppose $\phi \notin (range\ T)^0$, i.e. $\exists v \in V$ such that $\phi(Tv) \neq 0$, then this means $\phi \circ T \neq 0$, contradiction. Therefore $\phi \in (range\ T)^0$.\\
+Therefore $(range\ T)^0 = nul\ T'$.\\
+The second point follows from the dimension formula.
+\end{addmargin}
+Given $V, W$ both finite-dimensional, and $T \in \mathcal{L}(V, W)$. Then $T$ is surjective $\iff T'$ injective.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Suppose $T$ surjective, then $\forall w \in W, \exists v \in V$ such that $Tv = w$.\\
+Then suppose $f, h \in W', f \neq h$, i.e. $\exists w \in W$ such that $fw \neq hw$.\\
+Because $T$ surjective, then $\exists v \in V$ such that $Tv = w$. Then $T'(f) = f \circ T, T'(h) = h \circ T$, $f \circ T(v) = fw \neq hw = h \circ T(v)$, therefore $T'(f) \neq T'(h)$. Therefore, $T'$ injective.\\
+Suppose $T'$ injective. Suppose for contradiction that $T$ is not surjective, i.e $\exists w_0 \in W$ such $\forall v \in V, Tv \neq w_0$.\\
+Then given $f \in W'$, define $h \in W'$ as
+\begin{equation*}
+    h(w) = \begin{cases}
+    f(w) & w \neq w_0\\
+    f(w) - 1 & w = w_0
+    \end{cases}
+\end{equation*}
+Therefore $h, f$ only differs on $w_0$. But $f \circ T = h \circ T$ because $\nexists v \in V$ such that $Tv = w_0$. This contradicts with the fact that $T'$ injective.\\
+THerefore $T$ surjective.\\\\
+Using the formula, we can see that $T'$ injective $\iff nul\ T' = \{0\} \iff (range T)^0 = \{0\} \iff range\ T = V \iff T$ surjective.
+\end{addmargin}
+Similarly, for the same $V, W, T, T'$,
+\begin{equation*}
+    dim\ range\ T' = dim\ range\ T
+\end{equation*}
+\begin{equation*}
+    range\ T' = (null\ T)^0
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$dim\ range\ T = dim\ W - dim(range\ T')^0 = dim\ W' - dim(nul\ T') = dim(range\ T')$\\
+Given $\phi \in range\ T'$, this means $\exists \psi \in W'$ such that $\psi \circ T = \phi$.\\
+Then $\forall v \in nul\ T, \phi(v) = \psi \circ Tv = \psi(0) = 0$, i.e. $\phi \in (nul\ T)^0$.\\
+Therefore $range\ T' \subseteq (nul T)^0$.\\
+Then $dim\ range\ T' = dim\ range\ T = dim\ V - dim\ nul\ T = dim(nul\ T)^0$, therefore $range\ T' = (nul\ T)^0$
+\end{addmargin}
+Similarly, $T$ injective $\iff T'$ surjective.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$T \textrm{ injective} \iff dim\ range\ T = dim\ V \iff dim\ range\ T' = dim\ V \iff dim\ (nul\ T)^0 = dim\ V \iff dim\ nul\ T = dim\ V - dim\ (nul\ T)^0 = 0 \iff T \textrm{ surjective}$
+\end{addmargin}
+\subsection{Matrix of dual map}
+Suppose $T \in \mathcal{L}(V, W) \rightarrow \mathcal{M}(T') = (\mathcal{M}(T))^t$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+We can prove this by trying to calculate $\psi_j(T(v_i))$ using two different ways, i.e. given $v_1, ..., v_n$ basis for $V$, $\phi_1, ..., \phi_n$ the corresponding basis of $V'$, and $w_1, ..., w_m$ basis for $W$, $\psi_1, ..., \psi_m$ the corresponding basis for $W'$, we have
+\begin{equation*}
+    \psi_j(T(v_i)) = T'(\psi_j)(v_i)
+\end{equation*}
+\end{addmargin}
+\begin{equation*}
+    \psi_j(T(v_i)) = \psi_j(\mathcal{M}(T)v_i)
+\end{equation*}
+\begin{equation*}
+    = \psi_j\left(
+    \sum_{k=1}^{m} \mathcal{M}(T)_{ki}
+    \right) = \sum_{k=1}^{m} \psi_j(\mathcal{M}(T)_{ki}) = \mathcal{M}(T)_{ji}
+\end{equation*}
+Similarly,
+\begin{equation*}
+    T'(\psi_j) = \sum_{k = 1}^{n} \mathcal{M}(T')_{kj}
+\end{equation*}
+\begin{equation*}
+    T'(\psi_j)(v_i) = \mathcal{M}(T')_{kj}(v_i) = \begin{cases}
+    1 & k = i\\
+    0 & \textrm{otherwise}
+    \end{cases} = \mathcal{M}(T')_{ij}
+\end{equation*}
+Therefore $\mathcal{M}(T)_{ji} = \mathcal{M}(T')_{ij}$, i.e. $\mathcal{M}(T) = \mathcal{M}(T')^t$
+\subsection{Rank of a matrix}
+\textbf{Definition of row and column rank:}\\
+The row rank of $A \in \mathbf{F}^{m \times n}$ is the dimension of span of rows of $A$, the column span is similarly defined.\\
+\textbf{Dimension of range equals to column rank:}\\
+Given $T \in \mathcal{L}(V, W)$, then $dim\ range\ T = $ the column rank of $\mathcal{M}(T)$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+It is obvious that there is an isomorphism from $w \in range\ T$ to $\mathcal{M}(w)$ the representation of $w$ using basis of $\mathcal{M}(T)$, therefore $dim\ range\ T = dim\ \textrm{col rank of } \mathcal{M}(T)$.
+\end{addmargin}
+Then we can say that given $A \in \textbf{F}^{m \times n}$, row rank of $A =$ col rank of $A$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Given $A \in \textbf{F}^{m \times n}$, we create $T \in \mathcal{L}(\textbf{F}^n, \textbf{F}^m)$ so that $\mathcal{M}(T) = A$, then we have:\\
+col rank of $A =$ col rank of $\mathcal{M}(T) = dim\ range\ T = dim\ range\ T' =$ col rank of $\mathcal{M}(T') =$ col rank of $A' =$ row rank of $A$.
+\end{addmargin}
+\end{document}

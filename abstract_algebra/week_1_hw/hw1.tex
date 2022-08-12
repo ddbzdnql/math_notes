@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+\usepackage{amssymb}
+
+\title{Abstract Algebra\\
+\large{HW 1}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\subsubsection{1.1.6}
+Determine which of the following sets are groups under addition:\\
+\begin{addmargin}[1em]{0em}
+\textbf{(a)} the set of rational numbers (including $0=0/1$) in lowest terms whose denominators are odd.\\\\
+Yes.Denote $A=\{\textrm{rational numbers whose denominators are odd}\}$.\\
+Suppose $a, b\in A$, where $a = \frac{a_1}{a_2}$, $b=\frac{b_1}{b_2}$, and $a_2, b_2$ odd,\\
+Then $a+b=\frac{\textrm{something}}{lcm(a_2, b_2)}$.\\
+Therefore, we only need to prove/disprove the least common multiple of two odd numbers is still odd.\\
+Suppose $lcm(a_2, b_2) = n$ is even, then $\frac{n}{a_2}$ and $\frac{n}{b_2}$ are even.\\
+Therefore, $a_2 \cdot (\frac{n}{a_2 \cdot 2}) = b_2 \cdot (\frac{n}{b_2 \cdot 2}) = \frac{n}{2}$, which contradicts with the fact that $n$ is the least common multiple of $a_2$ and $b_2$.\\
+Therefore $lcm(a_2, b_2)$ is odd, i.e. set $A$ is closed under addition, and therefore is a group.\\\\
+\textbf{(b)} the set of rational numbers (including $0=0/1$) in lowest terms whose denominators are even.\\\\
+$0=\frac{0}{1}$ is not in this set. Therefore, the set is not a group.\\\\
+\textbf{(c)} the set of rational numbers of absolute value $<1$\\\\
+No. Apparently this set is not closed under addition: $0.8 + 0.8 = 1.6 > 1$.\\\\
+\textbf{(d)} the set of rational numbers of absolute value $\geq 1$ together with $0$\\\\
+No. $|2 + -1.5| = 0.5 < 1$.\\\\
+\textbf{(e)} the set of rational numbers with denominators equal to $1$ or $2$\\\\
+Yes. $\frac{a}{1} + \frac{b}{2} = \frac{2 a + b}{2}$.\\\\
+\textbf{(f)} the set of rational numbers with denominators equal to $1$, $2$, or $3$.\\\\
+No. $\frac{5}{2} + \frac{5}{3} = \frac{25}{6}$.
+\end{addmargin}
+
+\subsubsection{1.1.12}
+Find the orders of the following elements of the multiplicative group $(\mathbb{Z}/12\mathbb{Z})^\times$: $\overline{1}, \overline{-1}, \overline{5}, \overline{7}, \overline{-7}, \overline{13}$.\\\\
+$ord(\overline{1}) = 1$, $ord(\overline{-1}) = 2$, $ord(\overline{5}) = 2$, $ord(\overline{7}) = 2$, $ord(\overline{-7}) = 2$, $ord(\overline{13}) = 2$.\\
+
+\subsubsection{1.1.15}
+Prove that $(a_1 a_2 ... a_n)^{-1} = a_n^{-1} a_{n-1}^{-1} ... a_1^{-1}$.\\\\
+\begin{equation*}
+    a_n^{-1} a_{n-1}^{-1} ... a_1^{-1} \cdot (a_1 a_2 ... a_n) = a_n^{-1} a_{n-1}^{-1} ... a_1^{-1} \cdot a_1 a_2 ... a_n\\
+    = 1 = (a_1 a_2 ... a_n)^{-1} \cdot (a_1 a_2 ... a_n)
+\end{equation*}
+Therefore, $(a_1 a_2 ... a_n)^{-1} = a_n^{-1} a_{n-1}^{-1} ... a_1^{-1}$.\\
+
+\subsubsection{1.1.22}
+If $x$ and $g$ are elements of the group $G$, prove that $|x|=|g^{-1}xg|$. Deduce that $|ab| = |ba$ for all $a,b \in G$.\\\\
+Suppose $|x| = n, |g^{-1}xg| =m$, then $(g^{-1}xg)^n = g^{-1}xg \cdot g^{-1}xg \cdot ... \cdot g^{-1}xg = g^{-1} \cdot x^n \cdot g = g^{-1} \cdot g = 1$.\\
+Therefore, $|g^{-1}xg| \textrm{ divides } |x| $.\\
+Similarly, $(g^{-1}xg) ^ m = g^{-1} \cdot x^m \cdot g = 1$, i.e., $|x| \textrm{ divides } |g^{-1}xg|$.\\
+Therefore $|g^{-1}xg| = |x|$.\\
+Suppose $|ab| = m, |ba| = n$.\\
+$(ab)^n = a \cdot (ba)^{n-1} \cdot b = a \cdot (ba)^{-1} \cdot b = a \cdot a^{-1} \cdot b^{-1} \cdot b = 1$.\\
+$(ba)^m = 1$ can be proven in a similar fashion.\\
+
+\subsubsection{1.1.25}
+Prove that if $x^2=1$ for all $x \in G$ then $G$ is abelian.\\\\
+$\forall a, b \in G, (ab)(ba)=a(bb)a=1=(ab)(ab)$, therefore, $ab = ba$.\\
+
+\subsubsection{1.2.1}
+For powers of $r$, $x = r^i$, we have $x^{\textrm{lcm}(i, n)} = 1$.\\
+For $x = sr^i$, we have $sr^i \cdot sr^i = s \cdot (r^is) \cdot r = s \cdot sr^{-i} \cdot r^i = 1$.
+\subsubsection{1.2.2}
+Say $x = sr^i$, then $rsr^i = sr^{-1}r^i = sr^i r^{-1} = xr^{-1}$.
+\subsubsection{1.2.3}
+We already showed this in $1.2.1$.
+\subsubsection{1.2.17}
+$X_{2n} = \{x,y|x^n = y^2 = 1, xy = yx^2\}$\\
+a) The six elements are $1, x, x^2, y, yx, yx^2$.\\
+Given $x^iy, i\in \{1,2\}$, $xy=yx^2, x^2y = x \cdot xy = x \cdot yx^2 = xy \cdot x^2 = yx^2 \cdot x^2 = yx$.\\
+Therefore, there are only $6$ elements.\\
+b) Because $\textrm{gcd}(n, 3) = 1$, either $n = 3k+1, x^1 = 1$ or $n = 3k+2, x^2 = 1$.\\
+If $x^2 = 1$, then $x^2 = x^3 = 1 \Rightarrow x = 1$.
+\subsubsection{1.2.18}
+$X = \{u,v|u^4=v^3=1, uv=v^2u^2\}$\\
+a) $v^3 = 1 \Rightarrow v^3 \cdot v^{-1} = 1 \cdot v^{-1} \Rightarrow v^2 = v^{-1}$\\
+b) $v^2u^3v = v^2u^2 \cdot uv = uv \cdot uv = uv \cdot v^2u^2 = u^3 \Rightarrow v \cdot v^2u^3v = vu^3 \Rightarrow u^3v = vu^3$\\
+c)\\
+d)\\
+e)
+\subsubsection{7.1.3}
+Because $u \in S$ is a unit in $S$, then $\exists v \in S$ such that $uv = vu = 1$.\\
+Because $S$ a subring of $R$, then both $u, v \in R$, therefore, $uv = vu = 1 \in R$.\\
+To disprove the inverse, we can look at $R = \mathbb{Q}, S = \mathbb{Z}, u = 3$:\\
+In $\mathbb{Q}, \exists v = \frac{1}{3}$ such that $uv = vu = 1$, i.e., $u = 3$ is a unit in $\mathbb{Q}$.
+However, it is clear that $u = 3$ is not a unit in $\mathbb{Z}$.
+\subsubsection{7.1.5}
+\begin{addmargin}[1em]{0em}
+a. Denote the set of all rational number with odd denominators when written in lowest terms $A$.\\
+$(A,+)$ is an abelian group, as already proven in 1.1.6 (a).\\
+Because $A$ is also closed under multiplication and $\mathbb{Q}$ is abelian, this makes $A$ a ring.\\
+b. Denote the set of all rational numbers with even denominators when written in lowest terms $B$.\\
+As proven is 1.1.6 (b), $(B,+)$ is not an abelian group. Therefore, $B$ is not a ring.\\
+c. Denote the set of nonnegative rational numbers $C$.\\
+$(C,+)$ is not a group: for $1 \in C$, $\nexists x \in C$ such that $1+x = 0$.\\
+d. Denote the set of squares of rational numbers $D$.\\
+$(D,+)$ is not a group: $1 \in D$ because $1 = 1^2$, but $1+1 = 2 \notin D$ because $\sqrt{2} \notin D$.\\
+e. Denote the set of all rational numbers with odd numerators when written in lowest terms $E$.\\
+$E$ is not closed under addition: $\frac{1}{3}, \frac{1}{5} \in E$, but $\frac{1}{3} + \frac{1}{5} = \frac{8}{15} \notin E$.\\
+f. Denote the set of all rational numbers with even numerators when written in lowest terms $F$.\\
+First NTS $\forall \frac{a}{b} \in F, b$ is odd. If $\exists \frac{a}{b} \in F$ such that $b$ is even, then because $a$ is also even, it is not in its lowest terms.\\
+Therefore $\forall \frac{a}{b}, \frac{c}{d} \in F$, $\frac{a*c}{b*d}$ is the lowest term, therefore $F$ is closed under multiplication.
+Similarly $\frac{a*d + c*b}{b*d}$ is also the lowest term, therefore $F$ is closed under addition.\\
+Because $0 = \frac{0}{1} \in F$, this makes $(F,+)$ an abelian group.\\
+So $F$ is a ring.\\
+\end{addmargin}
+\end{document}

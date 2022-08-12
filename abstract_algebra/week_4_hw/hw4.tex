@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+
+\title{HW 4\\
+\large{Abstract Algebra}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+\maketitle
+\setcounter{secnumdepth}{0}
+\section{3.1.34}
+a. $\forall r^i \in D_{2n}, r^ir^kr^{-i} = r^k \in \braket{r^k}$.\\
+$\forall sr^i \in D_{2n}, sr^ir^k(sr^i)^{-1} = r^{-k} \in \braket{r^k}$\\
+Therefore $\braket{r^k} \trianglelefteq D_{2n}$\\
+b. Define $\phi: D_{2n} \rightarrow D_{2k}$ by
+\begin{equation*}
+    \phi(sr^i) = sr^{i\mod k}
+\end{equation*}
+First NTS $\phi$ is a homomorphism:\\
+$\phi(r^i)\phi(r^j) = r^{i\mod k}r^{j\mod k} = r^{(i+j)\mod k} = \phi(r^{i+j})$\\
+Therefore $\phi$ is a homomorphism.\\
+Then NTS $ker\ \phi = \braket{r^k}$:\\
+$\forall r^{ik}, \phi(r^ik) = r^{ik\mod k} = 1$, therefore $\braket{r^k} \subseteq ker\ \phi$\\
+$\forall r^i \in ker\ \phi, \phi(r^i) = r^{i\mod k} = 1 \rightarrow i = kj \rightarrow r^i \in \braket{r^k}$, therefore $ker\ \phi \subseteq \braket{r^k}$\\
+Therefore $ker\ \phi = \braket{r^k}$.\\
+Therefore $D_{2n}/ker\ \phi = D_{2n}/\braket{r^k} \cong D_{2k}$.
+\section{3.1.36}
+Denote $Z(G)$ as $Z$.\\
+Because $G/Z$ cyclic, we know $G/Z = \braket{aZ}$ for some $a \in G$.\\
+Then given $g_1, g_2 \in G, g_1Z = a^iZ, g_2Z = a^jZ$ for some $i, j$, i.e. $g_1 = a^ix, g_2 = a^jy$ for some $x, y \in Z$.\\
+Therefore $g_1g_2 = a^ixa^jy$, because $x, y \in Z, g_1g_2 = a^{i+j}xy$. Similarly, $g_2g_1 = a^{i+j}xy = g_1g_2$.\\
+Therefore $G$ abelian.
+\section{3.1.42}
+We see that
+\begin{equation*}
+    \forall h \in H, k \in K, hkh^{-1}k^{-1} = (hkh^{-1})k^{-1} = k'k^{-1} \in K
+\end{equation*}
+Similarly,
+\begin{equation*}
+    hkh^{-1}k^{-1} = h(kh^{-1}k^{-1}) = hh' \in H
+\end{equation*}
+Therefore, $hkh^{-1}k^{-1} \in H \cap K = 1 \rightarrow hk = kh$
+\section{3.2.8}
+Suppose $a \in H \cap K \rightarrow |\braket{a}|\ |\ |H|, |\braket{a}|\ |\ |K| \rightarrow |\braket{a}| = 1 \rightarrow a = 1$.
+\section{3.3.2}
+1. $A \leq B \iff \overline{A} \leq \overline{B}$:\\
+Suppose $A \leq B$:\\
+Then $\forall aN \in \overline{A}$, because $A \leq B, a \in B \rightarrow aN \in \overline{B}$.\\
+Therefore $\overline{A} \leq \overline{B}$\\
+Suppose $\overline{A} \leq \overline{B}$:\\
+Then $\forall a \in A, aN \in \overline{A} \rightarrow aN \in \overline{B} \rightarrow \exists b \in B, bN = aN$.\\
+Therefore $\exists n \in N, a = bn$. Because $N \leq B, bn = a \in B$, Therefore $A \leq B$.\\
+2. $A \leq B \rightarrow |B:A| = |\overline{B}:\overline{A}|$:\\
+We define $\phi: B/A \rightarrow \overline{B}/\overline{A}$ by
+\begin{equation*}
+    \phi(bA) = \overline{b}\cdot \overline{A}
+\end{equation*}
+We just NTS $\phi$ is a bijection:\\
+It is obvious $\phi$ is surjective.\\
+Then WTS $ker\ \phi = \{1\}$:\\
+$\forall bA, b \in B$ such that $\phi(bA) = \overline{A} \rightarrow \overline{b} in \overline{A} \rightarrow \exists a \in A, bN = aN$.\\
+From 2 we know this means $b \in A$ and therefore $bA = A = 1$.\\
+Therefore $ker\ \phi = \{1\}$ and $\phi$ is a bijection. Therefore $|B:A| = |\overline{B}:\overline{A}|$.\\
+3. $\overline{\braket{A, B}} = \braket{\overline{A}, \overline{B}}$:\\
+For this we only NTS $\overline{ab} = \overline{a}\cdot \overline{b}$:\\
+$\forall an_1bn_2 \in \overline{a}\cdot\overline{b}$, because $N \trianglelefteq G, an_1bn_2 = ab^{-1}n'n_2 \in \overline{ab}$.\\
+Therefore $\overline{\braket{A, B}} = \braket{\overline{A}, \overline{B}}$.\\
+4. $\overline{A \cap B} = \overline{A} \cap \overline{B}$:\\
+$\forall x \in A \cap B$ because $x \in A, \overline{x} \in \overline{A}$, similarly $\overline{x} \in \overline{B}$. Therefore $\overline{x} \in \overline{A} \cap \overline{B}$, i.e. $\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$.\\
+$\forall \overline{x} \in \overline{A} \cap \overline{B}$, because $\overline{x} \in \overline{A}$, from 2 we know this means $x \in A$, similarly $x \in B$. Therefore, $x \in A \cap B \rightarrow \overline{x} \in \overline{A \cap B}$, i.e. $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B}$.\\
+5. $A \trianglelefteq G \iff \overline{A} \trianglelefteq \overline{G}$:\\
+Suppose $A \trianglelefteq G$, then $\forall g \in G, a \in A, \exists a' \in A. gag^{-1} = a'$.\\
+Therefore given the natural projection $\pi$, we have
+\begin{equation*}
+    \pi(gag^{-1}) = \pi(g)\cdot\pi(a)\cdot\pi(g^{-1}) = \overline{g}\cdot\overline{a}\cdot\overline{g^{-1}} = \pi(a') = \overline{a'}
+\end{equation*}
+Therefore $\forall \overline{g} \in \overline{G}, \overline{a} \in \overline{A}, \exists \overline{a'} \in \overline{A}, \overline{gag^{-1}} = \overline{a'}$.\\
+Therefore $\overline{A} \trianglelefteq \overline{G}$.\\
+Suppose $\overline{A} \trianglelefteq \overline{G}$, then $\forall g \in G, a \in A, \pi(gag^{-1}) = \overline{g} \cdot \overline{a} \cdot \overline{g^{-1}} = \overline{a'}$ for some $a' \in A$.\\
+This means $gag^{-1} = a'n$ for some $n \in N$, from 2 we know this means $a'n \in A$ therfore $gag^{-1} \in A$. Therefore $A \trianglelefteq G$.
+\section{3.3.4}
+Because $H \trianglelefteq G$, then from the natural projection $\pi$ we know that $\overline{G} = G/H$ is a group and $\overline{K} \leq \overline{G}$.\\
+$|\overline{G}| = |G:H| = p$. Therefore $|\overline{K}| = 1$ or $p$.\\
+If $|\overline{K}| = 1$, then $K \leq H$.\\
+If $|\overline{K}| = p$, then $|\overline{K}| = |\overline{G}|$. Then $\forall g \in G, \exists h 
+in H, g \in hK \rightarrow HK = G$.\\
+Similarly from Second Isomorphism Theorem, we know that $HK/H \cong K/(K \cap H)$, therefore $|K:K\cap H| = p$
+\end{document}

@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Linear Algebra Done Right\\
+\large{HW 4}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{4.1}
+(Axler 3E.13)\\
+First NTS that $v_1, ..., v_m, u_1, ..., u_n$ span $V$:\\
+Given $v \in V, \exists x \in V$ such that $v = x + U$.\\
+Because $v_1+U, ..., v_m+U$ a basis of $V/U$, therefore $\exists$ a linear combination such that
+\begin{equation*}
+    x+U = \sum_{i=1}^{m} a_i (v_i+U) = \left(\sum_{i=1}^{m} a_iv_i\right)U
+\end{equation*}
+therefore this means $v = x + u$ for some $u \in U = \sum_{i=1}^{m} a_iv_i + u'$ for some $u' \in U$.\\
+Because $u_1, ..., u_n$ a basis of $U$, this means $x = \sum_{i=1}^{m}a_iv_i + \sum_{j=1}^{n}b_ju_j$.\\
+Therefore $v_1, ..., v_m, u_1, ..., u_n$ span $V$.\\
+Then we NTS $v_1, ..., v_m, u_1, ..., u_n$ is independent:\\
+Suppose $\exists$ a linear combination such that
+\begin{equation*}
+    \sum_{i=1}^{m}a_iv_i + \sum_{j=1}^{n}b_ju_j = 0
+\end{equation*}
+then this means $\sum_{i=1}^{m}a_iv_i = -\sum_{j=1}^{n}b_ju_j \in U \rightarrow (\sum_{i=1}^{m}a_iv_i)U = \sum_{i=1}^{j}a_i(v_i+U) = 0+U$. This is contradictory to that $v_1+U, ..., v_m+U$ a basis for $U/V$. Therefore no such linear combination exists and $v_1, ..., v_m, u_1, ..., u_n$ independent.
+\section{4.2}
+(Axler 3F.7)\\
+\begin{equation*}
+    \phi_j(x^i) = \begin{cases}
+    x^(i-j) = 0 & i > j\\
+    1 & i = j\\
+    0 & i < j
+    \end{cases}
+\end{equation*}
+Therefore $\phi_j(x^i) = 1 \iff i = j$ and $0$ otherwise, showing $\phi_0, ..., \phi_m$ a basis of te dual space of $\mathcal{P}_m(\mathbb{R})$.
+\section{4.3}
+(Axler 3F.8)\\
+1. We prove using induction on $m$:\\
+Suppose the statement is true for all $m <= n-1$, i.e. $1, x-5, ..., (x-5)^{n-1}$ is a basis of $\mathcal{P}_{n-1}(\mathbb{R})$, we then NTS the statement is also true for $m=n$.\\
+Given $x = \sum_{i=0}^{n}a_ix^i \in \mathcal{P}_n(\mathbb{R})$.\\
+Then we create $x' = x - a_n(x-5)^n$, it is clear that $x' \in \mathcal{P}_{n-1}(\mathbb{R}) \rightarrow x' = \sum_{i=0}^{n-1}b_i(x-5)^i$.\\
+Therefore $x = a_n(x-5)^n + \sum_{i=0}^{n-1}b_i(x-5)^i$. Therefore $1, x-5, ..., (x-5)^n$ span $\mathcal{P}_n(\mathbb{R})$.\\
+Now $1, x-5, ..., (x-5)^n$ obviously independent, therefore $1, ..., (x-5)^n$ a basis of $\mathcal{P}_n(\mathbb{R})$.\\
+2. The dual basis for $1, x-5, ..., (x-5)^m$ is
+\begin{equation*}
+    \phi_j(p) = \frac{p^{(j)}(5)}{j!}
+\end{equation*}
+\section{4.4}
+(Axler 3F.15)\\
+$T' = 0 \iff null\ T' = W' \iff (range\ T)^0 = W' \iff T = 0$
+\end{document}

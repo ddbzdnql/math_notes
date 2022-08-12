@@ -1,0 +1,214 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+
+\title{Week 3 Notes\\
+\large{Abstract Algebra}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+\maketitle
+\setcounter{secnumdepth}{0}
+\section{1.7 Group Action}
+\subsection{Definition of Group Action}
+A \textit{group action} of a group $G$ on a set $A$ is a map form $G\times A \rightarrow A$, written as $g\cdot a,\forall g \in G$, satisfying the following properties:
+\begin{addmargin}[1em]{0em}
+$\forall g_1, g_2 \in G, g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$\\
+$\forall a \in A, 1\cdot a = a$
+\end{addmargin}
+\subsection{Properties of Group Action}
+For each group action w.r.t. $G, A$, $\forall g \in G$, define $\sigma_g: A \rightarrow A$ as $\sigma_g(a) = g\cdot a$.\\
+Such $\sigma_g$s satisfies the following properties:
+\begin{addmargin}[1em]{0em}
+Fixing a $g$, $\sigma_g$ is a \textit{permutation} of $A$\\
+Define a mapping $\phi:G \rightarrow S_A$ as $\phi(g) = \sigma_g$. Then $\phi$ is a homomorphism.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+To show $\sigma_g$ is a permutation, oNTS that $\exists g^{-1}$ an inverse of $\sigma_g$. Claim $\sigma_{g^{-1}}$ is such inverse:\\
+$\forall a \in A, \sigma_{g^{-a}}(\sigma_g (a)) = g^{-1}\cdot (g \cdot a) = (g^{-1}g) \cdot a = 1\cdot a = a$.\\
+Therefore $\sigma_{g^{-1}}$ is an inverse of $\sigma_g$, therefore $\sigma_g$ is both injective and surjective, therefore a permutation of $A$.\\
+The injectivity and surjectivity can be proven separately using $\sigma_{g^{-a}}$ too:\\
+Injectivity:\\
+If $g\cdot a = g\cdot b$, then $g^{-1}\cdot (g\cdot a) = g^{-1}\cdot (g\cdot b)$, i.e. $1\cdot a = a = 1\cdot b = b$. Therefore, $\sigma_g$ is injective.\\
+Surjectivity:\\
+$\forall a \in A, \exists g^{-1}\cdot a$ such that $g\cdot (g^{-1}\cdot a) = (gg^{-1})\cdot a = 1\cdot a = a$, therefore $\sigma_g$ is surjective.
+\end{addmargin}
+\subsection{Examples}
+\begin{addmargin}[1em]{0em}
+1. If we define $\forall g\in G, \forall a \in A, g\cdot a = a$, then this is an \textit{trivial action}.\\
+If $G$ acts on $B$ such that distinct elements in $G$ induces distinct permutations of $B$, then such action is said to be faithful.\\
+We can see that with the $\phi$ defined above, if $|ker\phi| \neq 1$, then such an action is not faithful.\\
+2. When defining a vector space $V$ over $F$, we can say that $F$ acts on $V$ through the scalar multiplication.\\
+3. 
+\end{addmargin}
+\section{2.2 Centralizers and Normalizers, Stabilizers and Kernels}
+In this section, use $G$ to denote a group, $A$ to denote a non-empty \textbf{subset} of $G$.\\
+\subsection{Definition of Centralizer}
+\begin{addmargin}[1em]{0em}
+Define $\textbf{C}_G(A)=\{g\in G|\forall a\in A, gag^{-1}=a\}$. This is called the \textit{centralizer} of $A$ in $G$. We can interpret this as saying $\textbf{C}_G(A)$ is the set of elements that commutes with all elements in $A$.
+\end{addmargin}
+\subsection{Properties of Centralizers}
+\subsubsection{Centralizers are groups}
+\begin{addmargin}[1em]{0em}
+First of all centralizers are not empty because $1$ will be in all centralizers.\\
+Then $\forall g, h \in \textbf{C}_G(A)$, we show that $\forall a \in A, (gh)a(gh)^{-1} = a$:\\
+$(gh)a(gh)^{-1} = g(hah^{-1})g^{-1} = gag^-1 = a$.\\
+Then we show that $\forall g \in \textbf{C}_G(A), g^{-1} \in \textbf{C}_G(A)$:
+$\forall a \in A, gag^{-1} = a \rightarrow ga = ag \rightarrow a = g^{-1}ag$.\\
+Therefore $\textbf{C}_G(A)$ is a group.
+\end{addmargin}
+\subsection{Definition of Center}
+\begin{addmargin}[1em]{0em}
+Define $Z(G) = \{g \in G|\forall x \in G, gx = xg\}$. This called the \textit{center} of $G$.\\
+We can interpret this as the set of elements that commutes will all elements in $G$.
+\end{addmargin}
+\subsection{Definition of Normalizer}
+\begin{addmargin}[1em]{0em}
+Define $gAg^{-1} = \{gag^-1|a\in A\}$.Then the \textit{normalizer} of $A$ in $G$ is:
+\begin{equation*}
+    N_G(A) = \{g\in G|gAg^{-1} = A\}
+\end{equation*}
+\end{addmargin}
+\subsubsection{Examples}
+\begin{addmargin}[1em]{0em}
+1. If $G$ is abelian, then $Z(G) = G$, i.e. the center of $G$ is $G$; $C_G(A) = G$ because $\forall g \in G, gag^{-1} = gg^{-1}a = a$, i.e. the centralizer of any $A$ in $G$ is $G$; and similarly $N_G(A) = G$.\\
+2. For $D_8$, let $A = \{1, r, r^2, r^3\}$. Then $C_{D_8}(A) = A$.\\
+$\forall s^ir^j \in C_{D_8}(A), s^ir^jr^k(s^ir^j)^{-1} = s^ir^ks^{-i}$. This is equal to $r^k$ only if $i=0$.\\
+If $i \neq 0, s^ir^ks^{-i} = s^is^ir^{-k} = r^{-k}$, which is not necessarily equal to $r^k$.\\
+3. From the similar reasoning, we can see that $N_{D_8}(A) = D_8$\\
+4. $Z(D_8) = \{1, r^2\}$\\
+It is clear that for any subset $A$, $Z(G)$ must be in $C_G(A)$. Therefore $Z(D_8) \subseteq C_{D_8}(A) = \{1,r,r^2,r^3\}$ and apparently $r, r^3$ is not in $Z(D_8)$.
+\end{addmargin}
+\subsection{Stabilizers and Kernels}
+$G$ a group acting on a set $S$. Then for some $s \in S$, the stabilizer of $s$ in $G$ is defined as
+\begin{equation*}
+    G_s = \{g \in G | g\cdot s = s\}
+\end{equation*}
+The kernel of an action $G$ on $S$ is defined as
+\begin{equation*}
+    \{g \in G | \forall s\in S, g\cdot s = s \}
+\end{equation*}
+\subsection{Relations between Normalizers and Stabilizers, Centralizers and Kernels}
+Given $G$ a group, define $P(G)$ as the power set of $G$, i.e. the set of subsets of $G$.\\
+Then we can define an action of $G$ on $P(G)$ by conjugation:
+\begin{equation*}
+    \forall A \in P(G), g \in G, g:A \rightarrow gAg^{-1}
+\end{equation*}
+Then for a fixed $A$, we can see that the stabilizer of $A, G_A = N_G(A)$. Because $G_A = \{g \in G | g:A = gAg^{-1} = A\} = N_G(A)$\\
+Then for $N_G(A)$ and $A$, we define an action of $N_G(A)$ on $A$ again with conjugation. Here because $\forall g \in N_G(A), gAg^{-1} = A$, this action is well-defined.\\
+Then we can see that the kernel of this action is $\{g \in N_G(A) | \forall a \in A, gag^{-1} = a\}$, i.e. the kernel of this action is $C_G(A)$
+\section{2.3 Cyclic groups and cyclic subgroups}
+$G$ an arbitrary group and $x \in G$, if $\exists m, n \in \mathbb{Z}, x^n = 1, x^m = 1$, then then $x^d = 1$ where $d = gcd(m,n)$. And if $x^m = 1 \rightarrow |x| \vert m$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$\exists r, s \in \mathbb{Z}$ such that $d = mr + ns$, then
+\begin{equation*}
+    x^d = x^{mr+ns} = (x^m)^r(x^n)^s = 1^r1^s = 1
+\end{equation*}
+Let $n = |x|, d = gcd(m, n)$, then from above we know $x^d = 1$, and because $|x|$ is the smallest integer such that $x^n = 1$, we must have $d = n$, i.e. $n \vert d$.
+\end{addmargin}
+\textbf{Theorem 4} Any two cyclic groups of the same order are isomorphic:\\
+1. $n \in \mathbb{Z}^+$ and $\braket{x}, \braket{y}$ both cyclic groups of order $n$, then the map
+\begin{equation*}
+    \phi: \braket{x} \rightarrow \braket{y}
+\end{equation*}
+\begin{equation*}
+    \phi(x^k) = y^k
+\end{equation*}
+is well defined and isomorphism.\\
+2. If $\braket{X}$ is cyclic and infinite, then the map
+\begin{equation*}
+    \phi: \mathbb{Z} \rightarrow \braket{x}
+\end{equation*}
+\begin{equation*}
+    \phi(k) \rightarrow x^k
+\end{equation*}
+is well defined and isomorphism.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+1. First NTS $\phi$ is well defined, i.e. $x^r = x^s \rightarrow \phi(x^r) = \phi(x^s)$:\\
+Then we have $n | (r-s)$, i.e. $\exists t \in \mathbb{Z}, tn = r-s \rightarrow r = tn+s$.\\
+Then $\phi(x^r) = x^{tn+s} = (x^n)^tx^s = 1^tx^s = x^s$.\\
+Then it is obvious that $\phi$ is homoporphism and $\forall k \in \{0, ..., n-1\}, \exists x^k$ such that $\phi(x^k) = y^k$, therefore $\phi$ is surjective and because $|\braket{x}| = |\braket{y}|$, $\phi$ is isomorphism.
+\end{addmargin}
+$G$ a group, let $x \in G$ and $a \in \mathbb{Z} - \{0\}$, then\\
+1. $|x| = \infty \rightarrow |x^a| = \infty$\\
+2. $|x| = n < \infty \rightarrow |x^a| = \frac{n}{(n,a)}$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+1. Suppose $|x^a| = m < \infty$, then $x^{am} = (x^a)^m = 1^m = 1$, therefore $|x|$ must be $< \infty$.\\
+2. Denote $d = (a, n), b = n/d, c = a/d$.\\
+Then we NTS $k = |x^a| = b$.\\
+To do this, first show $k | b$:\\
+$(x^a)^b = x^{\frac{an}{d}} = x^{c n} = 1^c = 1$, therefore $k = |x^a| | b$.\\
+Then show $b | k$:\\
+$(x^a)^k = 1 \rightarrow n | ak$, i.e., $bd | cdk \rightarrow b | ck$. Because $b, c$ coprime, then $b | k$.\\
+Therefore $k = |x^a| = b = \frac{n}{d}$
+\end{addmargin}
+Let $H = \braket{x}$, then\\
+1. If $|x| = \infty$, then $H = \braket{x^n} = H$ iff $a = \pm 1$.\\
+2. If $|x| = n < \infty$, then $H = \braket{x^a}$ iff $(a,n) = 1$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+1. If $\exists m \neq \pm 1$ and $\braket{x^m} = H$, then $\exists n \neq 1$ and $(m, n) = 1$ such that $(x^m)^k = x^n$, because $|x| = \infty$, then $mk = n$, contradiction.\\
+2. From previous theorems we see that
+\begin{equation*}
+    |x| = |x^a| \iff (a, n) = 1
+\end{equation*}
+Because $\braket{x^a} \leq \braket{x}$, then $|x| = |x^a| \iff \braket{x^a} = \braket{x}$
+\end{addmargin}
+Then we can look at the complete structure of a cyclic subgroup:
+\subsection{Structure of a cyclic subgroup}
+\textbf{Theorem 7.} $H = \braket{x}$ a cyclic group, then\\
+1. Every subgroup of $H$ is cyclic.\\
+2. If $|H| = \infty$, then $\forall a \neq b \in \mathbb{Z}^+, \braket{x^a} \neq \braket{x^b}$.\\
+3. If $|H| = n < \infty$, then for each $a | n$, $\exists ! U \leq H$ such that $|U| = a$. This $U = \braket{x^d}, d = \frac{n}{a}$. And for every integer $m, \braket{x^m} = \braket{x^{(n,m)}}$, i.e. the subgroups of $H$ is isomorphic to positive divisors of $n$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+1. Given $K \subseteq H$, assuming $K \neq \{1\}$, then $\exists x^a \in K$ such that $a \in \mathbb{Z}^+$.\\
+Then we find smallest such $a$, because $x^a \in K, \rightarrow \braket{x^a} \subseteq K$.\\
+$\forall x^d \in K$, suppose $x^d \notin \braket{x^a}$, then this means $d = qa+r$, with $r < a$, then we have $x^r \in K$, contradicting with $a$ being the smallest such positive integer. Therefore $\nexists x^d \notin \braket{x^a}$.\\
+Therefore $K = \braket{x^a}$, i.e. $K$ is cyclic.\\
+3. Let $d = \frac{n}{a}$, then we say $\braket{x^d}$ is the desiered $U$.\\
+First obviously $|\braket{x^d}| = \frac{n}{(n, d)} = a$.\\
+Then given $U = \braket{x^m} \subseteq H$ and $|U| = a$, then we have $a = \frac{n}{(n, m)} \rightarrow \frac{n}{a} = d = (n, m) \rightarrow d | m$, i.e. $x^m \in \braket{x^d} \rightarrow U = \braket{x^m} \subseteq \braket{x^d}$, and because $|U| = |\braket{x^d}|, U = \braket{x^d}$.\\
+The second point of 3 naturally follows.
+\end{addmargin}
+\section{2.4 Subgroups generated by subsets of a group}
+In this section we try to generalize what we did for a single element in 2.3:\\
+A subgroup generated by $A$ a subset of a group $G$ is the smallest subgroup of $G$ that contains $A$.\\
+\textbf{Intersection of subgroups are also subgroups:}\\
+$\mathcal{A}$ a collection of subgroups of $G$, then the intersection of all members of $\mathcal{A}$ is still a subgroup.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+Denote the intersection as
+\begin{equation*}
+    K = \cap_{H \in A} H
+\end{equation*}
+Apparently $1 \in K$, and then $\forall a, b \in K$, this means $\forall H, a, b \in H \rightarrow ab \in H$, therefore $ab \in K$. Similarly we have $K$ a subgroup.
+\end{addmargin}
+\textbf{Definition of subgroup generated by $A$:}\\
+Given $A$ a subset of $G$, define
+\begin{equation*}
+    \braket{A} = \bigcap_{A \subseteq H, H \leq G} H
+\end{equation*}
+We define the closure of $A$ as
+\begin{equation*}
+    \Bar{A} = \{a_1^{\epsilon_1} ... a_n^{\epsilon_n}|n \in \mathbb{Z}^+, a_i \in A, \epsilon_i=\pm 1\}
+\end{equation*}
+Here each $a_1^{\epsilon_1}...a_n^{\epsilon_n}$ is called a \textbf{word} and these $a_i$ are not necessarily distinct.\\
+\textbf{Closure equals to generated subgroup:} $\Bar{A} = \braket{A}$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+First it is clear that $\Bar{A}$ is a subgroup. Then by definiton of $\braket{A}$, we know that $\braket{A} \subseteq \Bar{A}$.\\
+Then $\forall a = a_1^{\epsilon_1} ... a_n^{\epsilon_n} \in \Bar{A}$, all these $a_1^{\epsilon_1} \in \braket{A}$, therefore $a \in \braket{A}$. Therefore $\Bar{A} \subseteq \braket{A}$.\\
+Therefore $\braket{A} = \Bar{A}$
+\end{addmargin}
+\end{document}

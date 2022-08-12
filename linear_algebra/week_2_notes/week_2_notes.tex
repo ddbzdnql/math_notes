@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Linear Algebra Done Right\\
+\large{Week 2 Notes}}
+\author{shaozewxy }
+\date{May 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{3.B Null Spaces and Ranges}
+\subsubsection{\textit{Null Space}}
+FOr $T \in L(V,W)$, the \textit{null space} of $T$, denoted $\textrm{null } T$ is the subset of $V$ the elements of which maps to $0$ through $T$:
+\begin{equation*}
+    \textrm{null } T = \{v\in V | Tv = 0\}
+\end{equation*}
+\subsection{Null space is a subspace}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$T$ a linear map, therefore $T(0) = 0$, i.e., $0 \in null T$.\\
+$\forall u, v \in null T, T(u+v) = Tu + Tv = 0+0 = 0$, i.e., $null T$ is closed under addition.\\
+$\forall \lambda \in F, u \in null T, T(\lambda u) = \lambda Tu = \lambda 0 = 0$, i.e., $null T$ is closed under scalar multiplication.
+\end{addmargin}
+\subsection{Injectivity and Null Spaces}
+$T \in L(V, W)$, then $T$ is injective iff $null T = \{0\}$.\\
+\textbf{Proof:}\\
+\begin{addmargin}[1em]{0em}
+If $T$ injective, then $\forall v \in null T, Tv = 0 = T0 \rightarrow v = 0$.\\
+If $null T = \{0\}$, then $\forall u, v \in T$ such that $Tu = Tv$, we have $T(u-v) = Tu - Tv = 0 \rightarrow u - v = 0$, i.e., $u = v$.
+\end{addmargin}
+\subsection{Fundamental Theorem of Linear Maps}
+$V$ a finite dimensional space and $T \in L(V,W)$ then:
+\begin{equation*}
+    dim\ V = dim\ null\ T + dim\ range\ T
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$u_1, ..., u_m$ denotes a basis of $null\ T$, so $dim\ null\ T = m$. We can extend this basis to a basis of $V:\{u_1, .., u_m; v_1, ..., v_n\}$\\
+Then we only need to show that $dim\ range\ T=n$. To do this, we prove that $B = \{Tv_1, ..., Tv_n\}$ is a basis of $range\ T$.\\
+First we show that $B$ is independent:\\
+If $\exists$ a linear combination of $B$ that sums up to $0$:
+\begin{equation*}
+    \sum_{i=1}^{n}a_i Tv_i = 0
+\end{equation*}
+Then we have:
+\begin{equation*}
+    T\left(\sum_{i=1}^{n} a_i v_i\right) = 0
+\end{equation*}
+i.e., $\sum_{i=1}^{n} a_i v_i \in null\ T$.\\
+This means $\exists$ a linear combination of $u_1, ..., u_m$ that sums up to $\sum_{a_i}^{v_i}$:
+\begin{equation*}
+    \sum_{i=1}^{m} b_i u_i = \sum_{i=1}^{m} a_i v_i
+\end{equation*}
+\begin{equation*}
+    \sum_{i=1}^{m} b_i u_i - \sum_{i=1}^{m} a_i v_i = 0
+\end{equation*}
+making the basis $u_1, .., u_m, v_1, ..., v_n$ dependent, contradiction.\\
+Therefore, $Tv_1, ..., Tv_m$ must be independent.\\
+We then show that $Tv_1, ..., Tv_m$ spans $range\ T$:\\
+$\forall w \in range\ T, \exists v \in V$ such that $Tv = w$.\\
+Because $u_1, ..., u_m, v_1, ..., v_n$ is a basis of $V$, then $\exists$ a linear combination of the basis that sums up to $v$:
+\begin{equation*}
+    \sum_{i=1}^{m} b_i u_i + \sum_{i=1}^{m} a_i v_i = v
+\end{equation*}
+Then we have:
+\begin{equation*}
+    T\left(\sum_{i=1}^{m} b_i u_i + \sum_{i=1}^{m} a_i v_i\right) = w
+\end{equation*}
+\begin{equation*}
+    T\left(\sum_{i=1}^{m} b_i u_i\right) + T\left(\sum_{i=1}^{m} a_i v_i\right) = w
+\end{equation*}
+Because $u_1, ..., u_m$ a basis of $null\ T$, we have:
+\begin{equation*}
+    T\left(\sum_{i=1}^{m} b_i u_i\right) = 0
+\end{equation*}
+And therefore,
+\begin{equation*}
+    T\left(\sum_{i=1}^{m} a_i v_i\right) = w
+\end{equation*}
+\begin{equation*}
+    \sum_{i=1}^{m} a_i Tv_i = w
+\end{equation*}
+i.e., $\forall w \in range\ T, \exists$ a linear combination of $B$ that sums to $w$, making $B$ spanning $range\ T$.\\
+Therefore, $B$ is a basis.
+\end{addmargin}
+\subsubsection{Dimensions and In/Surjectivity}
+$V, W$ both finite-dimensional, with $dim\ V > dim\ W$, then $\nexists T\in L(V, W)$ that is injective.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$\forall T \in L(V,W), dim\ range\ T + dim\ null\ T = dim\ V$, also because $dim\ range\ T \leq dim\ W$, we have
+\begin{equation*}
+    dim\ V - dim\ null\ T \leq dim\ W
+\end{equation*}
+\begin{equation*}
+    dim\ null\ T \geq dim\ V - dim\ W \geq 0
+\end{equation*}
+Therefore, $T$ can't be injective.\\
+Similarly, $V, W$ both finite-dimensional, with $dim\ V < dim\ W$, then $\nexists T\in L(V, W)$ that is surjective.\\
+The proof is similar.
+\end{addmargin}
+\subsubsection{Dimensions and Linear Systems}
+Translating the two lemmas above to linear systems, we get:
+\begin{addmargin}[1em]{0em}
+A homogeneous system of linear equations with more variables than equations has nonzero solutions.\\
+An inhomogeneous system of linear equations with more equations than variables has no solutions for some choices of the constant terms.
+\end{addmargin}
+
+\section{3.D Invertibility and Isomorphic Vector Spaces}
+\subsection{Invertibility, Injectivity and Surjectivity}
+\begin{addmargin}[1em]{0em}
+A linear map is invertible iff it is both injective and surjective.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$T \in L(V, W)$ is invertible,\\
+Show $T$ is injective:\\
+$\forall a, b \in V$ such that $Ta = Tb$, then $T^{-1}(Ta) = =a = T^{-1}(Tb) = b$, therefore $T$ is injective.\\
+Show $T$ is surjective:\\
+$\forall w \in W$, let $v = T^{-1}w$, then $Tv = T(T^{-1}w) = w$, therefore $T$ is surjective.\\
+$T \in L(V, W)$ is both injective and surjective, WTS $T$ has an inverse.\\
+Define $T^{-1}:W \rightarrow V$, $\forall w \in W$, because $T$ surjective, $\exists v \in V$ such that $Tv = w$, let $T^{-1}w$ to be such $v$.\\
+$\forall v \in V. T(T^{-1}Tv) = Tv$, because $T$ injective, $\exists!$ therefore $T^{-1}Tv = v$.
+\end{addmargin}
+\subsection{Isomorphism}
+\subsubsection{Dimensions and Isomorphism}
+\begin{addmargin}[1em]{0em}
+Two finite-dimensional vector spaces over $F$ are isomorphic iff they have the same dimensions.
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+If $V \cong W$ and both finite-dimensional, therefore, $\exists T:V \rightarrow W$ such that $T$ is invertible.\\
+i.e. $T$ is injective and surjective.\\
+We can infer from this that $dim\ V = dim\ W$.\\
+If $dim\ V = dim\ W = n$, then $A = v_1, ..., v_n$ and $B = w_1, ..., w_n$ bases for $V, W$.\\
+Define $T:V \rightarrow W$ as $Tv_i = w_i$.\\
+WTS $T$ is injective:\\
+$T(\sum_{i=1}^{n}a_iv_i) = T(\sum_{i=1}^{n}b_iv_i)$, then $\sum_{i=1}^{n}a_iw_i = \sum_{i=1}^{n}b_iw_i$, but because $w_1, ..., w_i$ is a basis, then $a_i = b_i$ must be true, i.e. $\sum_{i=1}^{n}a_iv_i = \sum_{i=1}^{n}b_iv_i$. Therefore, $T$ is injective.\\
+WTS $T$ is surjective:\\
+$\forall \sum_{i=1}^{n}a_iw_i \in W$, let $v = \sum_{i=1}^{n}a_iv_i \in V$, then $Tv = T(\sum_{i=1}^{n}a_iv_i) = \sum_{i=1}^{n}a_iTv_i = \sum_{i=1}^{n}a_iw_i = w$. Therefore, $T$ is surjective.\\
+Therefore $T$ is invertible.
+\end{addmargin}
+\subsubsection{$L(V,W)$ and $\textbf{F}^{m,n}$ are isomorphic}
+\begin{addmargin}[1em]{0em}
+$A = v_1, ..., v_n$ a basis of $V$ and $B = w_1, .., w_m$ a basis of $W$. The $M(V, W, A, B)$ defines an isomorphism between $L(V, W)$ and $\textbf{F}^{m,n}$.
+\end{addmargin}
+\textbf{Prood:}
+\begin{addmargin}[1em]{0em}
+WTS $M$ is injective:\\
+$T\in L(V,W)$ and $M(T) = 0$, then we know $Tv_k = 0$ and because $v_1, ..., v_n$ is a basis, $T = 0$, therefore $M$ is injective.\\
+WTS $M$ is surjective:\\
+This is obvious, given $A \in \textbf{F}^{m,n}$, define $T$ accordingly.
+\end{addmargin}
+\subsection{Linear Map and Matrix Multiplication}
+\subsubsection{Linear maps act like matrix multiplication}
+\begin{addmargin}[1em]{0em}
+$T\in L(V,W)$ and $v\in V$, with $A = v_1, ..., v_n$ and $B = w_1, ..., w_n$ bases of $V$ and $W$. Then
+\begin{equation*}
+    M(Tv) = M(T)M(v)
+\end{equation*}
+\end{addmargin}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+$\forall v \in V = \sum_{i=1}^{n}a_iv_i, M(Tv) = M(\sum_{i=1}^{n}a_iTv_i)$, then we have
+\begin{equation*}
+M(v) = \begin{bmatrix}
+a_1\\
+a_2\\
+...\\
+a_n
+\end{bmatrix}, M(T) = \begin{bmatrix}
+Tv_1 & Tv_2 & ... & Tv_n
+\end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    M(Tv) = \sum_{i=1}^{n} a_iM(Tv_i) = \sum_{i=1}^{n} a_iM(T)_{\_i} = M(T)M(v)
+\end{equation*}
+\end{addmargin}
+\subsection{Operators}
+\begin{addmargin}[1em]{0em}
+A linear map from a vector space to itself is called an \textit{operator}.
+\end{addmargin}
+\subsection{Properties in finite dimensions}
+\begin{addmargin}[1em]{0em}
+$V$ a finite-dimensional vector space and $T\in L(V)$, then the following are equivalent:\\
+$T$ invertible.\\
+$T$ injective.\\
+$T$ surjective.
+\end{addmargin}
+The proof comes from the dimension formula:\\
+$dim\ null\ T + dim\ range\ T = dim\ V = dim\ V$
+\end{document}

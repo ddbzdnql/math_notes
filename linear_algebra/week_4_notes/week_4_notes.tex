@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Linear Algebra Done Right\\
+\large{Week 4 Notes}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section{5.B Eigenvectors and Upper-Triangular Matrices}
+Linear operators are different from general linear maps because they can be raised to powers and makes for more complex operations.
+\subsection{Polynomials Applied to Operators}
+\subsubsection{Definiton of powers of operators:}
+Given $T \in \mathcal{L}(V), m \in \mathbb{Z}^+$, then $T^m$ is defined by
+\begin{equation*}
+    T^m = T\cdot T ... T
+\end{equation*}
+and
+\begin{equation*}
+    T^0 = I
+\end{equation*}
+\begin{equation*}
+    T \textrm{ invertible} \rightarrow T^{-m} = (T^{-1})^m
+\end{equation*}
+With the definition of powers of operators, we can then define the polynomials of an operator:
+\subsubsection{Definition of polynomial of an operator:}
+Given $T \in \mathcal{L}(V), p \in \mathcal{P}(\mathbf{F})$ with
+\begin{equation*}
+    p(z) = a_0 + a_1z + ... + a_mz^m
+\end{equation*}
+for any $z \in \mathbb{F}$, then $p(T)$ is defined as
+\begin{equation*}
+    p(T) = a_0I + a_1T + ... + a_mT^m
+\end{equation*}
+\subsubsection{Properties of Operator Polynomials:}
+Given $p, q \in \mathcal{P}(\mathbf{F}), T \in \mathcal{L}(V)$, then
+\begin{equation*}
+    (pq)(T) = p(T)q(T)
+\end{equation*}
+\begin{equation*}
+    p(T)q(T) = q(T)p(T)
+\end{equation*}
+\subsection{Existence of Eigenvalues}
+\subsubsection{Operators on complex vector spaces have an eignenvalue}
+\textbf{Proof:}\\
+Given $V$ a complex vector space with dimension $n > 0$, then given $v \in V$, then
+\begin{equation*}
+    v, Tv, T^2v, ... T^nv
+\end{equation*}
+are linear dependent because there are $n+1$ vectors while dimension is $n$.
+This then means
+\begin{equation*}
+    0 = a_0v + a_1Tv + ... + a_nT^nv
+\end{equation*}
+Then we create $p \in \mathcal{P}(\mathbf{C})$ with
+\begin{equation*}
+    p(z) = a_0 + a_1z + ... + a_nz^n
+\end{equation*}
+From the fundamental theorem of algebra we know that 
+\begin{equation*}
+    p(z) = c(z - \lambda_1)...(z - \lambda_m)
+\end{equation*}
+for some $c \in \mathbf{C}$
+This means
+\begin{equation*}
+    0 = a_0v + a_1Tv + ... + a_nT^nv
+\end{equation*}
+\begin{equation*}
+    = c(T - \lambda_1I)...(T - \lambda_mI)v
+\end{equation*}
+This means at least one of $T - \lambda_i$ is not injective, i.e. $T$ has an eigenvalue.
+\subsection{Upper-Triangular Matrices}
+\subsubsection{Conditions for upper-triangular matrices}
+Given $T \in \mathcal{L}(V), v_1, ..., v_n$ a basis of $V$. Then the following are equivalent:
+\begin{equation*}
+    \mathcal{M}(T) \textrm{ upper triangular}
+\end{equation*}
+\begin{equation*}
+    \forall j, Tv_j \in \textrm{span}(v_1, ..., v_j)
+\end{equation*}
+\begin{equation*}
+    \forall j, \textrm{span}(v_1, ..., v_j) \textrm{ invariant under } T
+\end{equation*}
+The proof is straight forward.
+\subsubsection{All operators have upper-triangular matrix over complex space}
+\textbf{Proof 1:}\\
+Suppose this is true for all complex spaces with dimension $<n$.\\
+Given $V$ a complex space with dimension $n$. We denote $\lambda$ one of its eigenvalue of $T$, then let
+\begin{equation*}
+    U = \textrm{range}(T - \lambda I)
+\end{equation*}
+Here it is clear that $T - \lambda I$ is not injective and therefore not surjective, therefore $dim\ U < dim\ T$.\\
+WTS $U$ invariant under $T$:\\
+$\forall u \in U, Tu = (T - \lambda I)u + \lambda u$
+It is clear that $(T - \lambda I)u \in U \rightarrow Tu \in U$.\\
+Therefore $U$ invariant under $T$.\\
+Then we create $u_1, ..., u_m$ a basis of $U$ and extend this to a basis of $V: u_1, ..., u_m, v_1, ..., v_k$.\\
+For each $v_j, Tv_j = (T - \lambda I)v_j + \lambda v_j$, therefore $v_j \in \textrm{span}(u_1, ..., u_m, v_1, ..., v_j)$.\\
+This means $\mathcal{M}(T, u_1, ..., u_m, v_1, ..., v_k)$ is upper triangular.\\
+\textbf{Proof 2:}\\
+Suppose this is true for all complex spaces with dimension $<n$.\\
+Given $V$ a complex space with dimension $n$. Then similarly $\exists v_1 \in V$ an eigenvalue of $T$. Let
+\begin{equation*}
+    U = \textrm{range}(v_1)
+\end{equation*}
+Then we take a look at $V/U$:\\
+$dim\ V/U = n-1$. Therefore $\exists \overline{v_2}, ..., \overline{v_n}$ a basis of $T/U$ such that $\mathcal{M}(T/U)$ is upper triangular.\\
+This means that $\forall i, (T/U)\overline{v_i} \in \textrm{span}(\overline{v_2}, ..., \overline{v_i})$.\\
+i.e. $Tv_i + U = \textrm{span}(v_2, ..., v_i)/U \rightarrow Tv_i \in \textrm{span}(v_1, v_2, ..., v_i)$.\\
+Therefore $\mathcal{M}(T, v_1, ..., v_n)$ is upper triangular
+\subsubsection{Determination of invertibility from upper-triangular matrix}
+Given $T \in \mathcal{L}(V)$ which has an upper triangular matrix w.r.t. some basis of $V$. Then $T$ is invertible $\iff$ all entries on the diagonal of the upper triangular matrix are non-zero.\\
+\textbf{Proof:}\\
+If $\mathcal{M}(T)$ has no $0$ over the diagonal, we denote these entries $\lambda_1, \lambda_2, ..., \lambda_n$. Then we have $Tv_1 = \lambda_1v_1 \rightarrow v_1 \in range\ T$.\\
+Similarly, $Tv_2 = av_1 + \lambda_2v_2$ and because $v_1 \in range\ T$, we have $v_2 \in range\ T$. Doing this for all $v_2, v_3, ..., v_n$, we see $v_1, ..., v_n \in range\ T$, therefore $T$ surjective and since $T$ is a linear operator, this means $T$ injective and thus $T$ invertible.\\
+Given $T$ invertible. Obviously $\lambda_1 \neq 0$, because otherwise $Tv_1 = 0 \rightarrow T$ not injective and thus $T$ not invertible.\\
+Then assume $\lambda_j = 0$, then this means $T$ maps $span(v_1, ..., v_j)$ to $span(v_1, ..., v_{j-1})$. Since $dim\ span(v_1, ..., v_j) = j > dim\ span(v_1, ..., v_{j-1}) = j-1$ therefore $T$ restricted $span(v_1, .., v_j)$ is not injective and this means $\exists v \in span(v_1, .., v_j)$ such that $Tv = 0$, since $v$ also $\in V$, this means $T$ not injective in $V$, this contradicts with the fact that $T$ invertible, therefore no such $\lambda_j$ exists.
+\subsubsection{Determination of eigenvalues from upper-triangular matrix}
+Given $T \in \mathcal{L}(V)$ has an upper-triangular matrix w.r.t. a basis of $V$. Then the eigenvalues of $T$ are precisely the entris on the diagonal of the upper-triangular matrix.\\
+\textbf{Proof:}\\
+We denote the entries on the diagonal $\lambda_1, ..., \lambda_n$. Then the entries on the diagonal of $\mathcal{M}(T-\lambda I)$ are:
+\begin{equation*}
+    \lambda_1 - \lambda, ..., \lambda_n - \lambda
+\end{equation*}
+Then $\mathcal{M}(T - \lambda I)$ is not injective (i.e. has a non trivial zero solution) $\iff$ $\lambda = \lambda_i$ for some $i \in 1, .., n$.\\
+Therefore we see that the eignenvalues are just $\lambda_1, .., \lambda_n$
+\subsection{5.C Eigenspaces and Diagonal Matrices}
+\subsubsection{Definition of Eigenspaces}
+Given $T \in \mathcal{L}(V)$ and $\lambda \in \mathbf{F}$, then the \textbf{eigenspace} of $T$ corresponding to $\lambda$, denoted $E(\lambda, T)$ is defined by
+\begin{equation*}
+    E(\lambda, T) = null(T - \lambda I)
+\end{equation*}
+This is to say that the eigenspace of $T$ w.r.t. $\lambda$ is the set of all eigenvectors of $T$ corresponding to $\lambda$ and $0$.
+\subsubsection{Sum of eigenspaces is a direct sum}
+\textbf{Proof:}\\
+Given $u_1 \in E(\lambda_1, T), u_2 \in E(\lambda_2, T), ..., u_n \in E(\lambda_n, T)$ because $u_1, ..., u_n$ correspond to different eigenvalues, they are linearly independent, therefore these eigenspaces are also linearly independent.
+\subsubsection{Definition of diagonalizable}
+$T \in \mathcal{L}(V)$ is \textbf{diagonalizable} if the operator has a diagonal matrix w.r.t. to some basis of $V$.
+\subsubsection{Diagonalizability}
+Given $V$ finite-dim ensional and $T \in \mathcal{L}(V)$. Let $\lambda_1, \lambda_2, ..., \lambda_m$ denotethe distinct eigenvalues. Then the following are equivalent:
+\begin{addmargin}[1em]{0em}
+    a. T is diagtonalizable.\\
+    b. $V$ has a basis consisting of eigenvectors of $T$.\\
+    c. $\exists$ one dimensional subspaces $U_1, ..., U_n$, each invariant under $T$ and such that
+    \begin{equation*}
+        V = U_1 \oplus ... \oplus U_n
+    \end{equation*}
+    d. $V = E(\lambda_1, T) \oplus ... \oplus E(\lambda_m, T)$\\
+    e. $dim\ V = dim\ E(\lambda_1, T) + ... + dim\ E(\lambda_m, T)$
+\end{addmargin}
+\textbf{Proof:}\\
+First it is easy to show $a \iff b$:\\
+Given $T \in \mathcal{L}(V)$. If it has a diagonal matrix\\
+\begin{equation*}
+    \begin{pmatrix}
+        \lambda_1 & 0 & ... & 0\\
+        0 & \lambda_2 & ... & 0\\
+        0 & ... & ... & 0\\
+        0 & ... & 0 & \lambda_n
+    \end{pmatrix}
+\end{equation*}
+w.r.t basis $v_1, ..., v_n$, then $\forall i \in \{1, ..., n\},Tv_i = \lambda_i v_i$, i.e. $v_1, ..., v_n$ is a basis of eignenvectors, and vice versa.\\
+Therefore $a \iff b$.\\
+Suppose b holds. Then Create subspaces $U_1, ..., U_n$ by
+\begin{equation*}
+    U_i = span\ \{v_i\}
+\end{equation*}
+It is obvious that these subspaces are invaraint since $\forall kv_i \in span\ \{v_i\}, Tkv_i = kTv_i = k\lambda_iv_i \in span\ \{v_i\}$.\\
+NTS $V = U_1 \oplus ... \oplus U_n$:\\
+Given $v \in V \rightarrow v = \sum_{i=1}^{n} a_iv_i$, then $\forall i \in \{1, ..., n\}, a_iv_i \in U_i$, therefore $V = U_1 + ... + U_n$.\\
+From previous section we know $U_1, ..., U_n$ independent, therefore $V = U_1 \oplus ... \oplus U_n$.\\
+Therefore $b \Rightarrow c$.\\
+Suppose c holds. Then take $v_1, ..., v_n$ by $v_i \in U_i$. WTS $v_1, ..., v_n$ a basis of $V$ of eigenvectors:\\
+Because $U_i$ invariant, therefore $Tv_i \in U_i \rightarrow Tv_i = kv_i$, i.e. $v_i$ eigenvectors. Obviously $v_1, .., v_n$ linearly independent, because $V = U_1 \oplus ... \oplus U_n$, we know $v_1, ..., v_n$ span $V$. Therefore $v_1, ..., v_n$ a basis for $V$.\\
+Therefore $c \Rightarrow b$.\\
+Now we have that $a \iff b \iff c$. Then we complete the proof by $b \Rightarrow d \Rightarrow e \Rightarrow b$.\\
+$b \Rightarrow d$:\\
+Given $v_1, ..., vn$ a basis of $V$ of eigenvectors, $\forall v \in V, v = \sum_{i=1}^{n}a_iv_i$, therefore $V = E(\lambda_1, T) \oplus ... \oplus E(\lambda_m, T)$. Therefore $b \Rightarrow d$.\\
+$d \Rightarrow e$ is obvious.\\
+$e \Rightarrow b$:\\
+Pick a basis for each $E(\lambda_i, T)$ and combine these basis into $v_1, ..., v_n$, where $n = dim\ V$. Now only NTS $v_1, ..., v_n$ linearly independent, and since the length $=dim\ V$, it will be a basis.\\
+Suppose
+\begin{equation*}
+    \sum_{i=i}^{n} a_iv_i = 0
+\end{equation*}
+Then recombine $u_1 = a_{i_1}v_{i_1} + ... + a_{j_1}v_{j_1} \in E(\lambda_1, T), u_2 = a_{i_2}v_{i_2} + ... + a_{j_2}v_{j_2} \in E(\lambda_2, T), ..., u_m = a_{i_m}v_{i_m} + ... + a_{j_m}v_{j_m} \in E(\lambda_m, T)$.\\
+Now we have $u_1 + ... + u_m = \sum_{i=1}^{n} a_iv_i = 0$, then this means $E(\lambda_1,T), ..., E(\lambda_m, T)$ not linearly independent, therefore contradiction. Therefore $v_1, ..., v_n$ linearly independent, i.e. $v_1, ..., v_n$ a basis of $V$.\\
+Therefore $e \Rightarrow b$.
+\subsubsection{Not all Operators are Diagonalizable}
+$T \in \mathcal{L}(\mathbf{C}^2)$ defined by
+\begin{equation*}
+    T(w, z) = (z, 0)
+\end{equation*}
+Suppose $v = (w, z) \in \mathbf{C}^2$ is an eigenvector with eigenvalue $\lambda$, then
+\begin{equation*}
+    Tv = T(w, z) = (\lambda w, \lambda z) = (z, 0)
+\end{equation*}
+Suppose $\lambda \neq 0$, then $\lambda z = 0 \rightarrow z = 0$, therefore $\lambda w = z = 0 \rightarrow w = 0$. Therefore either $v = 0$ or $\lambda = 0$. Therefore $T$ has only one eigenvalue.
+\subsubsection{Enough eigenvalues implies diagonalizability}
+Given $T \in \mathcal{L}(V)$ with $dim\ V = n$ and it has $n$ eigenvalues, then $T$ is diagonalizable.\\
+\textbf{Proof:}\\
+This can be proven using $c \rightarrow a$.
+\end{document}
