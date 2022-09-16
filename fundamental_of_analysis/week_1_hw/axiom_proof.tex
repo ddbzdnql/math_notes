@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+\usepackage{amssymb}
+
+\title{Fundamental of Analysis\\
+\large{Week 1 HW (Axiom Proof)}}
+\author{shaozewxy }
+\date{August 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{Important Exercises from Section 3}
+\subsection*{3.1}
+Prove that the additive inverse of axiom 5 is unique.
+\begin{addmargin}[1em]{0em}
+    We know $\forall x, \exists x^{-1}$ such that $x + x^{-1} = 0$.\\
+    Then assume that $\exists x'$ such that $x + x' = 0$. Then we have
+    \begin{equation*}
+        \begin{split}
+            x + x^{-1} = 0\\
+            x + x^{-1} + x' = 0 + x' = x'\\
+            (x^{-1} + x) + x' = x'\\
+            x^{-1} + (x + x') = x'\\
+            x^{-1} + 0 = x^{-1} = x'
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection*{3.3}
+Prove that $-(-x) = x$ for all $x \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    Given $x \in \mathbf{R}$, we have
+    \begin{equation*}
+        \begin{split}
+            x + -x = 0\\
+            x + -x + -(-x) = 0 + -(-x) = -(-x)\\
+            x + (-x + -(-x)) = -(-x)\\
+            x + 0  = x = -(-x)
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection*{3.4}
+Prove that $-(x+y) = -x-y$ for all $x, y \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y \in \mathbf{R}$, we have
+    \begin{equation*}
+        \begin{split}
+            (x + y) - (x + y) = 0\\
+            (x + y) - (x + y) - x - y = 0 - x - y = - x - y\\
+            ((x + y) - x - y) - (x + y) = -x - y\\
+            0 - (x + y) = -x -y\\
+            -(x+y) = -x -y
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection*{3.5}
+Let $x, y \in \mathbf{R}$. Prove that $xy = 0$ if and only if $x = 0$ or $y = 0$.
+\begin{addmargin}[1em]{0em}
+    Suppose $x \neq 0, y \neq 0, xy = 0$.\\
+    Then according to Axiom 10, since $x \neq 0, y \neq 0, \rightarrow \exists x^{-1}, y^{-1}$ such that $xx^{-1} = yy^{-1} = 1$. Then we have
+    \begin{equation*}
+        \begin{split}
+            xy = 0\\
+            xyy^{-1} = x(yy^{-1}) = x = 0\cdot y^{-1} = 0\\
+            x = 0
+        \end{split}
+    \end{equation*}
+    Which is contradiction since $x \neq 0$.\\
+    Therefore we can see that it is impossible when not $x=0$ and $y=0$ for $xy = 0$.
+\end{addmargin}
+\subsection*{3.6}
+Let $x, y \in \mathbf{R}$. Prove that if $xy = xz$ and $x \neq 0$, then $y = z$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y, z \in \mathbf{R}$ such that $xy = xz, x \neq 0$, we have\\
+    Since $x \neq 0, \rightarrow \exists x^{-1} \in \mathbf{R}$ such that $xx^{-1} = 1$.\\
+    Therefore,
+    \begin{equation*}
+        \begin{split}
+            xy = xz\\
+            x^{-1}(xy) = x^{-1}(xz)\\
+            (x^{-1}x)y = (x^{-1}x)z\\
+            y = z
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection*{3.7}
+Prove that $-(xy) = x(-y) = (-x)y$ for all $x, y \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y \in \mathbf{R}$
+    \begin{equation*}
+        \begin{split}
+            -xy + xy = 0\\
+            -xy + xy + x(-y) = 0 + x(-y) = x(-y)\\
+            -xy + x(y - y) = x(-y)\\
+            -xy + 0 = -xy = x(-y)
+        \end{split}
+    \end{equation*}
+    The case for $-xy = (-x)y$ can be similarly prove.
+\end{addmargin}
+\subsection*{3.8}
+Prove that $(-1)x = -x$ for all $x \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x \in \mathbf{R}$, we have
+    \begin{equation*}
+        \begin{split}
+            0 = 0\\
+            x \cdot 0 = 0\\
+            x \cdot (1 + (-1)) = 0\\
+            x + (-1)x = 0\\
+            x + (-1)x + (-x) = -x\\
+            (x + (-x)) + (-1)x = -x\\
+            0 + (-1)x = (-1)x = -x
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\section*{Proof of Theorem 4.2}
+\subsection*{i}
+Prove that $1 > 0$.
+\begin{addmargin}[1em]{0em}
+    We try to prove that $1 - 0 = 1 \in P$:\\
+    Since $1 \neq 0$, we know that either $1 \in P$ or $-1 \in P$.\\
+    Suppose for a contradiction that $-1 \in P$, then we have $-1 \cdot -1 \in P$.\\
+    However, $-1 \cdot -1 = -(-1) = 1 \notin P$. Contradiction. Therefore $-1 \notin P$, i.e. $1 \in P$.
+\end{addmargin}
+\subsection*{ii}
+Prove that if $x > y$ and $y > z$, then $x > z$ for all $x, y, z \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y, z \in \mathbf{R}$ such that $x > y, y > z$, we have\\
+    $x - y \in P$ and $y - z \in P$, therefore we have
+    \begin{equation*}
+        (x - y) + (y - z) = x - y + y - z = x - z \in P
+    \end{equation*}
+    Therefore $x > z$.
+\end{addmargin}
+\subsection*{iii}
+Prove that if $x > y$, then $x+z > y + z$ for all $x, y, z \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y, z \in \mathbf{R}$ such that $x > y$, we have
+    \begin{equation*}
+        \begin{split}
+            x - y = x - y\\
+            x - y + 0 = x - y + (z - z) = x - y\\
+            x - y + z - z = (x + z) - y - z = (x + z) - (y + z) = (x - y)
+        \end{split}
+    \end{equation*}
+    Therefore $x - y \in P \rightarrow (x + z) - (y + z)\in P$, i.e. $x+z > y+z$.
+\end{addmargin}
+\subsection*{iv}
+If $x > y$ and $z > 0$, then $xz > yz$ for all $x, y, z \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y, z \in \mathbf{R}$ such that $x > y, z > 0$, we have
+    \begin{equation*}
+        x - y \in P, z - 0 = z \in P 
+    \end{equation*}
+    Therefore $(x - y)z = xz - yz \in P$, i.e. $xz > yz$.
+\end{addmargin}
+\subsection*{v}
+If $x > y$ and $z < 0$, then $xz < yz$ for all $x, y, z \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x, y, z \in \mathbf{R}$, such that $x > y, z < 0$, we have
+    \begin{equation*}
+        x - y \in P, 0 - z = -z \in P
+    \end{equation*}
+    Therefore $(x - y)(-z) = -xz + yz = yz - xz \in P$, i.e. $xz < yz$
+\end{addmargin}
+\section*{Proof of Theorem 4.5}
+\subsection*{i}
+Prove that let $\epsilon > 0$, then $|x| < -\epsilon$ if and only if $-\epsilon < x < \epsilon$ and $|x| \leq \epsilon$ if and only if $-\epsilon \leq x \leq \epsilon$.
+\begin{addmargin}[1em]{0em}
+    Suppose $x \geq 0$, and $|x| < \epsilon$.\\
+    Then we have that $x \geq 0$ and $\epsilon > 0$, therefore $-\epsilon < 0$ and therefore $x > -\epsilon$.\\
+    Since $|x| = x$ and $|x| < \epsilon$, we have $x < \epsilon$.\\
+    Therefore $-\epsilon < x < \epsilon$.\\
+    Suppose $x < 0$ and $|x| < \epsilon$.\\
+    Then we have $|x| = -x$.\\
+    Since $|x| = -x < \epsilon$ and $-1 < 0$, we have
+    \begin{equation*}
+        \begin{split}
+            -1\cdot -x > -1\cdot \epsilon\\
+            x > -\epsilon
+        \end{split}
+    \end{equation*}
+    Since $x < 0$ and $0 < \epsilon$, we have $x < \epsilon$.\\
+    Therefore $-\epsilon < x < \epsilon$.\\
+    For the case where $|x| \leq \epsilon$, we consider two cases:
+    \begin{itemize}
+        \item $|x| \neq \epsilon$: this is just the case above where $|x| < \epsilon$, which is already prove.
+        \item $|x| = \epsilon$: then either $x = \epsilon$ or $-x = \epsilon$.\\
+        If $x = \epsilon$, then $-\epsilon \leq x \leq \epsilon$ is true by nature.\\
+        If $-x = \epsilon$, then $x = -\epsilon$, therefore $-\epsilon \leq x$ is true.\\
+        Since $1 > 0, 0 > -1$, we have $1 > -1$.\\
+        Since $1 > -1$ and $\epsilon > 0$, we have $1\cdot \epsilon > -1\cdot \epsilon$, i.e. $x = -\epsilon < \epsilon$.\\
+        Therefore $-\epsilon \leq x \leq \epsilon$.
+    \end{itemize}
+\end{addmargin}
+\subsection*{ii}
+Prove that $x \leq |x|$ for all $x \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    $\forall x \in \mathbf{R}$, we have:\\
+    If $x \geq 0$, then $|x| = x$ and therefore $x \leq |x|$ is true.\\
+    If $x < 0$, then $|x| = -x > 0$, since $|x| > 0$ and $x < 0$, we have $x < |x|$, which makes $x \leq |x|$ true.\\
+    Therefore $x \leq |x|$ is always true.
+\end{addmargin}
+\subsection*{iii}
+Prove that $|xy| = |x||y|$ for all $x, y \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    Prove by discussing 3 situations.
+\end{addmargin}
+\subsection*{iv}
+Prove that $|x + y| \leq |x| + |y|$ for all $x, y \in \mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    If $x + y \geq 0$, then $|x+y| = x+y \leq |x| + |y|$.\\
+    If $x + y < 0$, then $|x+y| = -x - y \leq |-x| + |-y| = |x| + |y|$.\\
+    Therefore $|x + y| \leq |x| + |y|$.
+\end{addmargin}
+\end{document}

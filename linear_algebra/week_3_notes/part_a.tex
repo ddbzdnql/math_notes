@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Linear Algebra Done Right\\
+\large{Week 3 Notes (a)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{5.A Invariant Subspaces}
+Suppose we can decompose $V$ into the direct sum of subspaces:
+\begin{equation*}
+    V = U_1 \oplus U_2 \oplus ... \oplus U_n
+\end{equation*}
+Then we can study $T$ restricted to $U_i$ for $i \in \{1, ..., n\}$ respectively. However, $T|_{U}$ might not map $U$ to itself. Therefore, the concept of invariant subspace is useful.
+\subsection*{5.2 Definition of invariant subspace}
+Given $T \in \mathcal{L}(V)$, a subspace $U$ of $V$ is called \textbf{invariant} if $\forall u \in U, Tu \in U$.\\
+In other words, $U$ is invariant iff $T|_U$ is an operator on $U$.
+\subsubsection*{5.3 5.4 Some examples of invariant subspaces}
+\begin{enumerate}
+    \item $\{0\}$ is invariant under $T$:\\
+    $T(0) = 0 \in \{0\}$
+    \item $V$ is invariant under $T$:\\
+    $\forall v \in V, Tv \in V$
+    \item $null\ T$ is invariant under $T$:\\
+    $\forall v \in null\ T, Tv = 0 \in null\ T$
+    \item $range\ T$ is invariant under $T$:\\
+    $\forall v \in range\ T, Tv \in range\ T$
+    \item Suppose $T \in \mathcal{L}(\mathcal{P}(\mathbf{R}))$ is defined by
+    \begin{equation*}
+        Tp = p'
+    \end{equation*}
+    then $\mathcal{P}_4(\mathbf{R})$ is a invariant under $T$ because $\forall p \in \mathcal{P}_4(\mathbf{R}), Tp = p' \in \mathcal{P}_3(\mathbf{R}) \subseteq \mathcal{P}_4(\mathbf{R})$
+\end{enumerate}
+\subsection*{Eigenvalues and Eigenvectors}
+The class of invariant subspaces with dimension $1$ is of special interests.\\
+Given $v \in V$, we create $U = \{\lambda v : \lambda \in \mathbf{F}\} = span(v)$, then $U$ is a 1-dimensional subspace of $V$. If $U$ is invariant under $T$, then $Tv \in U \rightarrow \exists \lambda \in \mathbf{F}, Tv = \lambda v$.\\
+Conversely, if $Tv = \lambda v$, then $span(v)$ is a 1-dimensional invariant subspace under $T$.\\
+We thus give the defintion of eigenvalue and eigenvectors:
+\subsubsection*{5.5 Defintion of eigenvalue}
+Given $T \in \mathcal{L}(V), \lambda \in \mathbf{F}$ is called \textbf{eigenvalue} if $\exists v \neq 0 \in V, Tv = \lambda v$.
+\subsubsection*{5.6 Conditions for eigenvalue}
+Given $V$ finite-dimensional, $T\in \mathcal{L}(V), \lambda \in \mathbf{F}$, then the following are equivalent:
+\begin{enumerate}
+    \item[(a)] $\lambda$ is an eigenvalue of $T$.
+    \item[(b)] $T - \lambda I$ is not injective.
+    \item[(c)] $T - \lambda I$ is not surjective.
+    \item[(d)] $T - \lambda I$ is not invertible.
+\end{enumerate}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    $a \iff b$: Because $Tv = \lambda v \rightarrow Tv - \lambda v = 0 \rightarrow (T - \lambda I) v = 0$\\
+    Therefore, $a \iff b$\\
+    It follows that $b \iff c \iff d$ since $T$ is a linear operator.
+\end{addmargin}
+\subsubsection*{5.7 Definition of eigenvector}
+Given $T \in \mathcal{L}(V)$. $v \neq 0 \in V$ is an \textbf{eigenvector} if $\exists \lambda \in \mathbf{F}, Tv = \lambda v$.
+\subsubsection*{5.8 Example of eigenvector}
+Given $T \in \mathcal{L}(\mathbf{F}^2)$ defined by
+\begin{equation*}
+    T(w, z) = (-z, w)
+\end{equation*}
+\begin{itemize}
+    \item[(a)] If $\mathbf{F} = \mathbf{R}$, then suppose $\exists v = (w, z) \in \mathbf{F}, Tv = \lambda v$, we have
+    \begin{equation*}
+        \begin{cases}
+            w = - \lambda z \\
+            z = \lambda w
+        \end{cases} \tag*{5.9}
+    \end{equation*}
+    Therefore $w = -\lambda^2 w$.\\
+    Since $\mathbf{F} = \mathbf{R}$, $w = 0 = z$.\\
+    Therefore, no eigenvector exists for $T$ when $\mathbf{F} = \mathbf{R}$
+    \item[(b)] Following the logic from above, we know that when $\lambda = i$, then
+    \begin{equation*}
+        -\lambda^2 w = -i^2 w = w
+    \end{equation*}
+    and $z = \lambda w = iw$.\\
+    Therefore $T$ has eigenvalue $i$ and eigenvector $v = (w, iw)$ when $\mathbf{F} = \mathbf{C}$
+\end{itemize}
+\subsection*{Properties of eigenvectors}
+\subsubsection*{5.10 Distinct eigenvectors are independent}
+Given $T \in \mathcal{L}(V)$, suppose $\lambda_1, ..., \lambda_m$ are distinct eigenvalues and $v_1, ..., v_m$ are corresponding eigenvectors. Then $v_1, ..., v_m$ linearly independent.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $v_1, v_2, ...$ are all linearly independent until $v_k$. Then we have
+    \begin{equation*}
+        v_k \in span(v_1, ..., v_{k-1}) \tag*{5.11}
+    \end{equation*}
+    and therefore,
+    \begin{equation*}
+        \sum_{i=1}^{k-1} a_i v_i = v_k \tag*{5.12}
+    \end{equation*}
+    Since also $Tv_k = \lambda_k v_k$,
+    \begin{equation*}
+        Tv_k = T\left(
+            \sum_{i=1}^{k-1} a_i v_i
+        \right)
+        = \sum_{i=1}^{k-1} a_i \lambda_i v_i = \lambda_k v_k = \sum_{i=1}^{k} a_i \lambda_k v_i
+    \end{equation*}
+    This means that
+    \begin{equation*}
+        \sum_{i=1}^{k-1} a_i \lambda_i v_i = \sum_{i=1}^{k-1} a_i \lambda_k v_i \Rightarrow \sum_{i=1}^{k-1} a_i (\lambda_i - \lambda_k) v_i = 0
+    \end{equation*}
+    Which is contradiction to the fact that $v_1, v_2, ...$ are linearly independent until $v_k$.\\
+    Therefore no such $v_k$ exists, i.e. $v_1, ..., v_k$ are linearly independent.
+\end{addmargin}
+\subsubsection*{5.13 Number of eigenvalues is smaller than dimension}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    This naturally follows from the statment above since $v_1, ..., v_m$ are linearly independent, there can only be at most $dim\ V$ linearly independent vectors.
+\end{addmargin}
+\subsection*{Restriction and Quotient Operators}
+\subsubsection*{5.14 Definition of $T|_{U}$ and $T/U$}
+Given $T \in \mathcal{L}(V)$ and $U$ invariant in $V$ under $T$.
+\begin{itemize}
+    \item The \textbf{restirction operator} $T|_{U}$ is defined as
+    \begin{equation*}
+        \forall u \in U, T|_{U}(u) = Tu
+    \end{equation*}
+    \item The \textbf{quotient operator} $T/U$ is defined as
+    \begin{equation*}
+        \forall v \in V, (T/U)(v+U) = Tv + U
+    \end{equation*}
+\end{itemize}
+For the two defintions above, the fact that $U$ is invariant under $T$ is very important.\\
+$T|_{U}$ only maps $U$ to $U$ when $U$ is invariant.\\
+For $T/U$ to make sense, we need to show that $\forall, v, w \in V, v+U = w+U \Rightarrow Tv+U = Tw+U$:
+\begin{addmargin}[1em]{0em}
+    $v+U = w+U \rightarrow \exists u \in U, u+v = w$. Therefore, we have
+    \begin{equation*}
+        Tw = T(v+u) = Tv + Tu
+    \end{equation*}
+    Since $U$ invariant under $T, Tu \in U$, i.e. $\exists u' \in U, Tv + u' = Tw$. This shows that $Tv + U = Tw + U$.
+\end{addmargin}
+\subsubsection*{5.15 Limitations of restriction and quotient operators}
+Sometimes $T|_{U}$ and $T/U$ do not provide useful information about $T$. See the example below:
+\begin{addmargin}[1em]{0em}
+    Given $T \in \mathcal{L}(\mathbf{F}^2)$ defined by
+    \begin{equation*}
+        T(x, y) = (y, 0)
+    \end{equation*}
+    and define $U = \{(x, 0)| x \in \mathbf{F}\}$, we observe the following facts:
+    \begin{itemize}
+        \item[(a)] $U$ invariant under $T$, and $T|_{U}$ is $0$:\\
+        $\forall (x, 0) \in U, T(x, 0) = (0, 0) \in U$, therefore, $U$ invariant under $T$.\\
+        This also proves that $T|_{U} = 0$.
+        \item[(b)] $\nexists$ a subspace $W \subseteq \mathbf{F}^2$ such that $W$ invariant and $F^2 = U \oplus W$:\\
+        Suppose $\exists W$ that satisfies the requirements. Then we know that since $\mathbf{F}^2 = W \oplus U, \forall (x, y) \in W, x \neq 0 \iff y \neq 0$, because otherwise $(x, y)$ would be of form $(x, 0), x \neq 0 \rightarrow (x, y) \in U$, contradiction to the fact that $U, W$ independent.\\
+        Therefore given $(x, y) \in W, T(x, y) = (y, 0) \in U \rightarrow T(x, y) \notin W$. Therefore $W$ not invariant under $T$.
+        \item[(c)] $T/U$ is $0$:\\
+        $\forall v = (x, y) \in \mathbf{F}^2, T/U(v + U)= T(x, y) + U = (y, 0) + U$\\
+        Now obviously $T(x, y) = (y, 0) \in U \rightarrow (y, 0) + U = U$, i.e. $\forall v \in \mathbf{F}^2, (T/U)(v+U) = U$.\\
+        Therefore $T/U = 0$.
+    \end{itemize}
+\end{addmargin}
+The example above shows that while $U$ is not $\{0\}$, the restriction and quotient on $U$ doesn't provide any meaningful information of $T$.
+\end{document}

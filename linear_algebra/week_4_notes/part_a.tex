@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Linear Algebra Done Right\\
+\large{Week 4 Notes (a)}}
+\author{shaozewxy }
+\date{September 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{5.B Eigenvectors and Upper-Triangular Matrices}
+\subsection*{Polynomials applied to operators}
+Operators, unlike more general linear maps, can be raised to power, allowing more theory to be developed.
+\subsubsection*{5.16 Definition of power of operators}
+Given $T \in \mathcal{L}(V)$ and $m$ is a positive integer.
+\begin{itemize}
+    \item $T^m$ is defined by
+    \begin{equation*}
+        T^m = \underbrace{T...T}_{m \textrm{ times}}
+    \end{equation*}
+    \item $T^0$ is defined to be $I$.
+    \item If $T$ is invertible with inverse $T^{-1}$, then $T^{-m}$ is defined by
+    \begin{equation*}
+        T^{-m} = (T^{-1})^m
+    \end{equation*}
+\end{itemize}
+\subsubsection*{5.17 Definition of $p(T)$}
+Suppose $T \in \mathcal{L}(V)$ and $p \in \mathcal{P}(\mathbf{F})$ is a polynomial given by
+\begin{equation*}
+    p(z) = a_0 + a_1z + a_2z^2 + ... + a_mz^m
+\end{equation*}
+Then $p(T)$ is the operator defined by
+\begin{equation*}
+    p(T) = a_0I + a_1T + a_2T^2 + ... + a_mT^m
+\end{equation*}
+\subsubsection*{5.19 Definition of product od polynomials}
+If $p, q \in \mathcal{P}(\mathbf{F})$, then $pq \in \mathcal{P}(\mathbf{F})$ is the polynomial defined by
+\begin{equation*}
+    (pq)(z) = p(z)q(z)
+\end{equation*}
+\subsubsection*{5.20 Properties of operator multiplications}
+Suppose $p, q \in \mathcal{P}(\mathbf{F})$ and $T \in \mathcal{L}(V)$, Then
+\begin{itemize}
+    \item[(a)] $(pq)(T) = p(T)q(T)$
+    \item[(b)] $p(T)q(T) = q(T)p(T)$
+\end{itemize}
+Proof of this is obvious.
+\subsection*{Existence of eigenvalues}
+\subsubsection*{5.21 Operators on complex spaces have eigenvalue}
+Every operator on a finite-dimensional, nonzero, complex vector space has an eigenvalue.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $V$ is a complex vector space with dimension $n > 0$ and $T \in \mathcal{L}(V)$. Choose $v \neq 0 \in V$. Then
+    \begin{equation*}
+        v, Tv, T^2v, ..., T^nv
+    \end{equation*}
+    is not linearly independent since there are $n+1$ of them. Thus there exists $a_0, ..., a_n$ all complex numbers such that
+    \begin{equation*}
+        a_0v + a_1Tv + ... + a_nT^nv = 0
+    \end{equation*}
+    Here $a_1, ..., a_n$ cannot all be $0$ since otherwise $a_0$ will also need to be $0$.\\
+    From this we obtain a polynomial which by the \textbf{Fundamental Theorem of ALgebra} has a factorization
+    \begin{equation*}
+        a_0 + a_1z + .... + a_nz^n = c(z - \lambda_1)....(z - \lambda_m)
+    \end{equation*}
+    Here $m$ is not necessarily $n$ since the coefficient $a_n$ may be $0$.\\
+    We then have
+    \begin{equation*}
+        \begin{split}
+            0 &= a_0v + a_1Tv + ... + a_nT^nv\\
+            &= (a_0I + a_1T + ... + a_nT^n)v\\
+            &= c(T - \lambda_1I) ... (T - \lambda_mI)v
+        \end{split}
+    \end{equation*}
+    Therefore at least one $T-\lambda_jI$ is not injective and $T$ has an eigenvalue.
+\end{addmargin}
+\subsection*{Upper-Trianguler Matrices}
+A central goal of linear algebra is to show that given an operator, there is a basis w.r.t which the matrix is reasonably simple.\\
+In the case of complex vector spaces, we can show that we can make the matrix of $T$ have $0$s everywhere on the first column except for the first place:
+\begin{addmargin}[1em]{0em}
+    Since $T$ definitely has an eigenvector $v$, we extend from $v$ to form a basis of $V$ and $\mathcal{M}(T)$ will have $0$s everywhere on the first column except for the first entry which will be $\lambda$, i.e. the eigenvalue for $v$.
+\end{addmargin}
+\subsubsection*{5.24 Definition of diagonal}
+The \textbf{diagonal} of a square matrix consists of the entris along the line from the upper left corner to the bottom right corner.
+\subsubsection*{5.25 Definition of upper-triangular matrix}
+A matrix is called \textbf{upper triangular } if all the entris below the diagonal equal $0$.
+\subsubsection*{5.26 Conditions for upper triangular matrix}
+Suppose $T \in \mathcal{L}(V)$ and $v_1, ..., v_n$ a basis of $V$. Then the following are equivalent:
+\begin{itemize}
+    \item[(a)] the matrix of $T$ w.r.t $v_1, ..., v_n$ is upper triangular;
+    \item[(b)] $Tv_j \in span(v_1, ..., v_j)$;
+    \item[(c)] $span(v_1, ..., v_j)$ is invariant under $T$.
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    a $\iff$ b and c $\rightarrow$ b are all obvious. Therefore, only NTS b $\rightarrow$ c:\\
+    Given $j$, we know that
+    \begin{equation*}
+        \begin{split}
+            Tv_1 \in span(v_1) \subseteq span(v_1, ..., v_j);\\
+            Tv_2 \in span(v_1, v_2) \subseteq span(v_1, ..., v_j);\\
+            ...\\
+            Tv_j \in span(v_1, ..., v_j)
+        \end{split}
+    \end{equation*}
+    Thus given $v = a_1v_1 + ... + a_jv_j \in spab(v_1, ..., v_j), Tv \in span(v_1, ..., v_j)$, therefore $span(v_1, ..., v_j)$ is invariant under $T$.
+\end{addmargin}
+\subsubsection*{5.27 Every operator in complex space has upper-triangular matrix}
+Suppose $V$ is finite-dimensional complex vector space and $T \in \mathcal{L}(V)$, then $T$ has an upper-triangular matrix w.r.t. some basis of $V$.\\
+Two proofs are presented below. Both use the idea of creating a smaller vector space to use induction on and then expand the basis of the smaller space to a basis of $V$.\\
+\textbf{\Large{Proof 1:}}\\
+Here we create a subspace of range of $T - \lambda I$.
+\begin{addmargin}[1em]{0em}
+    We denote the eigenvalue of $T$ as $\lambda$.\\
+    Then let $U = range\ (T - \lambda I)$.\\
+    Clearly $dim\ U < n$ since $(T - \lambda I)v = 0$ therefore $T-\lambda I$ not surjective.\\
+    Then we can use induction on $T - \lambda I$ to assume that $T - \lambda I$ has a basis $u_1, ..., u_m$ such that $\mathcal{M}(T-\lambda I)$ is upper-triangular.\\
+    Moreover, $U$ is also invariant under $T$:
+    \begin{equation*}
+        \forall u \in U, Tu = (T - \lambda I)u + \lambda u
+    \end{equation*}
+    Then we extend to get a basis of $V: (u_1, ..., u_m, v_1, ..., v_k)$ and claim that $\mathcal{M}(T)$ under this basis is upper triangular:\\
+    Clearly $\forall u_i, Tu_i \in span(u_1, ..., u_i)$. Then for each $v_j, Tv_j = (T - \lambda I)v_j + \lambda v_j = u + \lambda v_j$ for some $u \in U$, therefore $Tv_j \in span(u_1, ..., u_i, v_1, ..., v_j)$.\\
+    Therefore $\mathcal{M}(T)$ under this basis is upper-triangular.
+\end{addmargin}
+\textbf{\Large{Proof 2:}}\\
+Here we create a subspace of quotient space of span of the eigenvector.
+\begin{addmargin}[1em]{0em}
+    We denote the eigenvector $v$, and $U = span(v)$.\\
+    Clearly $dim\ U = 1$ and thus $dim V/U = n-1$. Therefore, we can use induction on $V/U$ to assume that $V/U$ has a basis $v_2+U, ..., v_n + U$ such that $\mathcal{M}(T/U)$ under this basis is upper-triangular.\\
+    Since $v$ is a basis of $U$, then $v, v_2, ..., v_n$ is a basis of $V$. We claim that $\mathcal{M}(T)$ under this basis is upper-traingular:\\
+    Since $\mathcal{M}(T/U)$ is upper triangular, we know that $\forall v_i, (T/U)(v_i+U) \in span(v_2 + U, ..., v_i + U)$, i.e.
+    \begin{equation*}
+        \begin{split}
+            v_i + U = a_2(v_2+U) + ... + a_i(v_i + U)\\
+            v_i + U = (a_2v_2 + ... + a_iv_i) + U\\
+            \exists u \in U, v_i = a_2v_2 + ... + a_iv_i + u
+        \end{split}
+    \end{equation*}
+    Since $U = span(v)$, this is to say $v_i = a_1v + a_2v_2 + ... + a_nv_n$.\\
+    Therefore $v_i \in span(v, v_2, ..., v_i)$ and $\mathcal{M}(T)$ is upper-triangular.
+\end{addmargin}
+\subsubsection*{5.30 Invertibility and upper-triangular matrix}
+Suppose $T \in \mathcal{L}(V)$ has an upper-triangular matrix w.r.t. a basis of $V$. Then $T$ is invertible $\iff$ all entries on the diagonal of that upper-triangular matrix are non-zero.\\
+\textbf{\Large Proof:}\\
+We use the fact that if the operator is surjective/injective, then it is invertible.
+\begin{addmargin}[1em]{0em}
+    Suppose $T$ has nonzero entries along the diagonal.\\
+    Then clearly $v_1 \in range\ T$ since $Tv_1 = \lambda_1v_1$.\\
+    Then suppose $v_1, ..., v_{i-1} \in range\ T$, WTS $v_i \in range\ T$:\\
+    We have that $Tv_i = a_1v_1 + ... + a_{i-1}v_{i-1} + \lambda_i v_i$, since $v_1, ..., v_{i-1} \in range\ T$,
+    \begin{equation*}
+        \exists v' \in V, Tv_i = Tv' + \lambda_i v_i
+    \end{equation*}
+    Therefore $v_i \in range\ T$, i.e. $T$ surjective and thus invertible.\\
+    Suppose $T$ invertible.\\
+    Then clearly $\lambda_1 \neq 0$ since otherwise $Tv_1 = 0$ making $T$ not injective and thus not invertible, contradiction.\\
+    Then suppose at $\lambda_i$ is the first entry on the diagonal that equals $0$.\\
+    Then we have $Tv_1, ..., Tv_i \in span(v_1, ..., v_{i-1})$, i.e. $T$ maps $v_1, .., v_i$ to $span(v_1, ..., v_{i-1})$.\\
+    Therefore $T$ is not injective and thus $\exists v \in span(v_1, ..., v_i)$ such that $Tv = 0$, contradiction. Therefore no such $\lambda_i$ exists.
+\end{addmargin}
+\subsubsection*{5.32 Eigenvalues from upper-triangular matrix}
+Suppose $T \in \mathcal{L}(V)$ has an upper-triangular matrix w.r.t. a basis of $V$. Then eigenvalues of $T$ are the entries on the diagonal of that matrix.\\
+\textbf{\large Proof:\\}
+\begin{addmargin}[1em]{0em}
+    Denote that matrix $\mathcal{M}(T)$, and the diagonal entris $\lambda_1, ..., \lambda_n$.\\
+    Then $T - \lambda I$ will have $\lambda_1 - \lambda, ..., \lambda_n - \lambda$ on the diagonal.\\
+    Using 5.31, we know that $T - \lambda I$ is not injective $\iff $ one of the diagonal entry is $0$, i.e. $\lambda = \lambda_i$ for some $i$.
+\end{addmargin}
+\end{document}

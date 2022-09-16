@@ -5,11 +5,12 @@
 \usepackage{setspace}
 \usepackage{amsfonts}
 \usepackage{braket}
+\usepackage{amssymb}
 
-\title{Week 2 Notes\\
-\large{Abstract Algebra}}
+\title{Abstract Algebra\\
+\large{Week 2 Notes}}
 \author{shaozewxy }
-\date{May 2022}
+\date{August 2022}
 
 \doublespacing
 \begin{document}
@@ -17,84 +18,221 @@
 \maketitle
 
 \setcounter{secnumdepth}{0}
-\section{1.4 Matrix Groups}
-\subsection{Defintion of a \textit{field}}
+\section*{1.7 Group Actions}
+The concept of an "action" is important for studying algebraic objects by seeing how it can act on other structures.
+\subsection*{Definition of group action}
+A \textbf{group action} of a group $G$ on a set $A$ is a map from $G \times A \rightarrow A$. Given $g \in G, a, b \in A$, the action is written as $g\cdot a \rightarrow b$. The action needs to satisfy the following properties:
+\begin{enumerate}
+    \item $\forall g_1, g_2 \in G, a\in A, g_1\cdot(g_2\cdot a) = g_1g_2\cdot a$.
+    \item $\forall a \in A, 1\cdot a = a$.
+\end{enumerate}
+\subsection*{Group action defines permutation and homomorphism}
+Given a group $G$ acting on $A$. Then $\forall g \in G, \exists \sigma_g: A \rightarrow A$ defined by
+\begin{equation*}
+    \sigma_g(a) = g\cdot a
+\end{equation*}
+We observe the following facts:
+\begin{itemize}
+    \item[(i)] For each $g\in G, \sigma_g$ is a permutation.
+    \item[(ii)] The map from $G \rightarrow S_A$ defined by $g \rightarrow \sigma_g$ is a homomorphism.
+\end{itemize}
+\textbf{Proof:}
 \begin{addmargin}[1em]{0em}
-A \textit{field} is a set $F$ with two operations $+$ and $\times$,\\
-such that $(F,+)$ is an abelian group, and $(F-\{0\}, \times)$ is also an abelian group,\\
-while also satisfying the distribution rule:
-\begin{equation*}
-\forall a,b,c \in F, a\times(b+c) = a\times b+a\times c
-\end{equation*}
+    For i, since $\sigma_g$ maps $A$ to itself, then only NTS $\sigma_g$ is injective to show $\sigma_g$ is bijective and therefore a permutation.\\
+    Suppose $\exists a, b \in A, \sigma_g(a) = \sigma_a(b)$.\\
+    Then $\sigma_g(a) = g\cdot a = \sigma_g(b) = g\cdot b \rightarrow g^{-1}\cdot (g\cdot a) - g^{-1}\cdot (g\cdot b) \rightarrow 1\cdot a = a = 1\cdot b = b$.\\
+    Therefore $\sigma_g$ is injective and thus a permutation.\\
+    For ii, define $\phi:G \rightarrow S_A$ by
+    \begin{equation*}
+        \phi(g) = \sigma_g
+    \end{equation*}
+    then $\forall g, h \in G, \phi(gh) = \sigma_{gh}, \phi(g)\phi(h) = \sigma_g\sigma_h$.\\
+    $\forall x \in A, \sigma_{gh}(x) = gh\cdot x = g\cdot h\cdot x = \sigma_g\sigma_h(x)$.\\
+    Therefore $\forall g, h \in G, \phi(gh) = \phi(g)\phi(h)$.\\
+    The remaining criteria can be easily proved.
 \end{addmargin}
-\subsection{Properties of Matrix Groups and Fields}
-These facts will be proven later.
+The homomorphism above is called the \textbf{permutation representation} associated to the given action.
+\subsection*{Examples of group actions}
+\begin{enumerate}
+    \item Define a group action by $\forall g\in G, a\in A, ga = a$.\\
+    This is called a \textbf{trivial} action. The associated permutation representation mapping is also trivial as it maps all elements to the identity.\\
+    A group action is said to be \textbf{faithful} if distinct elements induce distinct permutations of $A$, i.e. the associated permutation representation is injective.\\
+    The \textbf{kernel} of an action is defined to be $\{g\in G | \forall a \in A, ga = a\}$, i.e. the elements that maps to identity in the associated permutation representaion.
+    \item The scalar multiplication of a field $\mathbf{F}$ and a vector space $V$ is also an example of group actions with field $\mathbf{F}$ acting on the vector space $\mathbf{F}^n$ defined by
+    \begin{equation*}
+        \forall a\in \mathbf{F}, v = (v_1, ..., v_n) \in \mathbf{F}^n, av = (av_1, ..., av_n)
+    \end{equation*}
+    \item For any non-empty set $A$ the symmetric group $S_A$ acts on $A$ by $\sigma a = \sigma(a)$. The associated permutation association is just the identity map.
+    \item Each element $\alpha \in D_{2n}$ defined a permuation $\sigma_{\alpha} \in S_n$ by fixing a labeling of the vertices.\\
+    Therefore $D_{2n}$ defines a group action on $\{1, 2, ..., n\}$ by
+    \begin{equation*}
+        \forall \alpha \in D_{2n}, i \in \{1, 2, ..., n\}, \alpha \cdot i = \sigma_\alpha(i)
+    \end{equation*}
+    \item A finite group of order $n$ is isomorphic to some subgroup of $S_n$.\\
+    We define a group action of $G$ acting on itself by
+    \begin{equation*}
+        \forall g, a \in G, g\cdot a = ga
+    \end{equation*}
+    Now we NTS the associated permutation representaion $\pi:G \rightarrow S_n$ is injective:\\
+    Suppose $\pi(g) = \pi(h)$, then $\pi(g)g^{-1} = \pi(h)g^{-1} \rightarrow hg^{-1} = 1 \rightarrow h = g$.\\
+    Therefore $\pi$ is injective and therefore there is a subgroup in $S_n$ that is isomorphic to $G$.
+\end{enumerate}
+\section*{2.5 Lattice of Subgroups of a Group}
+The lattice displays the structure of a group. It is constructed as follow:
+\begin{itemize}
+    \item The subgroup $1$ is placed at the bottom.
+    \item The group $G$ itself is placed at the top.
+    \item For subgroups $A, B$ there will be a line connecting them if $A \le B$ and there is no proper subgroup between them.
+\end{itemize}
+\subsection*{Drawbacks and Properties of Lattice}
+For infinite groups, we cannot draw a complete lattice.\\
+Even for some finite groups, the lattice can be very complicated. For example, groups of order $2^n$.\\
+However, for these cases, we can draw just part of the lattice which can still be very helpful.
+\section*{2.4 Subgroups Generated by Subsets of a Group}
+The concept of given a group $G$ and a subgroup $A \leq G$, is there a unique minimal subgroup that contains $A$, is a recurring theme.\\
+In vector space this is called a span, and in group this is called \textbf{the subgroup generated by $A$}.
+\subsection*{Proposition 8}
+If $\mathcal{A}$ is a non-empty collection of subgroups of $G$, then the intersection of all members of $\mathcal{A}$ is also a subgroup $G$.\\
+\textbf{Proof:}
 \begin{addmargin}[1em]{0em}
-1. If $F$ is a field, and $F$ is finite, then $|F| = p^m$ for some $p, m \in \mathbb{Z}$ and $p$ a prime.\\
-2. If $|F| = q$, then $|GL_n(F)| = (q^n-1)(q^n-q)(q^n-q^2)...(q^n-q^{n-1})$
+    Denote
+    \begin{equation*}
+        K = \bigcap_{H \in \mathcal{A}} H
+    \end{equation*}
+    Clearly $1 \in K$.\\
+    Given $a, b \in K$. Then $\forall H \in \mathcal{A}, a \in H, b \in H \rightarrow ab \in H$, i.e. $ab \in K$.\\
+    Therefore $K$ is a subgroup of $G$.
 \end{addmargin}
-
-\section{1.5 The Quaternion Group}
-\subsection{Definition of the \textit{Quaternion Group}}
+\subsection*{Definition of subgroup generated by $A$}
+If $A$ is any subset of $G$, then define
+\begin{equation*}
+    \braket{A} = \bigcap_{A \subset H \leq G} H
+\end{equation*}
+This is called \textbf{subgroup of $G$ generated by $A$}.\\
+From Proposition 8 we know that $\braket{A}$ is a subgroup, with $\mathcal{A} = \{H \leq G | A \subseteq H\}$. Since $\forall H, A \subseteq H \rightarrow A \subseteq \braket{A}$.\\
+The uniqueness of $\braket{A}$ is as follows:
+\begin{itemize}
+    \item $\braket{A}$ is a subgroup that contains $A$.
+    \item Any subgroup that contains $A$ also contains $\braket{A}$.
+\end{itemize}
+\subsection*{Properties of subgroup generated by $A$}
+We try to define the same subgroup from bottom up:
+\begin{equation*}
+    \overline{A} = \{a_1^{\epsilon_1}a_2^{\epsilon_2}a_3^{\epsilon_3}...|n \in \mathbb{Z}, n \geq 0, a_ \in A, \epsilon_i = \pm 1\}
+\end{equation*}
+In this definition, $a_i$ need not be distinct.\\
+From this definition we can see how a set is generated from $A$.
+\subsection*{Proposition 9}
+\begin{equation*}
+    \overline{A} = \braket{A}
+\end{equation*}
+\textbf{Proof:}
 \begin{addmargin}[1em]{0em}
-The \textit{Quaternion Group} us defined as:
-\begin{equation*}
-    Q_8 = \{1, -1, i, j, k, -i, -j, -k\}
-\end{equation*}
-with product computed as:
-\begin{equation*}
-    \forall a \in Q_8, 1a = a1 = a
-\end{equation*}
-\begin{equation*}
-    \forall a \in Q_8, (-1)(-1) = 1, (-1)a = a(-1) = -a
-\end{equation*}
-\begin{equation*}
-    ii = jj = kk = -1
-\end{equation*}
-\begin{equation*}
-    ij = k, ji = -k
-\end{equation*}
-\begin{equation*}
-    jk = i, kj = -i
-\end{equation*}
-\begin{equation*}
-    ki = j, ik = -j
-\end{equation*}
+    First obviously $\overline{A}$ is a subgroup.\\
+    Since $\forall a = a_1^{\epsilon_1}a_2^{\epsilon_2}a_3^{\epsilon_3}...\in \overline{A}, \forall H \in \mathcal{A}, a \in H \rightarrow a \in \bigcap_{A \subseteq H \leq G} H \rightarrow a \in \braket{A}$.\\
+    Therefore $\overline{A} \subseteq \braket{A}$.\\
+    Since clearly $\overline{A}$ is also a subgroup that contains $A$, then $\braket{A} \subseteq \overline{A}$.\\
+    Therefore $\overline{A} = \braket{A}$.
 \end{addmargin}
-The Quaternion Group is the smallest non-abelian group.
-
-\section{1.6 Homomorphisms and Isomorphisms}
-\subsection{Examples}
+\subsection*{Limitations of Subgroups Generated by $A$}
+If $G$ is abelian, then we could collect the terms in $a_1^{\epsilon_1}a_2^{\epsilon_2}a_3^{\epsilon_3}...$ to re-define $\braket{A}$:
+\begin{equation*}
+    \braket{A} = \{a_1^{\alpha_1}a_2^{\alpha_2}...a_k^{\alpha_k}\}
+\end{equation*}
+If we further assume that each $a_i$ has finite order $d_i$, then we can bound the size of $\braket{A}$:
+\begin{equation*}
+    |\braket{A}| \leq d_1d_2...d_k
+\end{equation*}
+However, if $G$ is non-abelian, then the generated group can be much more complicated.\\
+Let $G = D_8 = \braket{r, s}$ and choose $a = s, b = rs, A = \braket{a, b}$.\\
+Since $r = rs\cdot s = ba, \rightarrow A = G, |A| = |G| = 8$. However, since $|a| = |b| = 2$, it is \textbf{impossible} to write all elements in $A$ as $a^\alpha b^\beta$.\\
+The example above shows that for non-aeblian groups, the long product might not be collected. More specifically, the order of a finite group cannot be bounded even if we know the order of all the generating elements of the this group.\\
+In some cases, the group generated by elements of finite orders could even have infinite order:\\
+\begin{equation*}
+    G = GL_2(\mathbb{R}), a = \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+    \end{pmatrix}, b = \begin{pmatrix}
+        0 & 2\\
+        1/2 & 0
+    \end{pmatrix}
+\end{equation*}
+Now both $a, b$ have order $2$. But since $ab = \begin{pmatrix}
+    1/2 & 0\\
+    0 & 2
+\end{pmatrix}$, it is clear that $\braket{a, b}$ is an infinite subgroup.
+\section*{2.2 Centralizers and Normalizers, Stablizers and Kernels}
+\subsection*{Definition of Centralizer}
+Given set $A \subseteq G$, define
+\begin{equation*}
+    \mathbf{C}_G(A) = \{g \in G | \forall a \in A, gag^{-1} = a\}
+\end{equation*}
+This subset is called the \textbf{centralizer} of $A$ in $G$.\\
+Since $gag^{-1} = a \iff ga = ag$, this is to say $\mathbf{C}_G(A)$ is the set of elements of $G$ which commutes with every elements of $A$.
+\subsubsection*{Centralizers are Subgroups}
+\textbf{Proof:}
 \begin{addmargin}[1em]{0em}
-1. For any group $G, G \cong G$.\\
-While the identity map is an obvious isomorphism between $G$ and $G$, it is not necessarily the only such isomorphism.\\
-2. The exponential map $\textrm{exp}: \mathbb{R} \rightarrow \mathbb{R}^+$ defined by $\textrm{exp}(x) = e^x$. This is an isomorphism from $(\mathbb{R}, +) \rightarrow (\mathbb{R}^+, \times)$.\\
-This is so because this function has an inverse $\textrm{log}_e(x)$ and $e^xe^y = e^{x+y}$.\\
-3. We show that the isomorphism type of a symmetric group is dependent only on the cardinality of the underlying set being permuted.\\
-$\Delta, \Omega$ two nonempty sets with the same size, then $S_{\Delta} \cong S_{\Omega}$:\\
-given $|\Delta| = |\Omega|$, then there exists a bijection $\theta$ between $\Delta, \Omega$. We can then define isomorphism $\phi: S_{\Delta} \rightarrow S_{\Omega}$ using $\theta$:
+    Obviously $1 \in \mathbf{C}_G(A)$.\\
+    Suppose $x, y \in \mathbf{C}_G(A) \rightarrow \forall a \in A, xax^{-1} = a, yay^{-1} = a$.\\
+    Therefore $xya(xy)^{-1} = xyay^{-1}x^{-1} = xax^{-1} = a$, i.e. $xy \in \mathbf{C}_G(A)$.\\
+    This shows that $\mathbf{C}_G(A)$ is a subgroup of $G$.
+\end{addmargin}
+\subsection*{Definition of Center}
+Define $Z(G) = \{g \in G | \forall x \in G, gx =xg\}$, i.e. the set of elements that commutes with all the elements of $G$. This is called the \textbf{center} of $G$.\\
+Now it is clear that $Z(G) = \mathbf{C}_G(G)$ and therefore $Z(G) \leq G$, and is a special case of centralizer.
+\subsection*{Definition of Normalizer}
+Define $gAg^{-1} = \{gag^{-1}| a \in A\}$. Then the \textbf{normalizer} of $A$ in $G$ is
 \begin{equation*}
-    \phi(\sigma) = \sigma': \Omega \rightarrow \Omega, \sigma'(x) = \theta(\sigma(x))
+    N_G(A) = \{g \in G | gAg^{-1} = A\}
 \end{equation*}
-Conversely, if $S_{\Delta} \cong S_{\Omega}$, then it is obvious that $|S_{\Delta}| = |S_{\Omega}|$, i.e., $|\Delta|! = |\Omega|!$, therefore $|\Delta| = |\Omega|$.\\
-\end{addmargin}
-\subsection{Properties about Isomorphisms}
-\begin{addmargin}[1em]{0em}
-1. Any non-abelian group of order $6$ is isomorphis to $S_3$.\\
-In face, there are only two types of groups of order $6$, $S_3$ and $\mathbb{Z}/6\mathbb{Z}$.\\
-2. If $\phi: G \rightarrow H$ is an isomorphism, then:\\
-$|G| = |H|$\\
-$G$ is abelian iff $H$ is ableian.\\
-$\forall x \in G, |x| = |\phi(x)|$.\\
-Using these rules, we can determine some groups are not isomorphic conveniently:\\
-$S_3$ and $\mathbb{Z}/6\mathbb{Z}$ are not isomorphic because one is abelian and one is not.\\
-$(\mathbb{R}-\{0\}, \times), (\mathbb{R}, +)$ are not isomorphic because $-1$ has order $2$ in $(\mathbb{R}-\{0\}, \times)$ while no elements in $(\mathbb{R}, +)$ has order $2$.\\
-3. $G$ a finite group of order $n$ with $A=\{s_1, ..., s_m\}$ generating $G$. $H$ another group $B=\{r_1, ..., r_m\}$ elements of $H$. If any relation of $A$ is also satisfied by $B$ by replacing $s_i$ with $r_i$, then there is a unique homomorphism $\phi:G \rightarrow H$ which maps $s_i$ to $r_i$.\\
-This means to check isomorphism, we only need to check the presentation of $G$:\\
-If $B$ generates $H$, then $\phi$ is surjective, and if additionally, $|H| = |G|$, then $\phi$ is an isomorphism.\\
-\subsubsection{Examples}
-1. $D_{2n} = \braket{r,s|r^n=s^2=1, sr=r^{-1}s}$. Suppose $H$ a group containing elements $a,b$ with $a^n=b^2=1,ba=a^{-1}b$. Then $\exists$ homomorphism from $D_{2n}$ to $H$ mapping $r$ to $a$ and $s$ to $b$.\\
-Given $k|n$, the $D_{2k}$ has a homomorphism to $D_{2n}$. Because $\{r_1, s_1\}$ generates $D_{2k}$, the homomorphism is surjective.\\
-2. Between $D_6$ and $S_3$, with elements $a=(1 2 3), b=(1 2)$ satisfies $a^3 = 1, b^2 = 1, ba=ab^{-1}$. Then there is a homomorphism from $D_6$ to $S_3$ that sends $r \rightarrow a$, $s \rightarrow b$. Because $S_3$ is generated by $a, b$ and $|S_3| = |D_6|$, then $D_6 \cong S_3$.
-\end{addmargin}
+Note that if $g \in \mathbf{C}_G(A)$ then $\forall g \in A, gag^{-1} = a$ and therefore $C_G(A) \leq N_G(A)$.\\
+$N_G(A)$ can be proven to be a subgroup similar to $C_G(A)$.
+\subsection*{Examples}
+\begin{enumerate}
+    \item If $G$ is abelian, then all elements of $G$ commutes and therefore $Z(G) = G$, which also collapses $C_G(A), N_G(A)$ to $G$.
+    \item $G = D_8$ the dihedral group, with the usual definition of $r, s$. Then let $A = \{1, r, r^2, r^3\}$, WTS that $C_{D_8}(A) = A$:
+    Given $sr^i \in D_8, sr^ir^j(sr^i)^{-1} = sr^{i+j}r^{-i}s = sr^js = r^{-j} \neq r^j$.\\
+    Given $r^i \in D_8, r^ir^j(r^i)^{-1} = r^j$.\\
+    Therefore $C_{D_8}(A) = A$
+    \item In the previous example, we also WTS that $N_{D_8}(A) = D_8$:\\
+    Since $C_G(A) = A \rightarrow A \leq N_G(A)$.\\
+    $\forall r^i \in A, sr^is^{-1} = r^{-i}ss^{-1} = r^{-1} \rightarrow s \in N_G(A)$.\\
+    Since $r, s \in N_G(A)$ and $N_G(A)$ is a group, this meaqns $N_G(A) = \braket{r, s} = G$.
+    \item The center of $D_8$ is $\{1, r^2\}$:\\
+    First we can see that for any $A \subseteq G, Z(G) \leq C_G(A) \leq N_G(A)$. Therefore $Z(G) \leq A = \{1, r, r^2, r^3\}$.\\
+    Then given $r^i \in A, r^isr^j = sr^{-i}r^j$. In order for $r^isr^i = sr^{-i}r^j = sr^ir^j, \rightarrow r^i = r^{-i} \rightarrow r^i = r^2$.
+    \item Let $G = S_3, A = \{1, (1\ 2)\}$. WTS $C_{S_3}(A) = N_{S_3}(A) = A$:\\
+    Clearly $A \leq C_{S_3}(A)$. This, along with the fact that $C_{S_3}(A) \leq G$, and LaGrange's theorem, shows that $|C_{S_3}(A)|$ divides $2, 6$.\\
+    i.e. $|C_{S_3}(A)| = 2$ or $6$. But since $(1\ 2\ 3)$ doesn't commute with $(1\ 2)$, this means $|C_{S_3}(A)| \neq 6 \rightarrow |C_{S_3}(A)| = 2 \rightarrow C_{S_3}(A) = A$.\\
+    Then NTS $N_{S_3}(A) = A$, since $A$ contains only $(1\ 2)$ other than $1$. This means $\forall \sigma \in N_{S_3}(A), \sigma(1\ 2)\sigma^{-1} = (1\ 2)$ and therefore $\sigma \in C_{S_3}(A)$, i.e. $N_{S_3}(A) = C_{S_3}(A)$.
+\end{enumerate}
+\subsection*{Stabilizers and Kernels of Group Actions}
+The normalizer, centralizer of $A$, and the center of $G$ are all just special cases of results on group actions.
+\subsubsection*{Definition of Stabilizer}
+Given $G$ a group action on a set $S$, then fixing an element $s \in S$, the \textbf{stabilizer} of $s$ in $G$ is the set
+\begin{equation*}
+    G_s = \{g \in G | g\cdot s = s\}
+\end{equation*}
+\subsubsection*{Stabilizer is a Subgroup}
+The proof is obvious and similar to the proof that $C_G(A) \leq G$.
+\subsection*{Definition of Kernel}
+Given $G$ a group acting on a set $S$. Then the kernel of the action is defined as
+\begin{equation*}
+    \{g \in G| \forall s \in S, g\cdot s = s\}
+\end{equation*}
+similarly,
+\subsubsection*{Kernels are Subgroups}
+\subsection*{Relations between Centralizers, Normalizers and Stabilizers, Kernels*}
+If we define $S = \mathcal{P}(G)$, the set of all subsets of $G$, then we can let $G$ act on $S$ by \textbf{conjugation}:
+\begin{equation*}
+    \forall g \in G, B \subseteq G, g\cdot B = gBg^{-1}
+\end{equation*}
+Then in this case, given $A \subseteq G, N_G(A) = $ the stabilizer of $A$.\\
+Then if we let $N_G(A)$ act on $A$ also by conjugation, i.e.
+\begin{equation*}
+    \forall g \in N_G(A), a \in A, g\cdot a = gag^{-1}
+\end{equation*}
+Note this definition only makes sense when restricting the group to be $N_G(A)$ otherwise $gag^{-1}$ might not be in $A$.\\
+Then in this case, $C_G(A)$ is just the kernel of this action.\\
+Finally, if we let $G$ act on $S = G$ by conjugation, then $Z(G)$ is just the kernel of this action.
 \end{document}

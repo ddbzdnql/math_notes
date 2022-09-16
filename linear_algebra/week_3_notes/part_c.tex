@@ -1,0 +1,176 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Linear Algebra Done Right\\
+\large{Week 3 Notes (c)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{3.E Products and Quotients of Vector Space}
+\subsection*{Products of Vector Spaces}
+\subsubsection*{3.71 Definition of product of vector spaces}
+Given $V_1, ..., V_m$ are vector spaces over $\mathbf{F}$.
+\begin{itemize}
+    \item The \textbf{product} $V_1 \times ... \times V_m$ is defined by
+    \begin{equation*}
+        V_1 \times ... \times V_m = \{(v_1, ..., v_m): v_1 \in V_1, ..., v_m \in V_m\}
+    \end{equation*}
+    \item Addition of $V_1, ..., V_m$ is defined by
+    \begin{equation*}
+        (u_1, ..., u_m) + (v_1, ..., v_m) = (u_1 + v_1, ..., u_m + v_m)
+    \end{equation*}
+    \item Scalar multiplication is defined by
+    \begin{equation*}
+        \lambda(v_1, ..., v_m) = (\lambda v_1, ..., \lambda v_m)
+    \end{equation*}
+\end{itemize}
+\subsubsection*{3.73 Product of vector spaces is a vector space}
+The proof of this is obvious.
+\subsubsection*{3.76 Dimension of a product is the sum of dimensions}
+Given $V_1, ..., V_m$ finite-dimension vector spaces, then $V_1 \times ... \times V_m$ is also finite-dimensional add
+\begin{equation*}
+    dim(V_1 \times ... \times V_m) = dim\ V_1 + ... + dim\ V_m
+\end{equation*}
+\begin{addmargin}[1em]{0em}
+    To prove this, just create a basis where all entris all $0$ except for a basis vector from on of the vector space.\\
+    This is obviously a basis and the dimension is just the sum of dimensions of all the vector spaces.
+\end{addmargin}
+\subsection*{Products and Direct Sums}
+\subsubsection*{3.77 Product and direct sums}
+Given $U_1, ..., U_m$ subspaces of $V$. Define map $\Gamma: U_1 \times ... \times U_m \rightarrow U_1 + ... + U_m$ by
+\begin{equation*}
+    \Gamma(u_1, ..., u_m) = u_1 + ... + u_m
+\end{equation*}
+Then $U_1 + ... + U_m$ is a direct sum $\iff \Gamma$ is injective.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    This is basically saying that $\nexists (u_1, ..., u_m) \in U_1 \times ... \times U_m$ such that $u_1 + ... + u_m = 0$, therefore making $U_1 + ... + U_m$ a direct sum.
+\end{addmargin}
+Since $\Gamma$ is naturally surjective, therefore we can say it is a direct sum $\iff \Gamma$ is invertible. Therefore, the below result
+\subsubsection*{3.78 Condition for direct sum}
+Given $V$ finite-dimensional and $U_1, ..., U_m$ subspaces of $V$. Then $U_1 + ... + U_m$ is a direct sum $\iff$
+\begin{equation*}
+    dim(U_1 + ... + U_m) = dim\ U_1 + ... + dim\ U_m
+\end{equation*}
+\subsection*{Quotient of Vector Spaces}
+\subsubsection*{3.79 Definition of v+U}
+Given $v \in V, U \leq V$. Then $v+U$ is a subset of $V$ defined by
+\begin{equation*}
+    v+U = \{v+u : u\in U\}
+\end{equation*}
+\subsubsection*{3.81 Definition of affine subset and parallel}
+\begin{itemize}
+    \item An \textbf{affine subset} of $V$ of the form $v+U$ for some $v \in V, U \leq V$.
+    \item For $v \in V, U \leq V$, the affine subset $v+U$ is said to be \textbf{parallel} to $U$.
+\end{itemize}
+\subsubsection*{3.83 Definition of quotient space, V/U}
+Given $U \leq V$. THen the quotient space $V/U$ is the set of all affine subsets of $V$ parallel $U$, i.e.
+\begin{equation*}
+    V/U = \{v+U : v \in V\}
+\end{equation*}
+Next we try to show that $V/U$ is a vector space.
+\subsubsection*{3.85 Two affine subsets are equal or disjoint}
+Given $U \leq V, v, w \in V$, the following are equivalent:
+\begin{itemize}
+    \item[(a)] $v-w \in U$
+    \item[(b)] $v+U = w+U$
+    \item[(c)] $(v+U) \cap (w+U) \neq \emptyset$
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose a is true, then we WTS b is also true:\\
+    $\forall u'$ such that $\exists u \in U, v+u = u'$, we have that 
+    \begin{equation*}
+        v + u = w + v - w + u = w + (v-w + u) \in w+U
+    \end{equation*}
+    Therefore $v+U \subseteq w+U$, similarly $w+U \subseteq v+U$.\\
+    Thereofre $v+U = w+U$.\\
+    Now obviously that $b \rightarrow c$.\\
+    We only NTS $c \rightarrow a$:\\
+    Suppose $\exists u' \in v+U \cap w+U$ such that $\exists u_1, u_2 \in U, v+u_1 = u' = w+u_2$, then we have $v-w = u_2 - u_1 \in U$. Proving a.
+\end{addmargin}
+With the result above we can define the operations on $V/U$.
+\subsubsection*{3.86 Definition of addition and scalar multiplication on V/U}
+Given $U \leq V$. Then \textbf{addition} and \textbf{scalar multiplication} are defined on $V/U$ by
+\begin{equation*}
+    \begin{split}
+        (v+U) + (w+U) = (v+w)+U\\
+        \lambda (v+U) = (\lambda v+U)
+    \end{split}
+\end{equation*}
+\subsubsection*{3.87 Quotient space is a vector space}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    We need to show that the addition and multiplication above are well-defined.\\
+    For addition, suppose $v+U = v'+U, w+U = w'+U$. we NTS $(v+U)+(w+U)=(v+w)+U = (v'+U)+(w'+U) = (v'+w')+U$:\\
+    Since $v+U = v'+U, \rightarrow v' - v \in U$, similarly $w' - w \in U$.\\
+    Therefore we have
+    \begin{equation*}
+        v' - v + w' - w = (v'+w') - (v+w) \in U
+    \end{equation*}
+    Therefore $(v'+w')+U = (v+w)+U$.\\
+    The scalar multiplication can be seen as $\lambda$ times of $+ (v+U)$, therefore is already proven.
+\end{addmargin}
+\subsubsection*{Definition of quotient map, $\pi$}
+Given $U \leq V$, the \textbf{quotient map} $\pi:V \rightarrow V/U$ is defined by
+\begin{equation*}
+    \forall v \in V, \pi(v) = v+U
+\end{equation*}
+\subsubsection*{3.89 Dimension of quotient space}
+Given $U \leq V$, then
+\begin{equation*}
+    dim\ V/U = dim\ V - dim\ U
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \begin{equation*}
+        \begin{split}
+            dim\ V/U &= dim\ range\ \pi\\
+            &= dim\ V - dim\ null\ \pi\\
+            &= dim\ V - dim\ U
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsubsection*{3.90 Definition of $\tilde{T}$}
+Given $T \in \mathcal{L}(V, W)$, define $\tilde{T}: V/(null\ T) \rightarrow W$ by
+\begin{equation*}
+    \tilde{T}(v + null\ T) = Tv
+\end{equation*}
+NTS that the definition makes sense:
+\begin{addmargin}[1em]{0em}
+    Given $v_1, v_2 \in V$ such that $v_1 + null\ T = v_2 + null\ T$, then:\\
+    \begin{equation*}
+        \tilde{T}v_1 - \tilde{T}v_2 = Tv_1 -Tv_2 = T(v_1 - v_2)
+    \end{equation*}
+    Now since $v_1 + null\ T = v_2 + null\ T, \rightarrow v_1 - v_2 \in null\ T$.\\
+    Therefoore $\tilde{T}v_1 - \tilde{T}v_2 = T(v_1 - v_2) = 0$.
+\end{addmargin}
+\subsubsection*{3.91 Null space and range of $\tilde{T}$}
+Given $T \in \mathcal{L}(V, W)$, then we have:
+\begin{itemize}
+    \item[(a)] $\tilde{T}$ is injective
+    \item[(b)] $range\ \tilde{T} = range\ T$
+    \item[(c)] $V/(null\ T)$ is isomorphic to $range\ T$
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \begin{itemize}
+        \item[(a)] Given $\tilde{a}, \tilde{b} \in V/U$ such that $\tilde{T}(\tilde{a}) = \tilde{T}(\tilde{b})$, then we have $Ta = Tb \rightarrow a-b \in null\ T \rightarrow \tilde{a} = \tilde{b}$.
+        \item[(b)] This is obvious.
+        \item[(c)] This comes from a and b.
+    \end{itemize}
+\end{addmargin}
+\end{document}

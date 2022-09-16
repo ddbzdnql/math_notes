@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+\title{Fundamental Concepts of Analysis\\
+\large{Week 1 Notes (b)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section*{5 Least-Upper-Bound Axiom}
+\subsection*{5.1 Definition of lower/upper bound}
+A nonempty subset $X \subseteq \mathbf{R}$ is said to be \textbf{bounded above(below)} if there exists a real number $a$ such that $\forall x \in X, x \leq a(x \geq a)$. The number $a$ is called an \textbf{upper(lower) bound} for $X$.
+\subsection*{5.2 Definition of least-upper(greatest-lower) bound}
+Let $X \subseteq \mathbf{R}$ be nonempty.\\
+A number $a \in \mathbf{R}$ is said to be a \textbf{least upper bound} for $X$ if
+\begin{itemize}
+    \item[(i)] $a$ is an upper bound for $X$.
+    \item[(ii)] If $b$ is an upper bound for $X$, then $a \leq b$.
+\end{itemize}
+The \textbf{greatest lower bound} is defined similarly.\\
+Also, the (ii) part can be stated as:
+\begin{addmargin}[1em]{0em}
+    If $b < a$, then $b$ is not an upper bound for $X$.
+\end{addmargin}
+Using 5.1, the statement above is equivalent to
+\begin{itemize}
+    \item[(ii')] If $b < a$, then $\exists x \in X, x > b$
+\end{itemize}
+Sometimes when proving least upper bound, using (ii') is more convenient.
+\subsection*{5.3 Least upper bound is unique}
+Let $X \subseteq \mathbf{R}$. If $a, b$ are least upper bounds of $X$, then $a = b$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $a < b$, then by definition $\exists a < b$ such that $a$ is an upper bound, therefore $b$ is not an upper bound. Contradiction.
+\end{addmargin}
+We can then denote the least-upper(greatest-lower) bound of a set $X$ by
+\begin{equation*}
+    lub\ X = sup\ X, glb\ X = inf\ X
+\end{equation*}
+\subsection*{Axiom 13}
+A nonempty subset of real numbers bounded above has a least upper bound.\\
+This axiom is essentially saying there are no holes in the real line.
+\subsection*{5.4 Conditions for GLB}
+A nonempty subset of real numbers bounded below has a greatest lower bound.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Denote the set $X \subseteq \mathbf{R}$ which is bounded below. Then we create $Y$ as the set of real numbers that are lower bounds of $X$.\\
+    Since $X$ non-empty, $\exists x \in X$ such that $x$ is an upper bound of $Y$.\\
+    Therefore $Y$ bounded above and $\exists y = lub\ Y$.\\
+    We claim that $a = lub\ Y = glb\ X$:\\
+    First NTS $a$ is a lower bound of $X$:\\
+    Suppose $\exists x \in X$ such that $x < a$, then since $a = lub\ Y$ we know that $\exists y \in Y$ such that $y > x$ but since $y$ is a lower bound of $X$ this is a contradiction. Therefore no such $x$ exists, and thus $a$ is a lower bound of $X$.\\
+    Then NTS $a$ is the greaster upper bound of $X$:\\
+    $\forall b > a$ clearly $b \notin Y$ and therefore $b$ not a lower bound. Therefore $a$ is the greatest lower bound.
+\end{addmargin}
+\section*{6 Set of Positive Integers}
+\subsection*{6.1 Definition of sucessor set}
+A subset $X \subseteq \mathbf{R}$ is said to be a \textbf{successor set}
+\begin{itemize}
+    \item[(i)] If $1 \in X$.
+    \item[(ii)] If $n \in X$, then $n + 1 \in X$.
+\end{itemize}
+Since $\mathbf{R}$ itself is a successor set, we know that successor set exists.
+\subsection*{6.2 Intersection of successor sets}
+If $\mathscr{A}$ is a nonempty collection of successor sets, then $\cap \mathscr{A}$ is a successor set.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    For (i), $\forall A \in \mathscr{A}$, since $1 \in A \rightarrow 1 \in \cap \mathscr{A}$.\\
+    For (ii), $\forall n \in \cap\mathscr{A}$, since $\forall A \in \mathscr{A}, n \in A \rightarrow n+1 \in A$, we know that $n+1 \in \cap \mathscr{A}$.
+\end{addmargin}
+\subsection*{6.3 Definiton of positive integers}
+The set $\mathbf{P}$ of \textbf{positive integers} is the intersection of the family of all successor sets.\\
+The meaning of the above defintion is that $\mathbf{P}$ is the smallest successor set:\\
+If $X$ is a successor set, then $\mathbf{P} \subset \mathbf{X}$.
+\subsection*{6.4 Mathematical Induction}
+Suppose that for each positive integer $n$ we have a statement $S(n)$ and that
+\begin{itemize}
+    \item[(i)] $S(1)$ is true.
+    \item[(ii)] If $S(n)$ is true, then $S(n+1)$ is true.
+\end{itemize}
+Then $S(n)$ is true for every positive integer $n$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Let $G = \{n \in \mathbf{P} | S(n) \textrm{ is true}\}$, then $G \subseteq \mathbf{P}$.\\
+    But by definition $1 \in G$ and $n \in G \rightarrow n+1 \in G$, therefore $G$ a successor set and $\mathbf{P} \subseteq G$.\\
+    Therefore $G = \mathbf{P}$.
+\end{addmargin}
+Here are two examples of the induction:
+\subsection*{6.5 Positive integer $\geq 1$}
+If $n$ is a positive integer, then $n \geq 1$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    For (i), clearly $1 \geq 1$.\\
+    For (ii), suppose $n \geq 1$, then $n+1 \geq n \geq 1$.\\
+    Therefore this is true for all positive integer $n$.
+\end{addmargin}
+\subsection*{6.6 Sum of positive integers are positive integers}
+If $m, n \in \mathbf{P}$ then $m + n \in \mathbf{P}$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Define $S(m)$ to be "$\forall n \in \mathbf{P}, m+n \in \mathbf{P}$".\\
+    For (i), it is by definiton that $\forall n \in \mathbf{P}, 1+n \in \mathbf{P}$.\\
+    For (ii), $\forall n \in \mathbf{P} m+1+n = (m+n) + 1$, since $m+n \in \mathbf{P} \rightarrow (m+n) + 1 \in \mathbf{P}$.\\
+    Therefore this is true for all positive integer $m$.
+\end{addmargin}
+We then prove the well-ordering Theorem
+\subsection*{6.7}
+If $n \in \mathbf{P}$, then either $n - 1 = 0$ or $n - 1 \in \mathbf{P}$.\\
+The proof of this is obvious.
+\subsection*{6.8}
+If $m, n \in \mathbf{P}$ and $m < n$, then $n - m \in \mathbf{P}$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Let $S(m)$ be the statement above.\\
+    For (i), if $1 < n$ then $n - 1$ by 6.7 either $n - 1 = 0$ or $n - 1 \in \mathbf{P}$. Since $n \neq 1$, $n - 1 \in \mathbf{P}$.\\
+    For (ii), if $m+1 < n$, then $n - (m+1) = n - m - 1$ by 6.7 and the fact that $n - m \in \mathbf{P}$, either $n - m - 1 = 0$ or $n - m - 1 \in \mathbf{P}$. Since $n \neq m+1$, we know that $n - m - 1 \in \mathbf{P}$.\\
+    THereofre this is true for all positive integers.
+\end{addmargin}
+\subsection*{6.9}
+Let $n$ be a positive integer. No positive integer $m$ satisfies $n < m < n+1$\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    By 6.8 we know that $m - n \in \mathbf{P}$, but since $m < n + 1 \rightarrow m - n < 1$. This contradicts with the fact that $m - n \in \mathbf{P}$ should be $ \geq 1$.\\
+    Therefore no such $m$ exists.
+\end{addmargin}
+\subsection*{6.10 Well-Ordering Theorem}
+If $X$ is a non-void subset of positive integers, then $X$ contains a least element $a \in X$ such that $\forall x \in X, a \leq x$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+     We let the statement $S(n)$ be that "If $n \in X$, then $X$ contains a least element".\\
+     For (i), if $1 \in X$ then $1$ is the least element by 6.5.\\
+     For (ii), if $S(n)$ is true, i.e. $n \in X \rightarrow X$ contains a least element, then suppose $n+1 \in X$, WTS that $X$ has a least element.\\
+     Now $X \cup \{n\}$ has a least element $m$. If $m \in X$ then we are done, therefore assume $m \notin X \rightarrow m = n$.\\
+     This means that $\forall x \in X, n \leq x$. Therefore by 6.9 we have $\forall x \in X, n+1 \leq x$, therefore $n+1$ is the least element of $X$.
+\end{addmargin}
+\subsection*{6.11}
+The set of positive integers is not bounded above.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    If $\mathbf{P}$ is bouned above, then $lub\ \mathbf{P} = a$.\\
+    We know that $a - 1 < a$ is not an upper bound of $\mathbf{P}$ and therefore $\exists n \in \mathbf{P}$ such that $a - 1 < n \rightarrow a < n+1 \in \mathbf{R}$. Contradiction.
+\end{addmargin}
+The ordering of positive integers also implies some ordering of positive real numbers:
+\subsection*{6.12 Archimedean ordering of positive real numbers}
+If $a, b$ positive real numbers, then $\exists n \in \mathbf{P}$ such that $a < nb$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Since $\mathbf{P}$ is not bounded above, then $\exists n \in \mathbf{P}$ such that $a/b < n$.\\
+    Therefore $a < nb$.
+\end{addmargin}
+\end{document}

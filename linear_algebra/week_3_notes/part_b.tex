@@ -1,0 +1,280 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Linear Algebra Done Right\\
+\large{Week 3 Notes (a)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{3.F Duality}
+\subsection*{Definition of Dual Space and Dual Map}
+\subsubsection*{3.92 Definition of Linear Functional}
+A \textbf{linear functional} on $V$ is a linear map from $V$ to $\mathbf{F}$, i.e. the set of $\mathcal{L}(V, \mathbf{F})$
+\subsubsection*{3.93 Examples of Linear Functionals}
+\begin{itemize}
+    \item Define $\phi: \mathbf{R}^3 \rightarrow \mathbf{R}$ by $\phi(x, y, z) = 4x - 5y + 2z$. Then $\phi$ is a linear function on $\mathbf{R}^3$.
+    \item Fix $(c_1, ..., c_n) \in \mathbf{F}^n$. Define $\phi: \mathbf{F}^n \rightarrow F$ by
+    \begin{equation*}
+        \phi(x_1, ..., x_n) = c_1x_1 + ... + c_nx_n
+    \end{equation*}
+    Then $\phi$ is a linear functional on $\mathbf{F}^n$.
+    \item Define $\phi: \mathcal{P}(\mathbf{R}) \rightarrow \mathbf{R}$ by $\phi(p) = 3p''(5) + 7p(4)$. Then $\phi$ is a linear functional on $\mathcal{P}(\mathbf{R})$.
+    \item Define $\phi: \mathcal{P}(\mathbf{R}) \rightarrow \mathbf{R}$ by $\phi(p) = \int_{0}^{1}p(x)dx$. Then $\phi$ is a linear functional on $\mathcal{P}(\mathbf{R})$.
+\end{itemize}
+\subsubsection*{3.94 Definition of dual space}
+The \textbf{dual space} of $V$ denoted $V'$ is just the vector space of all linear functional on $V$, i.e. $V' = \mathcal{L}(V, \mathbf{F})$.
+\subsubsection*{3.95 Dual space and the orginal space have same dimension.}
+Suppose $V$ is finite dimensional, then $V'$ is also finite dimensional and $dim\ V = dim\ V'$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    This comes from the fact that
+    \begin{equation*}
+        dim\ \mathcal{L}(V, \mathbf{F}) = dim\ V \times dim\ \mathbf{F} = dim\ V \tag*{using 3.61}
+    \end{equation*}
+\end{addmargin}
+\subsubsection*{3.96 Definition of dual basis}
+Given $v_1, ..., v_n$ a basis of $V$, then the \textbf{dual basis} of $v_1, ..., v_n$ is the list $\phi_1, ..., \phi_n$ of elements in $V'$, where each $\phi_j$ is the linear functional on $V$ such that
+\begin{equation*}
+    \phi_j(v_k) = \begin{cases}
+        1 & k = j\\
+        0 & k \neq j
+    \end{cases}
+\end{equation*}
+\subsubsection*{3.98 Dual basis is a basis of dual space}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First NTS $\phi_1, ..., \phi_n$ are linearly independent:\\
+    Suppose $\exists \phi = \sum_{i=1}^{n} a_i\phi_i = 0$, then this means that $\phi(v_j) = a_j\phi_j(v_j) = a_j = 0$, i.e. all $a_i = 0$, therefore $\phi_1, ..., \phi_n$ are linearly independent.\\
+    Then NTS $\phi_1, ..., \phi_n$ span $V'$:\\
+    Given $\phi \in V'$, we claim that
+    \begin{equation*}
+        \phi = \sum_{i=1}^{n} \phi(v_i)\phi_i
+    \end{equation*}
+    $\forall v = \sum_{i=1}^{n}a_iv_i, \phi(v) = \sum_{i=1}^{n}a_i\phi(v_i)$, similarly,
+    \begin{equation*}
+        \begin{split}
+            \left(\sum_{i=1}^{n} \phi(v_i)\phi_i\right)\left(\sum_{i=1}^{n} a_iv_i\right) &
+            = \sum_{i=1}^{n} \phi(v_i)\phi_i\left(\sum_{i=1}^{n} a_iv_i\right)\\
+            & = \sum_{i=1}^{n} a_i\phi(v_i)\phi_i(v_i) \\
+            & = \sum_{i=1}^{n} a_i\phi(v_i) = \phi(v)
+        \end{split}
+    \end{equation*}
+    Therefore $\phi_1, ..., \phi_n$ span $V'$.\\
+    Therefore $\phi_1, ..., \phi_n$ is a basis for $V'$.
+\end{addmargin}
+\subsubsection*{3.99 Definition of dual map}
+Given $T \in \mathcal{L}(V, W)$, then the \textbf{dual map} of $T$ is the linear map $T' \in \mathcal{L}(V, W)$ defined by
+\begin{equation*}
+    T'(\phi) = \phi \circ T
+\end{equation*}
+\subsubsection*{3.101 Algebraic Properties of Dual Maps}
+\begin{itemize}
+    \item $\forall S, T \in \mathcal{L}(V, W) (S+T)' = S' + T'$
+    \item $\forall \lambda \in \mathbf{F}, T \in \mathcal{L}(V, W), (\lambda T)' = \lambda T'$
+    \item $\forall T \in \mathcal{L}(U, W), S \in \mathcal{L}(V, W), (ST)' = T'S'$
+\end{itemize}
+\subsection*{Properties of Dual Maps}
+\subsubsection*{3.102 Definition of annihilator}
+Given $U \subset V$, the \textbf{annihilator} of $U$, denoted $U^0$ is defined by
+\begin{equation*}
+    U^0 = \{\phi \in V': \forall u \in U, \phi(u) = 0\}
+\end{equation*}
+\subsubsection*{3.103 Example of Annihilator}
+Given $U \subset \mathcal{P}(\mathbf{R})$ consisting of all polynomial multiples of $x^2$. Then $\phi$ defined by
+\begin{equation*}
+    \phi(p) = p'(0)
+\end{equation*}
+is $\in U^0$.
+\subsubsection*{3.104 Example of Annihilator}
+$e_1, ..., e_5$ the standard basis of $\mathbf{R}^5$, and $\phi_1, ..., \phi_5$ the dual basis of $(\mathbf{R}^5)'$. Suppose
+\begin{equation*}
+    U = span(e_1, e_2) = \{(x_1, x_2, 0, 0, 0) \in \mathbf{R}^5: x_1, x_2 \in \mathbf{R}\}
+\end{equation*}
+Show that $U^0 = span(\phi_3, \phi_4, \phi_5)$.
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First NTS that $span(\phi_3, \phi_4, \phi_5) \subseteq U^0$:\\
+    Given $\phi = a_3\phi_3 + a_4\phi_4 + a_5\phi_5, \phi(x_1, x_2, 0, 0, 0) = 0 \rightarrow span(\phi_3, \phi_4, \phi_5) \subseteq U^0$.\\
+    Then NTS $U^0 \subseteq span(\phi_3, \phi_4, \phi_5)$:\\
+    Given $\phi = a_1\phi_1 + a_2\phi_3 + a_3\phi_3 + a_4\phi_4 + a_5\phi_5 \in U^0, \phi(x_1, x_2, 0, 0, 0) = a_1x_1 + a_2x_2 = 0 \forall x_1, x_2 \rightarrow a_1 = a_2 = 0$. Therefore $\phi \in span(\phi_3, \phi_4, \phi_5)$, i.e. $U^0 \subseteq span(\phi_3, \phi_4, \phi_5)$\\
+    Therefore $U^0 = span(\phi_3, \phi_4, \phi_5)$
+\end{addmargin}
+\subsubsection*{3.105 Annihilator is a subspace}
+The proof for this is easy to verify.
+\subsubsection*{3.106 Dimension of the annihilator}
+Given $V$ finite dimensional and $U < V$, then we have
+\begin{equation*}
+    dim\ U + dim\ U^0 = dim\ V
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    The first proof would be to create a basis for $U$ and extend it to a basis of $V$, then prove that the dual basis of the extension is a basis for $U^0$.\\
+    The second prrof is as follows:\\
+    Let $i \in \mathbf{L}(U, V)$ be the inclusion mapping defined by $i(u) = u$.\\
+    Then $i' \in \mathbf{L}(V', U')$. We have
+    \begin{equation*}
+        dim\ range\ i' + dim\ null\ i' = dim\ V' = dim\ V
+    \end{equation*}
+    Then we only NTS $range\ i' = U'$ and $null\ i' = U^0$:\\
+    WTS $range\ i' = U'$:\\
+    Given $\psi \in U'$, then we can extend this to $\phi \in V'$ such that $\forall u \in U, \phi(u) = \psi(u)$. Then clearly $i'(\phi) = \phi \circ i = \psi$.\\
+    Therefore $range\ i' = U'$.\\
+    WTS $null\ i' = U^0$:\\
+    This is basically the definition. Given $\phi \in U^0$, then $\forall u \in U, \phi \circ i(u) = \phi(u) = 0$, i.e. $\phi \circ i(u) = 0 \rightarrow \phi \in null\ i'$.\\
+    Given $\phi \in null\ i'$, then $\forall u \in U, \phi(u) = \phi \circ i(u) = 0$, therefore $\phi \in U^0$.\\
+    Therefore $null\ i' = U^0$.\\
+    Therefore $dim\ U + dim\ U^0 = dim\ V$.
+\end{addmargin}
+\subsubsection*{3.107 Null space of T'}
+Given $V, W$ both finite-dimensional and $T \in \mathcal{L}(V, W)$, then
+\begin{itemize}
+    \item[(a)] $null\ T' = (range\ T)^0$
+    \item[(b)] $dim\ null\ T' = dim\ null\ T + dim\ W - dim\ V$
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    For a:\\
+    First we NTS $null\ T' \subseteq (range\ T)^0$:\\
+    Suppose $\phi \in null\ T'$, then we know that $\phi \circ T = 0$.\\
+    Therefore, $\forall w \in W$ such that $\exists v \in V, Tv = w$, we know that $\phi(w) = \phi(Tv) = \phi \circ T(v) = 0$, i.e. $\phi \in (range\ T)^0$.\\
+    Therefore $null\ T \subseteq (range\ T)^0$.\\
+    Then we NTS $(range\ T)^0 \subseteq null\ T'$:\\
+    Given $\phi \in (range\ T)^0$, then denote $\psi = \phi \circ T$, we have $\forall v \in V, \psi(v) = \phi \circ Tv = 0$, therefore $(range\ T)^0 \subseteq null\ T'$.\\
+    Therefore $null\ T' = (range\ T)^0$.\\
+    For b:\\
+    With $null\ T' = (range\ T)^0$, we have that
+    \begin{equation*}
+        \begin{split}
+            dim\ null\ T' &= dim\ (range\ T)^0\\
+            &= dim\ W - dim\ range\ T\\
+            &= dim\ W - (dim\ V - dim\ null\ T)\\
+            &= dim\ W - dim\ V + dim\ null\ T
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsubsection*{3.108 T surjective iff T' injective}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    $T$ surjective $\iff dim\ (range\ T)^0 = 0 \iff dim\ null\ T' = 0 \iff T'$  injective.
+\end{addmargin}
+\subsubsection*{3.109 Range of T'}
+Given $V, W$ both finite-dimensional and $T \in \mathcal{L}(V, W)$. Then
+\begin{itemize}
+    \item[(a)] $dim\ range\ T' = dim\ range\ T$
+    \item[(b)] $range\ T' = (null\ T)^0$
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \begin{itemize}
+        \item[(a)] We have
+        \begin{equation*}
+            \begin{split}
+                dim\ range\ T' &= dim\ W - dim\ null\ T'\\
+                &= dim\ W - (dim\ W - dim\ V + null\ T)\\
+                &= dim\ range\ T
+            \end{split}
+        \end{equation*}
+        \item[(b)] First we NTS $range\ T' \subseteq (null\ T)^0$:\\
+        Given $\phi \in range\ T', \exists \psi \in W', \psi \circ T = \phi$.\\
+        Therefore $\forall v \in null\ T, \phi(v) = \psi \circ Tv = \psi(0) = 0$.\\
+        Therefore we have shown that $range\ T' \subseteq (null\ T)^0$.\\
+        Then we NTS $dim\ range\ T' = dim\ (null\ T)^0$:\\
+        \begin{equation*}
+            \begin{split}
+                dim\ range\ T' &= dim\ W' - dim\ null\ T'\\
+                &= dim\ W - (dim\ W - dim\ V + dim\ null\ T)\\
+                &= dim\ V - dim\ null\ T\\
+                &= dim\ (null\ T)^0
+            \end{split}
+        \end{equation*}
+    \end{itemize}
+\end{addmargin}
+\subsubsection*{3.110 T injective iff T' surjective}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \begin{equation*}
+        \begin{split}
+            T \mathrm{ injective} &\iff dim\ null\ T = 0\\
+            &\iff dim\ range\ T = V\\
+            &\iff dim\ range\ T' = dim\ range\ T = V\\
+            &\iff T' \mathrm{ surjective}
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection*{Matrix of a Dual Map}
+\subsubsection*{3.113 Transpose of product}
+Given $A$ an $m \cdot n$ matrix and $C$ an $n \cdot p$ matrix, then
+\begin{equation*}
+    (AC)^t = C^tA^t
+\end{equation*}
+\subsubsection*{3.104 Matrix of T' is the transpose of matrix of T}
+Given $T \in \mathcal{L}(V, W)$, then $\mathcal{M}(T') = (\mathcal{M}*(T))^t$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Denote $v_1, ..., v_n$ a basis for $V$, $v_1', ..., v_n'$ the corresponding basis for $V'$. Similarly $w_1, ..., w_m$ a basis for $W$, $w_1', ..., w_n'$ the corresponding basis for $W'$.\\
+    We denote $\mathcal{M}(T) = A, \mathcal{M}(T') = C$. Then we have
+    \begin{equation*}
+        \begin{split}
+            w_j'(Tv_i) &= w_j'\left(
+                \sum_{r=1}^{m} A_{ri} w_r
+            \right)\\
+            &= \left(
+                \sum_{r=1}^{m} A_{ri} w_j'(w_r)
+            \right)\\
+            &= A_{ji}\\
+            &= w_j' \circ T(v_i)\\
+            &= T'(w_j')v_i\\
+            &= \left(
+                \sum_{r=1}^{n} C_{rj}v_r'(v_i)
+            \right)\\
+            &= C_{ij}
+        \end{split}
+    \end{equation*}
+    Here the main equality is $w_j'(Tv_i) = T'w_j'(v_i)$. Using two ways to perform this calculation leads to the equality of the two entries of matrices $\mathcal{M}(T)$ and $\mathcal{M}(T')$.\\
+    $Tv_i$ selects the $i^{th}$ column of $\mathcal{M}(T)$ and similarly, $T'w_j'$ selects the $j^{th}$ column of $\mathcal{M}(T')$.\\
+    Then applying $w_j'$ to $Tv_i$ will result in $0$ for all rows $r \neq j$, leaving only $\mathcal{M}(T)_{ji} \cdot w_j'(w_j) = \mathcal{M}(T)_{ji}$.\\
+    Simlarly, applying $T'w_j'$ to $v_i$ will result in $0$ for all rows $r \neq i$, leaving only $\mathcal{M}(T')_{ij} \cdot v_i'(v_i)= \mathcal{M}(T')_{ij}$.\\
+    Therefore $\mathcal{M}(T)_{ji} = \mathcal{M}(T')_{ij} \rightarrow \mathcal{M}(T)^t = \mathcal{M}(T')$.\\
+    Check the below graph for a better understanding:\\
+    \includegraphics*[scale=0.40]{dual_map_matrix.png}
+\end{addmargin}
+\subsection*{Rank of a Matrix}
+\subsubsection*{3.115 Definition of rank}
+Given $A$ an $m \times n$ matrix with entries in $\mathbf{F}$.
+\begin{itemize}
+    \item The \textbf{row rank} of $A$ is the dimension of the span of rows of $A$ in $\mathbf{F}^{1, n}$.
+    \item The \textbf{column rank} of $A$ is the dimension of the span of the columns of $A$ in $\mathbf{F}^{m,1}$.
+\end{itemize}
+\subsubsection*{3.117 T and rank of M(T)}
+Given $V, W$ finite-dimensional and $T \in \mathcal{L}(V, W)$. Then $dim\ range\ T = $ column rank of $\mathcal{M}(T)$.
+\subsubsection*{Row rank equals to column rank}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Given $A \in \mathbf{F}^{m, n}$, then
+    \begin{equation*}
+        \begin{split}
+            \mathrm{column rank of } A &= \mathrm{column rank of } \mathcal{M}(T)\\
+            &= dim\ range\ T\\
+            &= dim\ range\ T'\\
+            &= \mathrm{column rank of } \mathcal{M}(T')\\
+            &= \mathrm{column rank of } A^t\\
+            &= \mathrm{row rank of A}
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsubsection*{3.119 Definition of rank}
+The \textbf{rank} of a matrix $A \in \mathbf{F}^{m,n}$ is the column rank of $A$.
+\end{document}

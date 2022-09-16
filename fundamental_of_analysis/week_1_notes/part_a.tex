@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Fundamental Concepts of Analysis\\
+\large{Week 1 Notes (a)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{3 Algebraic Axioms of the Real Numbers}
+\subsection*{3.1 Definition of Binary Operation}
+A \textbf{binary operation} on a set $X$ is a function from $X \times X$ into $X$.
+\subsection*{3.2 Definition of Real Numbers}
+The \textbf{real numbers} $\mathbf{R}$ is a set of objects satisfying the Axioms 1 to 13 listed below.
+\subsubsection*{Axiom 1. Closure under addition.}
+\subsubsection*{Axiom 2. Associativity under addition.}
+\subsubsection*{Axiom 3. Commutativity under addition.}
+\subsubsection*{Axiom 4. Existence of an additive identity.}
+\subsubsection*{Axiom 5. Existence of additive inverse.}
+The additive inverse in Axiom 5 can be shown to be unique.
+\subsection*{3.3 Theorem: Additive Identity is Unique}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $\exists 0' \in \mathbf{R}, \forall x \in \mathbf{R}, x + 0' = x$.\\
+    Then $0 + 0' = 0$. Similarly, $0' + 0 = 0'$.\\
+    Then from Axiom 3 we know that $0 = 0 + 0' = 0' + 0 = 0'$.\\
+    Therefore we have shown that the additive identity is unique.
+\end{addmargin}
+Some other properties can be proven similarly.\\
+Any mathmatical system that satisfies Axioms 1 to 5 is called an abelian group.
+\subsubsection*{Axiom 6. Closed under multiplication}
+\subsubsection*{Axiom 7. Associativity under multiplication}
+\subsubsection*{Axiom 8. Commutativity under multiplication}
+\subsubsection*{Axiom 9. Existence of an multiplicative identity}
+\subsubsection*{Axiom 10. Existence of multiplicative inverse for non-zero real numbers}
+\subsubsection*{Axiom 11. Multiplication distributes over addition}
+\begin{equation*}
+    \forall x, y, z \in \mathbf{R}, x(y+z) = xy + xz, (y+z)x = yx + xz
+\end{equation*}
+Similar to addition, the identity and inverse of multiplication is unique.\\
+Any mathematical system that satisfies Axioms 1 to 11 is called a field.
+\subsection*{3.4 Theorem: Zero Times Anything is Zero}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \begin{equation*}
+        \forall x \in \mathbf{R}, x\cdot 0 = x\cdot (0 + 0) = x\cdot 0 + x\cdot 0 \tag*{Axiom 4, 11}
+    \end{equation*}
+    \begin{equation*}
+        x\cdot 0 + [-(x\cdot 0)] = x\cdot 0 + x\cdot 0 + [-(x\cdot 0)] \tag*{Axiom 5}
+    \end{equation*}
+    \begin{equation*}
+        0 = x\cdot 0 + (x\cdot 0 + [-(x\cdot 0)]) = x\cdot + 0 \tag*{Axiom 2}
+    \end{equation*}
+    Because we have prove that the additive identity is unique, this shows that $x\cdot 0 = 0$.
+\end{addmargin}
+\section*{4 Order Axiom of Real Numbers}
+\subsection*{Axiom 12. Positive Real Numbers}
+There is a subset $P \subseteq \mathbf{R}$ called \textbf{positive real numbers} satisfying
+\begin{enumerate}
+    \item $\forall x, y \in P, x+y, xy \in P$.
+    \item $\forall x \in \mathbf{R}$, only one of the follow statment is true:
+    \begin{equation*}
+        x \in P, x = 0, or -x \in P
+    \end{equation*}
+\end{enumerate}
+From positive real numbers we can define some notations.
+\subsection*{4.1 Definitions of Positive and Negative}
+Given $x, y \in \mathbf{R}$,
+\begin{itemize}
+    \item[i] $-x \in P \rightarrow x$  is \textbf{negative}.
+    \item[ii] $x > y$ means $x-y$ is positive.
+    \item[iii] $x \geq y$ means $x < y$ or $x = y$.
+    \item[iv] $x < y$ means $y > x$.
+    \item[v] $x \leq y$ means $y \geq x$.
+\end{itemize}
+\subsection*{4.2 Theorem: Properties of Orders of Real Numbers}
+\begin{enumerate}
+    \item[i] $1 > 0$
+    \item[ii] $\forall x, y, z \in \mathbf{R}, x > y, y > z \rightarrow x > z$
+    \item[iii] $\forall x, y, z \in \mathbf{R}, x > y \rightarrow x+z > y+z$
+    \item[iv] $\forall x, y, z \in \mathbf{R}, x > y, z > 0 \rightarrow xz > yz$
+    \item[v] $\forall x, y, z \in \mathbf{R}, x > y, z < 0 \rightarrow xz < yz$
+\end{enumerate}
+\subsection*{4.4 Definition of Absolute Value}
+Given $x \in \mathbf{R}$ we define
+\begin{equation*}
+    |x| = \begin{cases}
+        x & \textrm{if } x \geq 0\\
+        -x & \textrm{if } x < 0
+    \end{cases}
+\end{equation*}
+\subsection*{4.5 Theorem: Properties of Absolute Value}
+\begin{itemize}
+    \item[i] Let $\epsilon > 0$. Then $|x| < \epsilon \iff -\epsilon < x < epsilon, |x| \leq \epsilon \iff -\epsilon \leq x \leq \epsilon$
+    \item[ii] $\forall x \in \mathbf{R}, x \leq |x|$
+    \item[iii] $\forall x, y \in \mathbf{R}, |xy| = |x||y|$
+    \item[iv] $\forall x, y \in \mathbf{R}, |x + y| \leq |x| + |y|$
+\end{itemize}
+\end{document}

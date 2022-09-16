@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+\usepackage{amssymb}
+
+\title{Abstract Algebra\\
+\large{Week 3 HW}}
+\author{shaozewxy }
+\date{August 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{1}
+(1.7.11)\\
+Write out the cycle decomposition of the eight permutation in $S_4$ corresponding to the elements of $D_8$ given by the action of $D_8$ on the vertices of a square.
+\begin{itemize}
+    \item[$1$:] $1$
+    \item[$r$:] $(1\ 2\ 3\ 4)$
+    \item[$r^2$:] $(1\ 3)(2\ 4)$
+    \item[$r^3$:] $(1\ 4\ 3\ 2)$
+    \item[$s$:] $(2\ 4)$
+    \item[$sr$:] $(1\ 2)(3\ 4)$
+    \item[$sr^2$:] $(1\ 3)$
+    \item[$sr^3$:] $(1\ 4)(2\ 3)$
+\end{itemize}
+\section*{2}
+(1.7.17)\\
+Let $G$ be a group and let $G$ act on itself by left conjugation, so each $g \in G$ map $G$ to $G$ by
+\begin{equation*}
+    x \mapsto gxg^{-1}
+\end{equation*}
+For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself. Deduce that $x$ and $gxg^{-1}$ have the same order for all $x$ in $G$ and that for any subset $A$ of $G, |A| = |gAg^{-1}|$.
+\begin{addmargin}[1em]{0em}
+    Fixing $g \in G$, define $\phi_g: G \rightarrow G$ by
+    \begin{equation*}
+        \phi_g(x) = gxg^{-1}
+    \end{equation*}
+    First NTS $\phi_g$ is injective:\\
+    $\forall x, y \in G, \phi_g(x) = \phi_g(y) \rightarrow gxg^{-1} = gyg^{-1} \rightarrow g^{-1}(gxg^{-1})g = g^{-1}(gyg^{-1})g$\\
+    Therefore $x = y$, i.e. $\phi_g$ is injective.\\
+    Then NTS $\phi_g$ is surjective:\\
+    $\forall x \in G, \exists g^{-1}xg \in G, \phi_g(g^{-1}xg) = g(g^{-1}xg)g^{-1} = g$.\\
+    Therefore $\phi_g$ is surjective.\\
+    Since $\phi_g$ is defined from an action, it is already a homomorphism, and therefore $\phi_g$ is an isomorphism.\\\\
+    Now since $\phi_g$ is an isomorphism, $\exists \phi_g^{-1}, \forall x \in G, \phi_g^{-1}(\phi_g(x)) = 1$.\\
+    Given $a, b \in G, \phi_g(a) = b$, and assume $|a| = m, |b| = n$.\\
+    This means $\phi_g(a)^m = \phi_g(a^m) = 1 = b^m$\\
+    Therefore $|b| \leq |a|$.\\
+    Similarly $\phi_g^{-1}(b)^n = \phi_g^{-1}(b^n) = 1 = a^n$.\\
+    Therefore $|a| \leq |b|$.\\
+    This shows that $\forall a, b \in G, \phi_g(a) = b,$we have $|a| = |b|$.\\
+    Therefore we have $\forall x \in G, |x| = |gxg^{-1}|$.\\\\
+    We can similarly define a map $\psi_g: A \mapsto gAg^{-1}$ by
+    \begin{equation*}
+        \forall x \in A, \psi_g(x) = gxg^{-1}
+    \end{equation*}
+    First NTS $\psi_g$ is well defined:\\
+    $\forall x \in A, \psi_g(x) = gxg^{-1}$ which by definition is in $gAg^{-1}$. Therefore $\psi_g$ is well-defined.\\
+    Then NTS $\psi_g$ is both injective and surjective. Which is similar to what we did for showing $\phi_g$ is invertible. Therefore $\exists$ a bijection $\psi_g$ between $A$ and $gAg^{-1}$.\\
+    Therefore $|A| = |gAg^{-1}|$
+\end{addmargin}
+\section*{3}
+(1.7.19)\\
+Let $H$ be a subgroup of the finite group $G$ and let $H$ act on $G$ by left multiplication. Let $x \in G$ and let $\mathcal{O}$ be the orbit of $x$ under the action of $H$. Prove that the map
+\begin{equation*}
+    H \rightarrow \mathcal{O} \textrm{  defined by } h \mapsto hx
+\end{equation*}
+is a bijection. From this and the preceeding exercise deduce \textbf{Lagrange's Theorem}:\\
+If $G$ is a finite group and $H$ is a subgroup of $G$ then $|H|$ divides $|G|$.
+\begin{addmargin}[1em]{0em}
+    This map is by nature surjective.\\
+    Only NTS it is injective:\\
+    $\forall g, h \in H, gx = hx \rightarrow (gx)x^{-1} = (hx)x^{-1} \rightarrow g = h$.\\
+    Therefore the map is injective and therefore a bijection.
+\end{addmargin}
+\section*{4}
+(2.2.7)\\
+Let $n \in \mathbb{Z}$ with $n \geq 3$. Prove the following:
+\begin{itemize}
+    \item[(a)] $Z(D_{2n}) = 1$ if $n$ is odd
+    \item[(b)] $Z(D_{2n}) = \{1, r^k\}$ if $n = 2k$.
+\end{itemize}
+\begin{addmargin}[1em]{0em}
+    Given $s \in D_{2n}$, we have
+    \begin{equation*}
+        \begin{split}
+            \forall sr^i \in D_{2n}, sr^is(sr^i)^{-1} & = sr^isr^{-i}s \\
+            & = sr^{2i}
+        \end{split}
+    \end{equation*}
+    $sr^{2i} = s \rightarrow r^{2i} = 1 \rightarrow 2i = n$ or $i = 0$ since $n$ is odd, it can only be that $i=0$, i.e. $sr^0 = s.$\\
+    However $sr^is^{-1} = r^{-i}$. Therefore $\nexists sr^i \in Z(D_{2n})$\\
+    Similarly,
+    \begin{equation*}
+            \forall r^i \in D_{2n}, r^isr^{-i} = r^{2i}s
+    \end{equation*}
+    $r^{2i}s = s \rightarrow r^{2i} = 1$ and we can see that $r^{2i}$ must be $1$.\\
+    This shows that only $1$ is in $Z(D_{2n})$ when $n$ is odd.\\
+    Using the same logic from above, we can see that when $n = 2k$, we can let $i = k$ so that $r^i = r^k \in Z(G)$.\\
+    Therefore $\{1, r^i\} = Z(G)$ when $n = 2k$.
+\end{addmargin}
+\section*{5}
+(2.2.10)\\
+Let $H$ be a subgroup of $G$ and any nonempty subset $A$ of $G$ define $N_H(A)$ to be the set $\{h \in H | hAh^{-1} = A\}$. Show that $N_H(A) = N_G(A) \cap H$ and deduce that $N_H(A)$ is a subgroup of $H$.
+\begin{addmargin}[1em]{0em}
+    First NTS $N_H(A) \subseteq N_G(A) \cap H$:\\
+    $\forall h \in N_H(A)$, since $h \in H \leq G$ and $hAh^{-1} = A \rightarrow h \in N_G(A)$.\\
+    Therefore $h \in N_G(A) \cap H$, i.e. $N_H(A) \subseteq N_G(A) \cap H$.\\
+    Then NTS $N_G(A) \cap H \subseteq N_H(A)$:\\
+    $\forall h \in N_G(A) \cap H$, since $h \in H$ and $hAh^{-1} = A$, $h \in N_H(A)$.\\
+    Therefore $N_G(A) \cap H \subseteq N_H(A)$.\\
+    Therefore $N_G(A) \cap H = N_H(A)$.\\
+    Since $H \leq G, N_G(A) \leq G, \rightarrow N_H(A)=N_G(A) \cap H \leq G$.\\
+    Since $N_H(A) \subseteq H, \rightarrow N_H(A) \leq H$.
+\end{addmargin}
+\section*{6}
+(2.3.17)
+\section*{7}
+(2.3.25)
+\section*{8}
+(3.1.9)
+\section*{9}
+(3.1.32)
+\section*{10}
+(3.1.33)
+\end{document}

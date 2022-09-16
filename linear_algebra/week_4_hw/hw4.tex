@@ -17,46 +17,212 @@
 \maketitle
 
 \setcounter{secnumdepth}{0}
-\section{4.1}
+\section*{4.1}
 (Axler 3E.13)\\
-First NTS that $v_1, ..., v_m, u_1, ..., u_n$ span $V$:\\
-Given $v \in V, \exists x \in V$ such that $v = x + U$.\\
-Because $v_1+U, ..., v_m+U$ a basis of $V/U$, therefore $\exists$ a linear combination such that
-\begin{equation*}
-    x+U = \sum_{i=1}^{m} a_i (v_i+U) = \left(\sum_{i=1}^{m} a_iv_i\right)U
-\end{equation*}
-therefore this means $v = x + u$ for some $u \in U = \sum_{i=1}^{m} a_iv_i + u'$ for some $u' \in U$.\\
-Because $u_1, ..., u_n$ a basis of $U$, this means $x = \sum_{i=1}^{m}a_iv_i + \sum_{j=1}^{n}b_ju_j$.\\
-Therefore $v_1, ..., v_m, u_1, ..., u_n$ span $V$.\\
-Then we NTS $v_1, ..., v_m, u_1, ..., u_n$ is independent:\\
-Suppose $\exists$ a linear combination such that
-\begin{equation*}
-    \sum_{i=1}^{m}a_iv_i + \sum_{j=1}^{n}b_ju_j = 0
-\end{equation*}
-then this means $\sum_{i=1}^{m}a_iv_i = -\sum_{j=1}^{n}b_ju_j \in U \rightarrow (\sum_{i=1}^{m}a_iv_i)U = \sum_{i=1}^{j}a_i(v_i+U) = 0+U$. This is contradictory to that $v_1+U, ..., v_m+U$ a basis for $U/V$. Therefore no such linear combination exists and $v_1, ..., v_m, u_1, ..., u_n$ independent.
-\section{4.2}
+Suppose $U$ is a subspace of $V$ and $v_1+U, ..., v_m+U$ is a basis of $V/U$ and $u_1, ..., u_n$ is a basis of $U$. Prove that $v_1, ..., v_m, u_1, ..., u_n$ is a basis of $V$.\\
+\textbf{Solution:}
+\begin{addmargin}[1em]{0em}
+    First we NTS that $v_1, ..., v_m, u_1, ..., u_n$ span $V$:\\
+    Given $v \in V, \pi(v) = v+U = \sum_{i=1}^{n}a_i(v_i+U) = \left(\sum_{i=1}^{n}a_iv_i\right)+U$.\\
+    This means $\exists u \in U$ such that $v = \sum_{i=1}^{n}a_iv_i + u = \sum_{i=1}^{n}a_iv_i + \sum_{j=1}^{m}b_ju_j$.\\
+    Therefore we have shown that $v_1, ..., v_m, u_1, ..., u_n$ span $V$.\\
+    Next we NTS that $v_1, ..., v_m, u_1, ..., u_n$ independent:\\
+    Suppose $\exists \sum_{i=1}^{n}a_iv_i + \sum_{j=1}^{m}b_ju_j = 0 \rightarrow \sum_{i=1}^{n}a_iv_i + u = 0 \rightarrow \sum_{i=1}^{n} a_iv_i \in U$, this means
+    \begin{equation*}
+        \sum_{i=1}^{n} a_i \left(v_i + U\right) = 0
+    \end{equation*}
+    Contradiction. Therefore $v_1, ..., v_m, u_1, ..., u_n$ independent.\\
+    Theerefore we have shown $v_1, ..., v_m, u_1, ..., u_n$ a basis.
+\end{addmargin}
+\section*{4.2}
 (Axler 3F.7)\\
+Suppose $m$ is a positive integer. Show that the dual basis of the basis $1, x, ..., x^m$ of $\mathcal{P}_m(\mathbf{R})$ is $\phi_0, \phi_1, ..., \phi_m$ where
 \begin{equation*}
-    \phi_j(x^i) = \begin{cases}
-    x^(i-j) = 0 & i > j\\
-    1 & i = j\\
-    0 & i < j
-    \end{cases}
+    \phi_j(p) = \frac{p^{(j)}(0)}{j!}
 \end{equation*}
-Therefore $\phi_j(x^i) = 1 \iff i = j$ and $0$ otherwise, showing $\phi_0, ..., \phi_m$ a basis of te dual space of $\mathcal{P}_m(\mathbb{R})$.
-\section{4.3}
+\textbf{Solution:}
+\begin{addmargin}[1em]{0em}
+    Essentially this is to calculate $\phi_j(x^i)$:
+    \begin{equation*}
+        \phi_j(x^i) = \begin{cases}
+            x^{i-j}(0) = 0 & i > j\\
+            1(0) = 1 & i = j\\
+            0(0) = 0 & i < j
+        \end{cases}
+    \end{equation*}
+    Therefore we have shown that $\forall j \in \{1, ..., m\}$,
+    \begin{equation*}
+        \phi_j(x^i) = \begin{cases}
+            0 & j \neq i\\
+            1 & j = i
+        \end{cases}
+    \end{equation*}
+    Therefore $\phi_0, ..., \phi_m$ is the dual basis.
+\end{addmargin}
+\section*{4.3}
 (Axler 3F.8)\\
-1. We prove using induction on $m$:\\
-Suppose the statement is true for all $m <= n-1$, i.e. $1, x-5, ..., (x-5)^{n-1}$ is a basis of $\mathcal{P}_{n-1}(\mathbb{R})$, we then NTS the statement is also true for $m=n$.\\
-Given $x = \sum_{i=0}^{n}a_ix^i \in \mathcal{P}_n(\mathbb{R})$.\\
-Then we create $x' = x - a_n(x-5)^n$, it is clear that $x' \in \mathcal{P}_{n-1}(\mathbb{R}) \rightarrow x' = \sum_{i=0}^{n-1}b_i(x-5)^i$.\\
-Therefore $x = a_n(x-5)^n + \sum_{i=0}^{n-1}b_i(x-5)^i$. Therefore $1, x-5, ..., (x-5)^n$ span $\mathcal{P}_n(\mathbb{R})$.\\
-Now $1, x-5, ..., (x-5)^n$ obviously independent, therefore $1, ..., (x-5)^n$ a basis of $\mathcal{P}_n(\mathbb{R})$.\\
-2. The dual basis for $1, x-5, ..., (x-5)^m$ is
-\begin{equation*}
-    \phi_j(p) = \frac{p^{(j)}(5)}{j!}
-\end{equation*}
-\section{4.4}
+Suppose $m$ is a positive integer.
+\begin{itemize}
+    \item[(a)] Show that $1, x-5, ..., (x-5)^m$ is a basis of $\mathcal{P}_m(\mathbf{R})$.
+    \item[(b)] What is the dual basis of the basis in part (a)?
+\end{itemize}
+\textbf{Solution:}
+\begin{addmargin}[1em]{0em}
+     \begin{itemize}
+        \item[(a)] First $1, x-5, ..., (x-5)^m$ is clearly independent since all coefficients need to be $0$ for the polynomial to be $0$ for all $x$.\\
+        Then we NTS that $1, x-5, ..., (x-5)^m$ span $\mathcal{P}_m(\mathbf{R})$:\\
+        To do this we show that $\forall i \in \{1, ..., m\}, x^i \in span(1, x-5, ..., (x-5)^m)$.\\
+        Suppose this is true for all $i \in \{1, ..., n-1\}$, WTS that $x^n \in span(1, x-5, ..., (x-5)^m)$.\\
+        First we have $(x-5)^n = x^n + \sum_{i=0}^{n-1}a_ix^i$.\\
+        Since $1, x, ..., x^{n-1} \in span(1, x-5, ..., (x-5)^m) \rightarrow \sum_{i=0}^{n-1}a_ix^i \in span(1, x-5, ..., (x-5)^m)$.\\
+        Therefore $x^n = (x-5)^n - \sum_{i=0}^{n-1}a_ix^i \in span(1, x-5, ..., (x-5)^m)$.\\
+        Therefore $1, x, ..., x^m \in span(1, x-5, ..., (x-5)^m)$, thus $span(1, x-5, ..., (x-5)^m) = \mathcal{P}_m(\mathbf{R})$.\\
+        THerefore $1, x-5, ..., (x-5)^m$ is a basis of $\mathcal{P}_m(\mathbf{R})$.
+        \item[(b)] Using the same reasoning as 3E.7 the dual basis are $\phi_0, \phi_1, ..., \phi_m$ where
+        \begin{equation*}
+            \phi_j(p) = \frac{p^{(j)}(5)}{j!}
+        \end{equation*}
+     \end{itemize}
+\end{addmargin}
+\section*{4.4}
 (Axler 3F.15)\\
-$T' = 0 \iff null\ T' = W' \iff (range\ T)^0 = W' \iff T = 0$
+Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V, W)$. Prove that $T' = 0 \iff T = 0$.\\
+\textbf{Solution:}
+\begin{addmargin}[1em]{0em}
+    This comes from the fact that $dim\ range\ T = dim\ range\ T'$. Therefore
+    \begin{equation*}
+        \begin{split}
+            T = 0 & \iff dim\ range\ T = 0\\
+            & \iff dim\ range\ T' = 0\\
+            & \iff T' = 0
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\section*{4.5}
+(Axler 5A.12)\\
+Define $T \in \mathcal{L}(\mathcal{P}_4(\mathbf{R}))$ by $(Tp)(x) = xp'(x)$. Find all eigenvalues and eigenvectors of $T$.
+\begin{addmargin}[1em]{0em}
+    Suppose $\exists \lambda \in \mathbf{R}, p \in \mathcal{L}(\mathcal{P}_4(\mathbf{R})), Tp = \lambda p$.\\
+    Then we have $\lambda p(x) = xp'(x)$.\\
+    Denote $p$ as $ax^4 + bx^3 + cx^2 + dx + e$, then $p' = 4ax^3 + 3bx^2 + 2cx + d, xp' = 4ax^4 + 3bx^3 + 2cx^2 + dx$, i.e.
+    \begin{equation*}
+        \forall x \in \mathbf{R}, \lambda ax^4 + \lambda bx^3 + \lambda cx^2 + \lambda dx + \lambda e = 4ax^4 + 3bx^3 + 2cx^2 + dx
+    \end{equation*}
+    In order for $\lambda ax^4 = 4ax^4 \rightarrow \lambda = 4, b = 0, c = 0, d = 0, e = 0$, i.e. $p = ax^4$ is an eigenvector of $T$ with eigenvalue 4.\\
+    Similarly:
+    \begin{itemize}
+        \item $p = bx^3$ is an eigenvector of $T$ with eigenvalue 3
+        \item $p = cx^2$ is an eigenvector of $T$ with eigenvalue 2
+        \item $p = dx$ is an eigenvector of $T$ with eigenvalue 1
+    \end{itemize} 
+\end{addmargin}
+\section*{4.6}
+(Axler 5A.15)\\
+Suppose $T \in \mathcal{L}(V)$. Suppose $S \in \mathcal{L}(V)$ is invertible.
+\begin{itemize}
+    \item[(a)] Prove that $T$ and $S^{-1}TS$ have the same eigenvalues.
+    \begin{addmargin}[1em]{0em}
+        Suppose $\lambda \in \mathbf{F}$ is an eigenvalue of $T$. Then we know that $T - \lambda I$ is not injective, i.e. $T - \lambda I = 0$ has a non trivial solution.\\
+        Then we have
+        \begin{equation*}
+            S^{-1}TS - \lambda I = S^{-1}TS - \lambda (S^{-1}IS) = S^{-1}TS - S^{-1}\lambda IS = S^{-1}(T - \lambda I)S
+        \end{equation*}
+        Therefore we can see that $S^{-1}TS - \lambda I$ is also not injective, i.e. $\lambda$ is also an eigenvalue of $S^{-1}TS$.\\
+        Similarly, if $\lambda \in \mathbf{F}$ is an eigenvalue of $S^{-1}TS$, then $S^{-1}TS - \lambda I = 0$ has a non-trivial solution.
+        \begin{equation*}
+            T - \lambda I = S(S^{-1}TS)S^{-1} - S(\lambda I)S^{-1} = S(S^{-1}TS - \lambda I)S^{-1}
+        \end{equation*}
+        Therefore $T \lambda I$ also has a non-trivial solution and $\lambda$ is an eigenvalue of $T$.\\
+        This shows that $T$ and $S^{-1}TS$ have the same eigenvalues.
+    \end{addmargin}
+    \item[(b)] What is the relationship between the eigenvectors of $T$ and the eigenvectors of $S^{-1}TS$?
+    \begin{addmargin}[1em]{0em}
+        From the reasoning in (a), it is easy to see that
+        \begin{itemize}
+            \item $\forall v$ such that $Tv = \lambda v, \exists S^{-1}vS$ such that
+            \begin{equation*}
+                S^{-1}TS(S^{-1}vS) = S^{-1}(\lambda v)S = \lambda S^{-1}vS
+            \end{equation*}
+            \item $\forall v$ such that $S^{-1}TSv = \lambda v, \exists SvS^{-1}$ such that $TSvS^{-1} = \lambda SvS^{-1}$
+        \end{itemize}
+    \end{addmargin}
+\end{itemize}
+\section*{4.7}
+(Axler 5A.18)\\
+Show that the operator $T \in\mathcal{L}(\mathbf{C}^{\infty})$ defined by
+\begin{equation*}
+    T(z_1, z_2, ...) = (0, z_1, z_2, ...)
+\end{equation*}
+has no eigenvalues.
+\begin{addmargin}[1em]{0em}
+    We show that $\forall v = (z_1, z_2, ...)$ such that $\exists \lambda, Tv = \lambda v, v = 0$.\\
+    Suppose $k$ is the first index where $v_k = z_k \neq 0$. Then $Tv = (0, z_1, ...)$ will have $(Tv)_k = z_{k-1} = 0 = \lambda v_k = \lambda z_k \rightarrow \lambda = 0$.\\
+    Since also $(Tv)_{k+1} = v_k \neq 0 = \lambda v_{k+1} = 0$, which is a contradiction. Therefore no such $k$ exists, i.e. $v = (z_1, z_2, ...) = 0$.\\
+    We have shown that no eigenvalues exist for $T$.
+\end{addmargin}
+\section*{4.8}
+(Axler 5A.20)\\
+Find all eigenvalues and eigenvectors of the backward shift operator $T \in \mathcal{L}(\mathbf{F}^{\infty})$ defined by
+\begin{equation*}
+    T(z_1, z_2, z_3, ...) = (z_2, z_3, ...)
+\end{equation*}
+\begin{addmargin}[1em]{0em}
+    Suppose $\exists \lambda \in \mathbf{F}, v = (z_1, z_2, z_3, ...) \in \mathbf{F}^\infty$ such that $Tv = \lambda v$.\\
+    If $\lambda \neq 0$, then we have
+    \begin{equation*}
+        \begin{cases}
+            (Tv)_1 = \lambda v_1 = \lambda z_1 = z_2\\
+            (Tv)_2 = \lambda v_2 = \lambda z_2 = \lambda^2 z_1 = z_3\\
+            (Tv)_3 = \lambda v_3 = \lambda z_3 = \lambda^3 z_1 = z_4\\
+            ...
+        \end{cases}
+    \end{equation*}
+    Therefore $\forall \lambda \neq 0, v = (\lambda^0z_1, \lambda^1z_1, \lambda^2z_1, ...)$ is an eigenvector with eigenvalue $\lambda$.\\
+    If $\lambda = 0$, then $Tv = 0 = (z_2, z_3, ...) \rightarrow z_2 = z_3 = ... = 0$.\\
+    Therefore $v = (z_1, 0, 0, ...)$ is an eigenvector with eigenvalue $0$.
+\end{addmargin}
+\section*{4.9}
+(Axler 5A.22)\\
+Suppose $T \in \mathcal{L}(V)$ and there exists nonzero vectors $v$ and $w$ in $V$ such that
+\begin{equation*}
+    Tv = 3w \textrm{   and   } Tw = 3v
+\end{equation*}
+Prove that $3$ or $-3$ is an eigenvalue of $T$.
+\begin{addmargin}[1em]{0em}
+    Now suppose $v+w \neq 0$.\\
+    Then we have $u = v+w \neq 0, Tu = T(v+w) = Tv + Tw = 3w + 3v = 3(w+v) = 3u$.\\
+    Therefore we see that if $v+w \neq 0$, then $3$ is an eigenvalue of $T$.\\
+    Now suppose $v+w = 0$.\\
+    This means $w = -v \rightarrow Tv = 3w = -3v$.\\
+    Therefore $-3$ is an eigenvalue of $T$.\\
+    Therefore either $3$ or $-3$ is an eigenvalue of $T$.
+\end{addmargin}
+\section*{4.10}
+(Axler 5A.30)\\
+Suppose $T \in \mathcal{L}(\mathbf{R}^3)$ and $-4, 5$ and $\sqrt{7}$ are eigenvalues of $T$. Prove that there exists $x \in \mathbf{R}^3$ such that $Tx - 9x = (-4, 5, \sqrt{7})$.
+\begin{addmargin}[1em]{0em}
+    Suppose that $T-9I$ is not injective.\\
+    Then this means that $9$ is an eigenvalue of $T$.\\
+    However, that would give $T$ 4 eigenvalues, which is larger than the dimension of $V = \mathbf{R}^3$. Contradiction.\\
+    Therefore $T-9I$ is injective, i.e. $(T-9I)x = (-4, 5, \sqrt{7})$ has a unique solution.
+\end{addmargin}
+\section*{4.11}
+(Axler 5A.32)\\
+Suppose $\lambda_1, ..., \lambda_n$ is a list of distinct real numbers. Prove that the list $e^{\lambda_1x}, ..., e^{\lambda_nx}$ is linearly independent in the vector space of real-valued functions on $\mathbf{R}$.
+\begin{addmargin}[1em]{0em}
+    Denote $V$ the vector space of real-valued functions on $\mathbf{R}$. Create $T \in \mathcal{L}(\mathbf{V})$ defined by
+    \begin{equation*}
+        Tf = f'
+    \end{equation*}
+    It is obvious that $T$ is a linear operator.\\
+    Now $\forall \lambda, T(e^{\lambda_i x}) = \lambda_ie^{\lambda_ix} \rightarrow e^{\lambda_ix}$ is an eigenvector of $T$ with eigenvalue $\lambda_i$.\\
+    Therefore since $e^{\lambda_1x}, ..., e^{\lambda_nx}$ is a list of eigenvectors with distinct eigenvalues, then they are linearly independent.
+\end{addmargin}
+\section*{4.12}
+(Axler 5B.1)
+\section*{4.13}
+(Axler 5B.2)
+\section*{4.14}
+\section*{4.15}
+\section*{4.16}
 \end{document}
