@@ -122,11 +122,25 @@ Let $H$ be a subgroup of $G$ and any nonempty subset $A$ of $G$ define $N_H(A)$ 
     Since $N_H(A) \subseteq H, \rightarrow N_H(A) \leq H$.
 \end{addmargin}
 \section*{6}
-(2.3.17)
+(2.3.17)\\
+Find a presentation for $Z_n$ with one generator.
+\begin{addmargin}[1em]{0em}
+    $Z_n = \{z|z^n=1\}$
+\end{addmargin}
 \section*{7}
-(2.3.25)
+(2.3.25)\\
+Let $G$ be a cyclic group of order $n$ and let $k$ be an integer relatively prime to $n$. Prove that the map $x \mapsto x^k$ is surjective. Use Lagrange's Theorem to prove the same is true for any finite group of order $n$.
+\begin{addmargin}[1em]{0em}
+    Since $k$ relatively prime to $n$, this means $gcd(k, n) = 1$.\\
+    Therefore $\exists r, s$ such that $rk+sn = 1 \rightarrow \forall a \in \mathbb{Z}, ark+asn = a$.\\
+    Therefore $x^{ark+asn} = x^a = x^{ark} \cdot 1$, i.e. $(x^{ar})^k = x^a$.\\
+    For any finite group of order $n$:\\
+    Given $x \in G$, by Lagrange's Theorem we know $|x||k$ and thus $k$ also relatively prime to $|x|$.\\
+    Therefore this is also true for any finite group of order $n$.
+\end{addmargin}
 \section*{8}
-(3.1.9)
+(3.1.9)\\
+
 \section*{9}
 (3.1.32)
 \section*{10}
