@@ -19,4 +19,117 @@
 \maketitle
 \section*{Quotient Groups: Definitions and Examples}
 The study of \textbf{quotient groups} are essentially the study of \textbf{fibres} of $\phi$ i.e. the set of elements mapping to the same element under $\phi$.
+\subsection*{Basic properties of homomorphisms and fibres}
+\subsubsection*{Definition of quotient group}
+Given $\phi: G \rightarrow H$ be a homomorphism with kernel $K$. The \textbf{quptient group G/K}  is the group whose element elements are fibres of $\phi$ with operation defined as:
+\begin{equation*}
+    X = \overline{a}, Y = \overline{b}, XY = \overline{ab}
+\end{equation*}
+We can also define a quotient group without spelling out the $\phi$ explicitly.
+\subsubsection*{Properties of fibres and kernels}
+Given $\phi: G \rightarrow H$ a homomorphism with kernel $K$. Suppose $X \in G/K$ is a fibre above $a$, i.e. $X = \phi^{-1}(a)$. Then
+\begin{enumerate}
+    \item $\forall u \in X, X = \{uk| k \in K\}$.
+    \item $\forall u \in X, X = \{ku| k \in K\}$.
+\end{enumerate}
+This is saying that if $K$ is a kernel, then $uK = Ku$.
+Proof for this is obvious.\\
+The groups defined above can be generalized to any subgroup in $G$:
+\subsubsection*{Definition of coset}
+Given $N \leq G, g \in G$, let
+\begin{equation*}
+    gN = \{gn | n \in N\}, Ng = \{ng | n \in N\}
+\end{equation*}
+these are called \textbf{left coset and right coset} respectively. Any element of a coset is called a \textbf{representative} of that coset.\\
+With the definiton, we can see that \textbf{fibres of homomorphisms} are just \textbf{left cosets of kernels}.\\
+This enables us to define quotient groups without spelling out the homomorphisms explicitly as long as we know that $K$ is a kernel:
+\subsubsection*{Operations of cosets}
+Given $G$ a group and $K$ a kernel of some homomorphism from $G$. Then the set of left cosets of $K$ with operations defined by
+\begin{equation*}
+    uK \circ vK = (uv)K
+\end{equation*}
+forms a group $G/K$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Given $X, Y \in G/K$ with $X = \phi^{-1}(a), Y = \phi^{-1}(a)$, we denote that $Z = XY = \phi^{-1}(ab)$. We NTS that $\forall u \in X, v \in Y, uv \in Z$:\\
+    Since $u \in X, v \in Y$, we know that $\phi(u) = a, \phi(v) = b$. Then $\phi(uv) = \phi(u)\phi(v) = ab \rightarrow uv \in Z = \phi^{-1}(ab)$.\\
+    Also NTS show that $\forall z = uvk \in Z = (uv)K, \exists u' \in X, v' \in Y$ such that $z = u'v'$:\\
+    Since $z \in Z$, we know that $\phi(z) = ab$. Then choose $u \in X = uK, z = u \circ (u^{-1}z)$, we have\\
+    $\phi(u)\phi(u^{-1}z) = a \circ \phi(u^{-1}z) = ab \rightarrow \phi(u^{-1}z) = b \rightarrow u^{-1}z \in Y$.\\
+    THerefore we have shown that $Z = uvK = XY = (uK)(vK)$.
+\end{addmargin}
+Here we note that the multiplication of cosets is \textbf{independent of the choice of representations}.\\
+We can therefore denote a coset $X = uK = \overline{u}$, then multiplication can just be written as $\overline{uv}$.\\
+Next we show that $G/K$ is well defined $\iff K$ is a kernel. Such a subgroup $K$ is also called a \textbf{normal subgroup}.
+\subsubsection*{Cosets form a partition}
+Given $N \leq G$, the set of left cosets of $N$ form a partition of $G$. Furthermore $\forall u, v \in G, uN = vN \iff v^{-1}n \in N$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First $\forall g \in G, g \in gN$ since $1 \in N$. Therefore
+    \begin{equation*}
+        G = \bigcup_{g \in G} gN
+    \end{equation*}
+    Then NTS that $uN \neq vN \rightarrow uN \cap vN = \emptyset$:\\
+    Suppose $\exists x \in uN, vN$, we claim that $uN = vN$:\\
+    Denote $x = un = vm$ for some $n, m \in N$, then we have $u = vmn^{-1}$ with $mn^{-1} \in N$.\\
+    Therefore $\forall ut \in uN, ut = vmn^{-1}t \in vN$, i.e. $uN \subseteq vN$.\\
+    We can similarly prove $vN \subseteq uN$.\\
+    Therefore $uN = vN$.
+\end{addmargin}
+\subsubsection*{Conditions for coset multiplication}
+Given $N \leq G$.
+\begin{enumerate}
+    \item The multiplication
+    \begin{equation*}
+        uN \cdot vN = (uv)N
+    \end{equation*}
+    is well defined $\iff \forall g \in G, n \in N, gng^{-1} \in N$.
+    \item If the operation is well defined, then left cosets of $N$ is a group. With identity $1N$ and $(gN)^{-1} = g^{-1}N$.
+\end{enumerate}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $\forall g \in G, n \in N, gng^{-1} \in N$, WTS $uN\cdot vN = (uv)N$ is well defined:\\
+    Given $u' = un \in uN, v' = vm \in vN$, NTS $u'v' \in (uv)N$:\\
+    $u'v' = unvm = uv\cdot v^{-1}nvm$. Since $\forall g \in G, n \in N, gng^{-1} \in N$, we know that $\exists n' \in N$ such that $n' = v^{-1}nv$.\\
+    Therefore $u'v' = uv\cdot n'm \in (uv)N$.\\
+    Then suppose $uN \cdot vN$ well defined, WTS $\forall g \in G, n \in N, gng^{-1} \in N$:\\
+    Here given $g \in G$, we have $gN \cdot (g^{-1}N) = (gg^{-1})N = 1N$.\\
+    This means that $\forall n \in N$, since $gn \in gN, g^{-1} \in g^{-1}N$, we know that $gng^{-1} \in N$, i.e. $\exists n' \in N$ such that $1\cdot n' = n' = gng^{-1}$.\\
+    This complete the proof for 1. The proof for 2 is easy.
+\end{addmargin}
+\subsubsection*{Definition of conjugate and normal}
+The element $gng^{-1}$ is called the \textbf{conjugate} of $n \in N$ by $g$.\\
+The set $gNg^{-1} = \{gng^{-1} | n \in N\}$ is called the \textbf{conjugate} of $N$ by $g$.\\
+The element $g$ is said to \textbf{normalize} $N$ if $gNg^{-1} = N$.\\
+$N \leq G$ is calle \textbf{normal} if every element normalizes $N$, written $N \trianglelefteq G$.\\
+Note that the structure of $G$ is preserved in $G/N$.
+\subsubsection*{Conditions for normal subgroups}
+Given $N \leq G$. The following are equivalent:
+\begin{enumerate}
+    \item $N \trianglelefteq G$
+    \item $N_G(N) = G$
+    \item $\forall g \in G, gN = Ng$
+    \item The coset multiplication for $N$ make the cosets into a group.
+    \item $\forall g \in G, gNg^{-1} \subseteq N$.
+\end{enumerate}
+Proof of this is done throughout this chapter.\\
+In determining the normality of $N$, using generators can avoid a lot of computations since proving \textbf{normality for each of the generators suffices to show normality of the whole group}.\\
+Now we prove the relation between kernel and normal subgroups:
+\subsubsection*{Kernel and normal subgroups}
+$N \leq G$ is normal $\iff$ it is a kernel of some homomorphism.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $N$ is a kernel of $\phi$, WTS $N \trianglelefteq G$:\\
+    $\forall g \in G, \phi(gng^{-1}) = \phi(g)\phi(n)\phi(g^{-1}) = \phi(g)\phi(g^{-1}) = 1 \rightarrow gng^{-1} \in N$ the kernel of $\phi$.\\
+    Therefore $N_G(N) = G \rightarrow N \trianglelefteq G$.\\
+    Suppose $N \trianglelefteq G$, WTS $\exists \phi$ such that $N$ is the kernel of $\phi$:\\
+    Just use
+    \begin{equation*}
+        \forall g \in G, \phi(g) = gN
+    \end{equation*}
+\end{addmargin}
+The homomorphism defined above is special:
+\subsubsection*{Definition of natural projection}
+Given $N \trianglelefteq G$, then homomorphism $\pi: G \rightarrow G/N$ defined by $\pi(g) = gN$ is called the \textbf{natural projection} of $G$ onto $G/N$.\\
+The normalizer of a subgroup $N \leq G$ is a measure of how close $N$ is to being normal.
 \end{document}
