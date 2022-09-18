@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Linear Algebra Done Right\\
+\large{Week 4 Notes (b)}}
+\author{shaozewxy }
+\date{September 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\setcounter{secnumdepth}{0}
+\section*{5.C Eigenspaces and Diagonal Matrices}
+\subsection*{Definition of eigenspace}
+Given $T \in \mathcal{L}(V)$ and $\lambda \in \mathbf{F}$. The \textbf{eigenspace} of $T$ corresponding to $\lambda$ denoted $E(\lambda, T)$ is defined by
+\begin{equation*}
+    E(\lambda, T) = null(T - \lambda I)
+\end{equation*}
+This is to say, $E(\lambda, T)$ is the set of eigenvectors of $T$ corresponding to $\lambda$.
+\subsection*{5.38 Sum of eigenspaces is a direct sum}
+Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$ with $\lambda_1, ..., \lambda_m$ are distinct eigenvalues of $T$. Then
+\begin{equation*}
+    E(\lambda_1, T) + ... + E(\lambda_m, T)
+\end{equation*}
+is a direct sum. Furthermore,
+\begin{equation*}
+    dim\ E(\lambda_1, T) + ... + dim\ E(\lambda_m, T) \leq dim\ V
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    To prove $E(\lambda_i, T)$ are linearly independent, suppose $\exists v_1, ..., v_m$ such that $v_1 + ... + v_m = 0$, but since they are eigenvectors, it is impossible due to 5.10.\\
+    Then $\sum dim\ E(\lambda_i, T) = dim(\bigoplus E(\lambda_i, T)) \leq dim\ V$
+\end{addmargin}
+\subsection*{Defintion of diagonalizable}
+$T \in \mathcal{L}(V)$ is called \textbf{diagonalizable} if $T$ has a diagonal matrix w.r.t. some basis of $V$.
+\subsection*{Example of diagonalizable operator}
+Define $T \in \mathcal{T}(\mathbf{R}^2)$ by
+\begin{equation*}
+    T(x, y) = (41x + 7y, -20x + 74y)
+\end{equation*}
+$T$ with basis $(1, 4)(7, 5)$ has a matrix
+\begin{equation*}
+    \begin{pmatrix}
+        69 & 0\\
+        0 & 46
+    \end{pmatrix}
+\end{equation*}
+Given $(x, y) \in \mathbb{R}^2$, we have
+\begin{equation*}
+    \begin{pmatrix}
+        1 & 7 & x\\
+        4 & 5 & y
+    \end{pmatrix} \Rightarrow
+    \begin{pmatrix}
+        1 & 0 & \frac{7y-5x}{23}\\
+        0 & 1 & \frac{4x-y}{23}
+    \end{pmatrix}
+\end{equation*}
+Then
+\begin{equation*}
+    \begin{pmatrix}
+        1 & 7\\
+        4 & 5
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        69 & 0\\
+        0 & 46
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        \frac{7y - 5x}{23}\\
+        \frac{4x- y}{23}
+    \end{pmatrix} =
+    \begin{pmatrix}
+        41x + 7y\\
+        -20x + 74y
+    \end{pmatrix}
+\end{equation*}
+\subsection*{5.41 Conditions for diagonalizability}
+Given $V$ finite dimensional with $T \in \mathcal{L}(V)$. Let $\lambda_1, ..., \lambda_m$ denote the distinct eigenvalues of $T$. Then the following are equivalent:
+\begin{itemize}
+    \item[(a)] $T$ diagonalizable.
+    \item[(b)] $V$ has a basis consisting of eigenvectors of $T$.
+    \item[(c)] There exists 1-dimensional subspaces $U_1, ..., U_n$ of $V$ each invariant under $T$ such that
+    \begin{equation*}
+        V = U_1 \oplus ... \oplus U_n
+    \end{equation*}
+    \item[(d)] $V = \bigoplus E(\lambda_i, T)$
+    \item[(e)] $dim\ V = \sum dim\ E(\lambda_i, T)$
+\end{itemize}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First it is clear that $a \iff b$.\\
+    Now $b \rightarrow c$ since each $U_i$ can just be $span(v_i)$.\\
+    Similarly, suppose $c$ holds, picking $v_i \neq 0$ from $U_i$ creates a basis of $V$. Therefore $c \rightarrow b$.\\
+    We have now proven that $a \iff b \iff c$. Next WTS that $b \rightarrow d \rightarrow e \rightarrow b$:\\
+    Suppose $b$ holds: then $\forall v \in V, v = \sum a_iv_i$. Since $E(\lambda_i, T)$ are linearly independent, we know that $V = \bigoplus E(\lambda_i, T)$. THerefore $b \rightarrow d$.\\
+    Suppose $d$ holds: then obviously $\sum dim\ E(\lambda_i, T) = dim\ \bigoplus E(\lambda_i, T) = dim\ V$. THerefore $d \rightarrow e$.\\
+    Suppose $e$ holds: then for each $E(\lambda_i, T)$, pick $dim\ E(\lambda_i, T)$ independent vectors from it. This forms a basis of $V$ since the result is still independent and the size equals to $dim\ V$. Obviously this basis consist of eigenvectors. Therefore $e \rightarrow b$.
+\end{addmargin}
+Now every operator is diagonalizable even in complex space.
+\subsection*{Example of un-diagonalizable operator}
+The operator $T \in \mathcal{L}(\mathbf{C}^2)$ defined by
+\begin{equation*}
+    T(w, z) = (z, 0)
+\end{equation*}
+is not diagonalizable.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $Tv = T(w, z) = \lambda v = (\lambda w, \lambda z)$, then we have
+    \begin{equation*}
+        \begin{cases}
+            \lambda z = 0\\
+            \lambda w = z
+        \end{cases}
+    \end{equation*}
+    If $\lambda \neq 0$, then $z = w = 0$.
+\end{addmargin}
+\subsection*{5.44 Enough eigenvalues implies diagonalizability}
+If $T \in \mathcal{L}(V)$ has $dim\ V$ distinct eigenvalues then $T$ diagonalizable.\\
+This is obvious since the corresponding eigenvectors form a basis of $V$.
+\subsection*{5.45 Example of finding diagonal matrices}
+Define $T \in \mathcal{L}(\mathbf{F}^3)$ by
+\begin{equation*}
+    T(x, y, z) = (2x+y, 5y+z, 8z)
+\end{equation*}
+Then it has a basis of eigenvectors.\\
+\begin{addmargin}[1em]{0em}
+    The matrix w.r.t. standard basis is upper triangular, therefore we have
+    \begin{equation*}
+        \begin{cases}
+            2x = 2x+y\\
+            2y = 5y+3z\\
+            2z = 8z
+        \end{cases} \Rightarrow \begin{pmatrix}
+            1\\
+            0\\
+            0
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+        \begin{cases}
+            5x = 2x+y\\
+            5y = 5y+3z\\
+            5z = 8z
+        \end{cases} \Rightarrow \begin{pmatrix}
+            3\\
+            1\\
+            0
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+        \begin{cases}
+            8x = 2x+y\\
+            8y = 5y+3z\\
+            8z = 8z
+        \end{cases} \Rightarrow \begin{pmatrix}
+            1\\
+            6\\
+            6
+        \end{pmatrix}
+    \end{equation*}
+    These are a basis of eigenvectors for $V$.
+\end{addmargin}
+\end{document}
