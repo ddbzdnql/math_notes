@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Fundamental Concepts of Analysis\\
+\large{Week 1 Notes (b)}}
+\author{shaozewxy }
+\date{June 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section*{7. Integers, Rationals and Exponents}
+\subsection*{Deifnition of integers}
+The set of \textbf{integers}, denoted $\mathbf{Z}$ is the set
+\begin{equation*}
+    \{0\}\cup \mathbf{P} \cup -\mathbf{P}
+\end{equation*}
+where $-\mathbf{P} = \{-n | n \in \mathbf{P}\}$.\\
+Integers is a group satisfying axioms 1 to 5.
+\subsection*{Definition of rational numbers}
+The set of \textbf{rational numbers}, denoted $\mathbf{Q}$ is the set
+\begin{equation*}
+    \left\{
+        \frac{p}{q} | p, q \in \mathbf{Z}, q \neq 0
+    \right\}
+\end{equation*}
+The rational numbers is a field satisfying axioms 1 to 11.
+\subsection*{Definition of integer exponents}
+Given $x \in \mathbf{R}$, define
+\begin{equation*}
+    x^1 = x, x^{n+1} = x\cdot x^n, n \in \mathbf{P}
+\end{equation*}
+We can then expand this defintion to all integers:
+\begin{equation*}
+    x^0 = 1, x^{-1} = \frac{1}{x^n}, n \in \mathbf{P}
+\end{equation*}
+Now it is important to show that $\mathbf{R} \neq \mathbf{Q}$.
+\subsection*{7.4 Square root of 2}
+$\nexists r \in \mathbf{Q}$ such that $r^2 = w$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $\exists r = \frac{p}{q} \in \mathbf{Q}$ such that $r^2 = 2$.\\
+    Then assume that not both $p, q$ are even, since if they are, we can keep divide both by $2$ until they are not both even.\\
+    Then we have $(\frac{p}{q})^2 = \frac{p^2}{q^2} = 2$.\\
+    Therefore $p^2 = 2q^2 \rightarrow p$ is even, i.e. $\exists k \in \mathbf{Z}$ such that $p  = 2k$.\\
+    Therefore $2q^2 = (2k)^2 = 4k^2 \rightarrow q^2 = 2k^2$, i.e. $q$ is also even, contradiction.
+\end{addmargin}
+We then prove that such a root exists in $\mathbf{R}$.
+\subsection*{7.5 Existence of nth root}
+Suppose $a$ non-negative integer and $n \in \mathbf{P}$, then $\exists b \geq 0 \in \mathbf{R}$ such taht $b^n = a$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    We define
+    \begin{equation}
+        X = \{x | x^n \leq a, x \geq 0\}
+    \end{equation}
+    We NTS that there exists a least upper bound for $X$:\\
+    First clearly $X$ is not empty since $0 \in X$.\\
+    Then clearly $X$ is bounded above since $a+1$ would be an upper bound.\\
+    Therefore $X$ has a least upper bound, $b = lub\ X$, we claim that $b^n = a$.\\
+    Now either $b^n = a$ or $b^n < a, b^n > a$.\\
+    We WTS that $b^n < a$ is not possible:\\
+    Suppose $b^n < a \rightarrow \exists \epsilon > 0 \in \mathbf{R}, \epsilon = a - b^n$.\\
+    Then we just need to construct a $b+r$ such that $(b+r)^n < a$ and this will result in a contradiction since $b+r \in X, b+r > b$.\\
+    \begin{equation*}
+        \begin{split}
+            (b+r)^n &= \sum_{k=0}^{n} \begin{pmatrix}
+                n\\
+                k
+            \end{pmatrix} b^k r^{n-k}\\
+            &= b^n + \sum_{k=0}^{n-1} \begin{pmatrix}
+                n\\
+                k
+            \end{pmatrix} b^k r^{n-k}
+        \end{split}
+    \end{equation*}
+    Therefore, we just need to pick $r$ so that for each
+    \begin{equation*}
+        \begin{pmatrix}
+            n\\
+            k
+        \end{pmatrix} b^k r^{n-k} < \frac{\epsilon}{n}
+    \end{equation*}
+    To do so, pick $r = \frac{1}{p}$ where $p \in \mathbf{P}$.\\
+    This is to pick a $p \in \mathbf{P}$ such that $p^{n-k} >$ some real number. Since $\mathbf{P}$ is not bounded above, we know that such $p$ exists.\\
+    Therefore we have that $b + \frac{1}{p} \in X, b + \frac{1}{p} > b$, which is impossible.\\
+    Therefore $b^n < a$ is impossible.\\
+    The case against $b^n > a$ can be similarly proven.
+\end{addmargin}
+We can then expand the definition to when $a$ is negative.
+\subsection*{7.6 Existence of nth root expanded}
+If $a \in \mathbf{R}$ and $n \in \mathbf{P}$ is odd, then $\exists b \in \mathbf{R}$ such that $b^n = a$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $a$ is positive, then we have proven this in 7.5.\\
+    Suppose $a$ is negative, then again we know that by 7.5 $\exists c \in \mathbf{R}$ such that $c^n = |a|$.\\
+    Then let $b = -c \rightarrow b^n = (-1\cdot c)^n = -c^n = -|a| = a$.
+\end{addmargin}
+We can then expand the two results above to a definiton of rational exponents of real numbers.
+\subsection*{Definition of rational exponents of real numbers}
+\subsubsection*{Nonnegative base with positive rational exponent}
+Suppose $x \in \mathbf{R}$ is nonnegative and $n \mathbf{P}$, define $x^{1/n}$ to be the nonnegative real number $y$ such that $y^n = x$.
+\subsubsection*{Real base with positive odd rational exponent}
+Suppose $x \in \mathbf{R}$ and $n \in \mathbf{P}$ is odd, then define $x^{1/n}$ to be the real number such that $y^n = x$.
+\subsubsection*{Real base with negative rational exponent}
+Suppose $x \in \mathbf{R}$ and $n \in \mathbf{P}$, define
+\begin{equation*}
+    x^{-1/n} = \frac{1}{x^{1/n}}
+\end{equation*}
+If $x \in \mathbf{R}$ and $r = p/q \in \mathbf{Q}$ with $p/q$ the lowest term of $r$, then define
+\begin{equation*}
+    x^r = (x^{1/q})^p
+\end{equation*}
+In these definitions, there doesn't exists a case where $x \in \mathbf{R}$ is negative whil $n \in \mathbf{P}$ is even, this is because $\forall y \in \mathbf{R}, y^n \geq 0 \neq x$, i.e $\nexists (-x)^{1/2k}$.\\
+We then show that there are many rational numbers and real numbers:
+\subsection*{7.8 Existence of rational numbers}
+Suppose $a, b \in \mathbf{R}$ and $a < b$, then $\exists r \in \mathbf{Q}$ such that $a < r < b$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    \textbf{Summarize:\\}
+    We first construct a rational unit length $1/q$ so that it is less then the delta between $a, b$.\\
+    Then we start from $0$ and walk towards $b$ using this unit length until we are barely larger than $b$.\\
+    Then we walk back one unit length, then we are bound to be in between $a, b$.\\
+    \includegraphics[scale=0.55]{UnitLength.png}
+\end{addmargin}
+\subsection*{7.9 Sum with irrational number is irrational}
+Sum of a rational number and an irrational number is irrational.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $s$ rational and $t$ irrational and $s+t$ rational. Then $t = s+t + (-t)$ is still rational. Contradiction.
+\end{addmargin}
+\subsection*{7.10 Existence of irrational numbers}
+Suppose $a, b \in \mathbf{R}$ with $a < b$, then $\exists s$ irrational such that $a < s < b$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    By 7.8 $\exists t \in \mathbf{Q}$ such that $a - \sqrt{2} < t < b - \sqrt{2}$, then $a < t + \sqrt{2} < b$.\\
+    By 7.9 $t + \sqrt{2}$ is irrational.
+\end{addmargin}
+\end{document}
