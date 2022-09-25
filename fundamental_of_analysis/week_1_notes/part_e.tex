@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Fundamental Concepts of Analysis\\
+\large{Week 1 Notes (e)}}
+\author{shaozewxy }
+\date{September 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section*{Summary}
+\begin{enumerate}
+    \item 16.2 Establish bounded and monotone equals convergence.
+    \item 16.3 16.4 Use the 16.2 to prove convergence without finding the limit.
+    \item 16.5 16.6 Use 16.2 to prove $(1+1/n)^n$ converges and define the limit to be $e$.
+    \item 16.7 Another example of using 16.2 to prove $n^{1/n}$ converges.
+\end{enumerate}
+\section*{16 Monotone Sequences and \textbf{e}}
+Previously to prove that a sequence $\{a_n\}$ converges, we need to know the limit $L$.\\
+Here we find a method to prove convergence without knowing the limit beforehand.
+\subsection*{Definition of monotonicity}
+Given $\{a_n\}$, we say that $\{a_n\}$ is \textbf{increasing/decreasing} if $a_n \leq a_{n+1} (a_n \geq a_{n+1})$. In either case, we say that $\{a_n\}$ is \textbf{monotone}.\\
+In the case where the eqaulity is not necessary, we say $\{a_n\}$ is \textbf{strictly increasing(decreasing)}, and also \textbf{strictly monotone}.
+\subsection*{16.2 Monotone sequense is convergent iff bounded}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    We prove the case for \textbf{increasing} since the decreasing will be similar.\\
+    Suppose $\{a_n\}$ is increasing and convergent then obviously it is bounded.\\
+    Therefore only NTS that if $\{a_n\}$ is increasing and bounded, then $\{a_n\}$ convergent:\\
+    We denote $X = \{x | x \textrm{ upper bound of } a_n\}$. Since $\{a_n\}$ bounded above, so we know that $X$ not empty and $X$ is trivially bounded below by $a_1$.\\
+    Therefore we claim that $L = \inf X$ exists, and it is the limit of $\{a_n\}$.\\
+    Suppose $\exists \epsilon > 0$ such that $\forall N \in \mathbf{P}, \exists n > N \in \mathbf{P}$ such that $|L - a_n| = L - a_n > \epsilon$.\\
+    Then we can see that $\forall n \in \mathbf{P},$ take $N = n$, then $\exists n' > N = n \in \mathbf{P}$ such that $L - a_{n'} > \epsilon$. Since $\{a_n\}$ increasing, and $n' > n$, we have $a_n < a_{n'} < L - \epsilon$.\\
+    This shows that $L - \epsilon$ is an upper bound of $\{a_n\}$ and contradiction, therefore no such $\epsilon$ exists.
+\end{addmargin}
+Therefore we can also prove convergence by showing a sequence is bounded and monotone.
+\subsection*{16.3}
+IF $|a| < 1$, then $\lim_{n \rightarrow \infty} a^n = 0$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First suppose $0 < a < 1$, then we know that $a^n$ is bounded above by $1$ and below by $0$. Therefore $a^n$ is bounded and decreasing.\\
+    Therefore $L = \lim_{n \rightarrow \infty} a^n$ exsits.\\
+    We have that
+    \begin{equation*}
+        L = \lim_{n \rightarrow \infty} a^n = \lim_{n \rightarrow \infty} a^{n+1} = a \lim_{n \rightarrow \infty}a^n = aL
+    \end{equation*}
+    Therefore if $L \neq 0$, we have $a = 1$, which is a contradiction.\\
+    We conclude that $L = 0$.\\
+    For the case where $-1 < a < 0$, we take the subsequence of $a^{2n} = (a^2)^n$, which becomes the first case.
+\end{addmargin}
+\subsection*{16.4}
+If $a > 0$, then $\lim_{n \rightarrow \infty} a^{1/n} = 1$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $a \geq 1$, then $\{a^{1/n}\}$ is decreasing and bounded below by $1$. Therefore $L = \lim_{n \rightarrow \infty} a^{1/n}$ exists.\\
+    We know that
+    \begin{equation*}
+        \lim_{n \rightarrow \infty} a^{2/n} = \lim_{n \rightarrow \infty} a^{1/n} \cdot a^{1/n} = (\lim_{n \rightarrow \infty} a^{1/n})^2 = L^2
+    \end{equation*}
+    Now $\{a^{2/2n}\}$ is a subsequence of $\{a^{2/n}\}$ and therefore has limit $L^2$.\\
+    But $\{a^{2/2n}\} = \{a^{1/n}\}$ by definition, therefore $L = L^2$. Since $L \neq 0$, we know that $L = 1$.\\
+    For the case where $0 < a < 1$, we have
+    \begin{equation*}
+        \begin{split}
+            \lim_{n \rightarrow \infty} a^{1/n} &= \lim_{n \rightarrow \infty} \left(\frac{1}{\frac{1}{a}}\right)^{1/n}\\
+            &= \frac{1}{\lim_{n \rightarrow \infty}(\frac{1}{a})^{1/n}}\\
+            &= \frac{1}{1} = 1
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+Given these two examples of proving convergence before calculating the limit, we can look at how to define $e$.
+\subsection*{16.5}
+Given $0 \leq a < b$, we have
+\begin{equation*}
+    \frac{b^{n+1} - a^{n+1}}{b-a} < (n+1)b^n
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    We know that
+    \begin{equation*}
+        (b^{n+1} - a^{n+1}) = (b - a)\left(
+            \sum_{i=0}^{n} b^ia^{n-i}
+        \right)
+    \end{equation*} 
+    Therefore,
+    \begin{equation*}
+        \frac{b^{n+1} - a^{n+1}}{b-a} = \sum_{i=0}^{n} b^ia^{n-i} < (n+1) b^n
+    \end{equation*}
+\end{addmargin}
+\subsection*{16.6 Defining $e$}
+The sequence $\{(1 + 1/n)^n\}$ is increasing and convergent. The limit is denote $e$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    We denote the sequence $\{x_n\}$ with $b = 1+1/n, a = 1+1/(n+1)$.\\
+    We reorganize the inequality to
+    \begin{equation*}
+        b^n(b - (n+1)(b-a)) < a^{n+1}
+    \end{equation*}
+    We denote $X = (b - (n+1)(b-a))$ the cross step term.\\
+    In this case $X = (1+1/n - 1/n) = 1$.\\
+    Therefroe $b^n = x_n < a^{n+1} = x_{n+1}$, i.e $\{x_n\}$ increasing.\\
+    Now we NTS it is bounde above:\\
+    Let $a = 1, b = 1 + 1/2n$, then $X = 1/2$, then
+    \begin{equation*}
+        \begin{split}
+            \left(1 + \frac{1}{2n}\right) ^ n  X &< 1\\
+            \left(1 + \frac{1}{2n}\right) ^ n &< 2\\
+            \left(1 + \frac{1}{2n}\right) ^ {2n} &< 4
+        \end{split}
+    \end{equation*}
+    Since $\{x_n\}$ is increasin, we know that $\forall n \in \mathbf{P}, x_n = (1+1/n)^n < x_{2n} = (1+1/2n)^{2n} = 4$.\\
+    Therefore $\{x_n\}$ is bouned above and converges.
+\end{addmargin}
+\subsection*{16.7}
+The sequence $\{n^{1/n}\}_{n=3}^{\infty}$ is decreasing and $\lim_{n \rightarrow \infty}n^{1/n} = 1$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    First we NTS $\{n^{1/n}\}$ decreasing.
+    \begin{equation*}
+        \begin{split}
+            (n+1)^{1/(n+1)} \leq n^{1/n} &\iff \\
+            ((n+1)^{1/(n+1)})^{n(n+1)} \leq (n^{1/n})^{n(n+1)} &\iff \\
+            (n+1)^n \leq n^{n+1} &\iff \\
+            \left(\frac{n+1}{n}\right)^n \leq n &\iff \\
+            \left(
+                1 + \frac{1}{n}
+            \right)^n \leq n &
+        \end{split}
+    \end{equation*}
+    From 16.6 we know that $\left(1+\frac{1}{n}\right)^n \leq 4$ therefore for $n \geq 4 \in \mathbf{P}, \{n^{1/n}\}$ is decreasing.\\
+    Since it is also bounded below by $1$, we know $L = \lim_{n \rightarrow \infty} n^{1/n}$ exists.\\
+    Now we have
+    \begin{equation*}
+        \begin{split}
+            L &= \lim_{n\rightarrow \infty} (2n)^{1/2n} \\
+            &= \lim_{n \rightarrow \infty} 2^{1/2n} n^{1/2n} \\
+            &= \lim_{n \rightarrow \infty} 2^{1/2n} \left(\lim_{n \rightarrow \infty} n^{1/n}\right)^2 \\
+            &= 1 \cdot L^2
+        \end{split}
+    \end{equation*}
+    Therefore since $L \neq 0$, we know that $L = 1$.
+\end{addmargin}
+\end{document}

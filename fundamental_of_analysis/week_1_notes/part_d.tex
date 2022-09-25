@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Fundamental Concepts of Analysis\\
+\large{Week 1 Notes (d)}}
+\author{shaozewxy }
+\date{September 2022}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section*{Summary}
+A list of basic theorem for sequences.
+\section*{10 Sequences of Real Numbers}
+\subsection*{Definition of sequences}
+Given $X$ a set. A \textbf{sequence} of elements of $X$ is a function from $\mathbf{P}$ the set of positive integers to $X$.\\
+So \textbf{a real sequence} is a function from $\mathbf{P} \rightarrow \mathbf{R}$.\\
+The notion is $\{a_n\}_{n=1}^{\infty}$ where $a$ denotes the function and $a_n$ is the value of the function at $n \in \mathbf{P}$.\\
+Can also use $a_1, a_2, ...$ or $\{a_n\}$ to denote a sequence.
+\subsection*{Definition of limit of a sequence}
+Given $\{a_n\}$ a sequence, we say that $\{a_n\}$ has \textbf{limit} $L \in \mathbf{R}$ if $\forall \epsilon > 0, \exists N \in \mathbf{P}$ such that $n \geq N \rightarrow |a_n - L| < \epsilon$.
+\subsection*{10.3 Limit is unique}
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Suppose $L \neq L'$ both limits of $\{a_n\}$.\\
+    Then choose $\epsilon = |L - L'|/4$, we have that $\exists N_1$ such that $\forall n > N_1 \in \mathbf{P}, |L - a_n| < \epsilon$, similarly $N_2$ exists for $L'$, we choose $N$ to be the larger of $N_1, N_2$.\\
+    Then choose $n > N$, we have $|L - a_n| < \epsilon, |L' - a_n| < \epsilon$.\\
+    However, it is obvious such $a_n$ doesn't exist:\\
+    \includegraphics*[]{UniqueLimit.png}
+\end{addmargin} 
+Now we can denote this unique limit of $\{a_n\}$ as $\lim_{n \rightarrow \infty} a_n = L$.
+\subsection*{Test of non-limit}
+From the definition we know that $\{a_n\}$ doesn't have a limit $L$ if $\exists \epsilon$ such that there are infinitely many $n \in \mathbf{P}$ such that $|L - a_n| > \epsilon$.
+
+\section*{11 Subsequences}
+\subsection*{Definition of subsequence}
+Given $\{a_n\}$ a sequence. Define a $f: \mathbf{P} \rightarrow \mathbf{P}$ to be strictly increasing. The sequence $\{a_{f(n)}\}_{n=1}^\infty$ is called a \textbf{subsequence} of the sequence $\{a_n\}$.
+\subsection*{11.2 Subsequences share the limit}
+Given $\{a_n\}$ with limit $L$, then any subsequence of $\{a_n\}$ also has limit $L$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    $\forall \epsilon > 0$ we know that $\exists N$ such that $\forall n > N \in \mathbf{P}, |a_n - L| < \epsilon$.\\
+    Then given an strictly increasing $f: \mathbf{P} \rightarrow \mathbf{P}$, we know $\exists N'$ such that $f(N') > N$.\\
+    Then we say that with this $N', \forall n \in \mathbf{P} > N', a_{f(n)} = a_{n'}$ for some $n' = f(n) > N' > N, \rightarrow |L - a_{f(n)}| < \epsilon$.
+\end{addmargin}
+
+\section*{12 Algebra of Limits}
+We say that $\{a_n\}$ is \textbf{convergent} if it has a limit and \textbf{divergent} if it doesn't have a limit.
+\subsection*{12.1 Unchanged sequence converges}
+The proof of this is obvious.
+\subsection*{12.2-12.9  Operation of limits}
+These operations of convergent sequences reflect to their limits:\\
+Addition, subtraction, multiplication with number, multiplication, division (given it makes sense).\\
+Here the case of division needs to be taken special care of.\\
+Suppose $\lim_{n \rightarrow \infty}a_n = L \neq 0$, then there can \textbf{only be finitely many} $a_n = 0$.\\
+This comes from the fact that $L$ is the limit of $\{a_n\}$, so as $n$ increases, $\{a_n\}$ will contract into a smaller range centering on $L$, only finitely many $n$ outside of this range and could be $=0$.\\
+Then we can define $\frac{1}{a_n}$ as a sequence with limit $\frac{1}{L}$.
+\section*{13 Bounded Sequences}
+\subsection*{Definition of bounded}
+A sequence $\{a_n\}$ is \textbf{bounded above(below)} if $\exists M$ such that $\forall n \in \mathbf{P} a_n \leq M(a_n \geq M)$.\\
+From this definition we can see that $\{a_n\}$ is bounded $\iff \exists M \mathbf{P}$ such that $\forall n \in \mathbf{P}, |a_n| \leq M$.\\
+Therefore we have
+\subsection*{13.2 Convergent sequences are bounded}
+\subsection*{13.3 Multiplication of bounded sequeces}
+Given $\{a_n\}, \{b_n\}$ with $\lim_{n \rightarrow \infty}a_n = 0$ and $\{b_n\}$ bounded, then we have $\lim_{n \rightarrow \infty}a_nb_n = 0$.
+\end{document}
