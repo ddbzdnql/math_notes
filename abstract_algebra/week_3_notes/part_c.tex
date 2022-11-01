@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{braket}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Abstract Algebra\\
+\large{Week 3 Notes (c)}}
+\author{shaozewxy }
+\date{September 2022}
+
+\doublespacing
+\begin{document}
+\maketitle
+\section*{3.2 More on Cosets and Lagrange's Theorem}
+\subsection*{Lagrange's Theorem}
+If $G$ is a finite group and $H \leq G$, then the order of $H$ divides the order of $G$, i.e. $|H| \big| |G|$ and the number of cosets of $H$ in $G$ is $\frac{|G|}{|H|}$.\\
+\textbf{Proof:}
+\begin{addmargin}[1em]{0em}
+    Let $|H| = n$ and number of left cosets of $H$ be $k$.\\
+    We know that cosets of $H$ partition $G$. Now we NTS that $\forall g \in G, |gH| = |H|$:\\
+    Define a map $H \rightarrow gH$ by $h \rightarrowtail gh$. This map is by definition surjective.\\
+    Then from cancellation law we can see that $h_1 \neq h_2 \in H \rightarrow gh_1 \neq gh_2$, i.e. the map is also injective and therefore bijective.\\
+    Therefore we conclude that $\forall g \in G, |gH| = |H|$.\\
+    This then shows that $|G| = \sum_{g\in G} |gH| = kn$.
+\end{addmargin}
+\subsection*{Definition of index}
+Given $G$ a group (could be infinite) and $H \leq G$, the number of left cosets of $H$ in $G$ is called the \textbf{index} of $H$ in $G$ and denoted $|G:H|$.\\
+If $G$ is finite then $|G:H| = \frac{|G|}{|H|}$. If $G$ is infinite then the index could be either finite or infinite.\\
+Now we look at some consequences of Lagrange's Theorem.
+\subsection*{Order of elements divides the group}
+Given $G$ a group and $x \in G$, then $|x| \big| |G|$. In particular $\forall x \in G, x^{|G|} = 1$.\\
+This is pretty obvious since $|x| = |\braket{x}|$.
+\subsection*{Prime order group is cyclic}
+If $G$ a group of prime order $p$, then $G$ cyclic and $G \simeq Z_p$.\\
+This is also pretty obvious.
+\subsection*{Examples of Lagrange's Theorem}
+\begin{enumerate}
+    \item Given $H = \braket{(1\ 2\ 3)} \leq S_3$, we show that $H \trianglelefteq S_3$:\\
+    This is essentially saying the $N_G(H) = G$.\\
+    We know that $H \leq N_G(H) \leq G$, so $|H| = 3 \big| |N_G(H)| \big| |G| = 6$, i.e. $|N_G(H)| = 3$ or $6$.\\
+    But since $(1\ 2)(1\ 2\ 3)(2\ 1) = (1\ 3\ 2) \in \braket{(1\ 2\ 3)}$.\\
+    This means that $(1\ 2)$ conjugates a generator to another generator, therefore $|N_G(H)| \neq 3 \rightarrow |N_G(H)| = 6 \rightarrow N_G(H) = G$.
+    \item Given $G$ a group with $H \leq G, |G:H| = 2$, show that $H \trianglelefteq G$:\\
+    Given $g \in G \notin H$, we know that $gH = G - H$ since $gH$ and $H$ are the only two left cosets of $H$.\\
+    For similar reasoning, $Hg = G - H = gH$. Therefore $H \trianglelefteq G$.\\
+    This shows that $\braket{i}, \braket{j}, \braket{k} \trianglelefteq Q_8$ and $\braket{s, r^2}, \braket{r}, \braket{sr, r^2} \trianglelefteq D_8$.
+    \item The normal relationship is not transitive.\\
+    For example:
+    \begin{equation*}
+        \braket{s} \trianglelefteq \braket{s, r^2} \trianglelefteq D_8
+    \end{equation*}
+    But $\braket{s}$ is not normal in $D_8$.
+\end{enumerate}
+\end{document}
