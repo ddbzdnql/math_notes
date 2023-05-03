@@ -18,6 +18,120 @@
 
 \maketitle
 
-\setcounter{secnumdepth}{0}
-\section*{}
+\section{Geometry of $\mathbb{R}^n$ (Ch 1.4)}
+\textbf{Algebra is all about eqaulity, calculus is all about inequality.}
+\subsection{Interpretation of dot product}
+
+\begin{equation*}
+    \mathbf{x} \cdot \mathbf{y} = |\mathbf{x}||\mathbf{y}| \cos(\theta) \tag{1.4.3}
+\end{equation*}
+Proof:
+\begin{addmargin}[10px]{0px}
+    This comes from the \textbf{cosine law}.\\
+    Since we know $\mathbf{x}$, $\mathbf{y}$, $\mathbf{x}-\mathbf{y}$ form a triangle, therefore:
+    \begin{equation*}
+        |\mathbf{x} - \mathbf{y}|^2 = |\mathbf{x}|^2 + |\mathbf{y}|^2 - 2 |\mathbf{x}| |\mathbf{y}| \cos \alpha
+    \end{equation*}
+    Since also,
+    \begin{equation*}
+        |\mathbf{x} - \mathbf{y}|^2 = (\mathbf{x} - \mathbf{y})^2
+    \end{equation*}
+    We have
+    \begin{equation*}
+        \begin{split}
+            |\mathbf{x}|^2 + |\mathbf{y}|^2 - 2 \mathbf{x}\mathbf{y} &= |\mathbf{x}|^2 + |\mathbf{y}|^2 - 2 |\mathbf{x}| |\mathbf{y}| \cos \alpha\\
+            \mathbf{x}\mathbf{y} &= |\mathbf{x}||\mathbf{y}|\cos \alpha
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+\subsection{Angle between vectors in $\mathbb{R}^n > 3$}
+We want to define angles between $\mathbf{x}, \mathbf{y} \in \mathbb{R}^n, n > 3$ with
+\begin{equation*}
+    \alpha = \arccos\frac{\mathbf{x}\mathbf{y}}{|\mathbf{x}||\mathbf{y}|}
+\end{equation*}
+However we cannot guarantee that $\frac{\mathbf{x}\mathbf{y}}{|\mathbf{x}||\mathbf{y}|} \in [-1, 1]$. Hence we need to first prove the following:\\
+\textbf{Schwartz's Inequality}
+\begin{equation*}
+    \forall \mathbf{v}, \mathbf{w} \in \mathbb{R}^n, |\mathbf{v}\mathbf{w}| \leq |\mathbf{v}||\mathbf{w}| \tag{1.4.5}
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Suppose $\mathbf{v}, \mathbf{w} \neq 0$, then consider $f(t) = |\mathbf{v} + t \mathbf{w}|^2$:
+    \begin{equation*}
+        \begin{split}
+            f(t) = |\mathbf{w}|^2 t^2 + 2\mathbf{v}\mathbf{w} t + |\mathbf{v}|^2
+        \end{split}
+    \end{equation*}
+    It is obvious that $f(t) \geq 0$, this means that
+    \begin{equation*}
+        \begin{split}
+            (2\mathbf{v}\mathbf{w})^2 - 4|\mathbf{v}|^2|\mathbf{w}|^2 &< 0\\
+            4|\mathbf{v}\mathbf{w}|^2 &< 4(|\mathbf{v}||\mathbf{w}|)^2
+        \end{split}
+    \end{equation*}
+\end{addmargin}
+With Schwartz's Inequality, we have proven that
+\begin{equation*}
+\forall \mathbf{v}, \mathbf{w} \in \mathbb{R}^n, -1 \leq \frac{\mathbf{vw}}{|\mathbf{v}||\mathbf{w}|} \leq 1
+\end{equation*}
+And now we can define the angle between any two vectors as:
+\begin{equation*}
+    \alpha = \arccos \frac{\mathbf{vw}}{|\mathbf{v}||\mathbf{w}|}
+\end{equation*}
+\subsubsection{Application of Schwartz's Inequality}
+\begin{equation*}
+    \forall \mathbf{x, y} \in \mathbb{R}^n, |\mathbf{x+y}| \leq |\mathbf{x}| + |\mathbf{y}| \tag{1.4.9}
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    For the LHS, we have
+    \begin{equation*}
+       \begin{split}
+            |\mathbf{x+y}|^2 &= (\mathbf{x+y})^2\\
+            &= |\mathbf{x}|^2 + |\mathbf{y}|^2 + 2\mathbf{xy}
+       \end{split} 
+    \end{equation*} 
+    For the RHS, we have
+    \begin{equation*}
+        (|\mathbf{x}| + |\mathbf{y}|)^2 = |\mathbf{x}|^2 + |\mathbf{y}|^2 + 2\mathbf{|x||y|}
+    \end{equation*}
+    Since from Schwartz's Inequality we know that $2\mathbf{xy} \leq 2|x||y|$, therefore,
+    \begin{equation*}
+        |\mathbf{x+y}|^2 = |\mathbf{x}|^2 + |\mathbf{y}|^2 + 2 \mathbf{xy} \leq (\mathbf{|x| + |y|})^2 = |\mathbf{x}|^2 + |\mathbf{y}|^2 + 2 |\mathbf{x}||\mathbf{y}|
+    \end{equation*}
+\end{addmargin}
+\subsection{Geometry of Matrices}
+First we need to define \textbf{the length of a matrix:}
+\begin{equation*}
+    \forall A \in \mathbb{R}^{n\times m}, |A|^2 = \sum_{i,j} a_{ij}^2 \tag{1.4.10}
+\end{equation*}
+Then we can define the \textbf{product involving matrices:}
+\begin{equation*}
+    \forall A \in \mathbb{R}^{n\times m}, B \in \mathbb{R}^{m\times k}, b \in \mathbb{R}^m |A\mathbf{b}| \leq |A| |\mathbf{b}|, |AB| \leq |A| |B| \tag{1.4.11}
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Using $A_{i\_}$ to denote the vector consisting of $[a_{i1}, a_{i2}, ..., a_{im}]$, we have:
+    \begin{equation*}
+        |A\mathbf{b}|^2 = \sum_{1\leq i \leq n} (A_{i\_}\mathbf{b})^2
+    \end{equation*}
+    while
+    \begin{equation*}
+        \begin{split}
+            (|A||b|)^2 &= \sum_{1\leq i\leq n} |A_{i\_}|^2 |\mathbf{b}|^2
+        \end{split}
+    \end{equation*}
+    Since from Schwartz's Inequality we know that $(A_{i\_}b)^2 \leq |A_{i\_}|^2|\mathbf{b}|^2$, we have proven that
+    \begin{equation*}
+        |A\mathbf{b}|^2 \leq (|A||\mathbf{b}|)^2
+    \end{equation*}
+\end{addmargin}
+For $|AB|^2$, we know that
+\begin{equation*}
+    |AB|^2 = \sum_{1\leq j\leq k} |AB_{\_j}|^2
+\end{equation*}        
+And since for each $|AB_{\_j}|^2 \leq (|A||B_{\_j}|)^2$ (proven previously), we know that
+\begin{equation*}
+    |A|^2 |B|^2 = |A|^2 \sum_{1\leq j\leq k} B_{\_j}^2 \geq |AB|^2
+\end{equation*}
 \end{document}
