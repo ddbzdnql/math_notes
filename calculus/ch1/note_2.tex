@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Calculus\\
+\large{Notes on 2023/06/09}}
+\author{shaozewxy }
+\date{June 2023}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\section{Geometry of $\mathbb{R}^n$ (Ch 1.4)}
+\textbf{Algebra is all about eqaulity, calculus is all about inequality.}
+\subsection{Determinants and Traces}
+Currently we only define determinants and traces in $\mathbb{R}^2$.
+\begin{equation*}
+    A = \begin{bmatrix}
+        a_1& b_1\\
+        a_2& b_2
+    \end{bmatrix}, \det A = a_1b_2 - b_1a_2, \mathrm{tr} A = a_1 + b_2
+\end{equation*}
+\textbf{Geometric interpretation of determinants}
+\begin{equation*}
+    \forall \mathbf{a, b} \in \mathbb{R}^2, \det [\mathbf{a, b}] = \textrm{Area of parallelogram by} \mathbf{a, b}
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    We know that $\sin \theta = \sqrt{1 - \cos^2 \theta}$, and $\cos \theta = \frac{\mathbf{ab}}{\mathbf{|a||b|}}$, therefore,
+    \begin{equation*}
+        \begin{split}
+            \sin \theta &= \sqrt{1 - \left(\frac{\mathbf{ab}}{\mathbf{|a||b|}}\right)^2}\\
+            &= \sqrt{1 - \frac{(a_1b_1 + a_2b_2)^2}{(a_1^2+a_2^2)(b_1^2+b_2^2)}}\\
+            &= \sqrt{\frac{a_1^2b_1^2+a_1^2b_2^2+a_2^2b_1^2+a_2^2b_2^2 - a_1^2b_1^2 - a_2^2b_2^2 - 2a_1a_2b_1b_2}
+            {a_1^2b_1^2+a_1^2b_2^2+a_2^2b_1^2+a_2^2b_2^2}}\\
+            &= \sqrt{\frac{(a_2b_1-a_1b_2)^2}{(\mathbf{|a||b|})^2}}\\
+            &= \frac{|\det [\mathbf{a, b}]|}{\mathbf{|a||b|}}
+        \end{split}
+    \end{equation*}
+    i.e., $|\det[\mathbf{a, b}]| = \sin \theta \cdot \mathbf{|a||b|}$
+\end{addmargin}
+Given a standard $\mathbb{R}^2$, $\det [\mathbf{a, b}]$ is positive $\iff \mathbf{a}$ counterclk-wise from $\mathbf{b}$.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Define $\mathbf{c}$ by rotating $\mathbf{a}$ by $\frac{\pi}{2}$, i.e. $\mathbf{c} = \begin{bmatrix}
+        -a_2\\
+        a_1
+    \end{bmatrix}$, then we have $\mathbf{bc} = a_1b_2 - a_2b_1 = \det [\mathbf{a, b}]$.\\
+    \begin{equation*}
+        \det [\mathbf{a, b}] > 0 \Rightarrow \theta < \frac{\pi}{2} \Rightarrow \theta + \frac{\pi}{2} < \pi
+    \end{equation*}
+    i.e., $\mathbf{a}$ counterclk-wise from $\mathbf{b}$.
+\end{addmargin}
+\subsection*{Determinants and cross products in $\mathbb{R}^3$}
+\textbf{Determinants in $\mathbb{R}^3$}
+\begin{equation*}
+    \det \begin{bmatrix}
+        a_1& b_1& c_1\\
+        a_2& b_2& c_2\\
+        a_3& b_3& c_3
+    \end{bmatrix} = a_1 \det \begin{bmatrix}
+        b_2& c_2\\
+        b_3& c_3
+    \end{bmatrix} - a_2 \det \begin{bmatrix}
+        b_1& c_1\\
+        b_3& c_3
+    \end{bmatrix} + a_3 \det \begin{bmatrix}
+        b_2& c_2\\
+        b_3& c_3
+    \end{bmatrix}
+\end{equation*}
+\textbf{Cross product in $\mathbb{R}^3$}
+\begin{equation*}
+    \forall \mathbf{a, b} \in \mathbf{R}^3, \mathbf{a \times b} = \textrm{components of } \det \begin{bmatrix}
+        1& a_1& b_1\\
+        1& a_2& b_2\\
+        1& a_3& b_3
+    \end{bmatrix} = \begin{bmatrix}
+        \det \begin{bmatrix}
+            a_2& b_2\\
+            a_3& b_3
+        \end{bmatrix}\\
+        -\det \begin{bmatrix}
+            a_1& b_1\\
+            a_3& b_3
+        \end{bmatrix}\\
+        \det \begin{bmatrix}
+            a_1& b_1\\
+            a_2& b_2
+        \end{bmatrix}
+    \end{bmatrix}
+\end{equation*}
+From the definition we can easily see that
+\begin{equation*}
+    \det [\mathbf{a, b, c}] = \mathbf{a} \cdot (\mathbf{b\times c})
+\end{equation*}
+\textbf{Geometric interpretation of cross product}
+\begin{enumerate}
+    \item $\mathbf{a \times b}$ orthogonal to the plane spanned by $\mathbf{a, b}$.
+    \item $|\mathbf{a\times b}|$ is the area of the parallelogram between $\mathbf{a, b}$.
+    \item $\mathbf{a, b}$ no colinear $\iff \det[\mathbf{a, b, a\times b}] > 0$
+\end{enumerate}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    The first one is easy to verify by multiplying $\mathbf{a\cdot (a\times b)}$ and so on.\\
+    For 2, we use $\sin \theta = \sqrt{1 - \cos^2 \theta}$:
+    \begin{equation*}
+        \begin{split}
+            \sin \theta &= \sqrt{1 - \cos^2 \theta}\\
+            &= \sqrt{1 - \left(\mathbf{\frac{ab}{|a||b|}}\right)^2}\\
+            &= \sqrt{\frac{(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2) - (a_1b_1 + a_2b_2 + a_3b_3)^2}
+            {(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2)}}\\
+            &= \sqrt{\frac{a_1^2b_2^2 +a_1^2b_3^2 + a_2^2b_1^2 + a_2^2b_3^2 + a_3^2b_1^2 + a_3^2b_2^2 - 2a_1a_2b_1b_2 - 2a_1a_3b_1b_3 - 2a_2a_3b_2b_3}
+            {\mathbf{(|a||b|)^2}}}\\
+            &= \sqrt{\frac{(a_1b_2-a_2b_1)^2 + (a_1b_3-a_3b_1)^2 + (a_2b_3-a_3b_2)^2}
+            {\mathbf{(|a||b|)^2}}}
+        \end{split}
+    \end{equation*}
+    i.e. Area of parallelogram $= \mathbf{|a||b|}\sin \theta = |\mathbf{a\times b}|$
+\end{addmargin}
+\end{document}

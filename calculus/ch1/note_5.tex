@@ -1,0 +1,338 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Calculus\\
+\large{Notes on 2023/06/15}}
+\author{shaozewxy }
+\date{June 2023}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section{1.7 Derivatives with multiple variables}
+The purpose of calculus is to replace non-linear mappings with \textbf{linears transformations in small localities.}
+\subsection{Linear approximation in one-dimension}
+Given $U \subseteq R$ an open subset, and $f: U \rightarrow \mathbb{R}$, $f$ is \textbf{differentiable} at $a \in U$ with derivative
+\begin{equation*}
+    f'(a) = \lim_{h\rightarrow 0} \frac{1}{h}\left(f(a+h)-f(a)\right)
+\end{equation*}
+if such limit exists.
+\subsection{Partial derivatives in $\mathbb{R}^1$}
+Here we do the same thing as in one-dimensional case.\\
+Given $U \subseteq \mathbb{R}^n$ an open subset and $f: U \rightarrow \mathbb{R}$, we denote the derivative of $f$ w.r.t the i-th variable
+\begin{equation*}
+    D_i f(a) = \lim_{h\rightarrow 0}\frac{1}{h}\left(
+        f
+            \begin{pmatrix}
+                a_1\\
+                ...\\
+                a_i+h\\
+                ...\\
+            \end{pmatrix}
+         -
+        f
+            \begin{pmatrix}
+                a_1\\
+                ...\\
+                a_i\\
+                ...\\            
+            \end{pmatrix}
+    \right)
+\end{equation*}
+i.e. fixing all other variables as constant and changing only the i-th variable.
+\subsection{Partial derivatives in $\mathbb{R}^m$}
+Defined similarly as partial derivatives in $\mathbb{R}^1$:
+\begin{equation*}
+    \overrightarrow{D_if(a)} = \lim_{h\rightarrow 0}\frac{1}{h}\left(
+        \mathbf{f}\begin{pmatrix}
+            a_1\\
+            ...\\
+            a_i + h\\
+            ...
+        \end{pmatrix} -
+        \mathbf{f}\begin{pmatrix}
+            a_1\\
+            ...\\
+            a_i\\
+            ...
+        \end{pmatrix}
+    \right) = \begin{bmatrix}
+        D_if_1(a)\\
+        ...\\
+        D_if_m(a)
+    \end{bmatrix}
+\end{equation*}
+\subsection{Derivatives in several variables}
+With partial derivatives, can develop derivatives in several variables, i.e. how a system changes when all its components change.\\
+In the case of one variable, derivative is defined as
+\begin{equation*}
+    \lim_{h\rightarrow 0}\frac{f(a+h)-f(a)}{h}
+\end{equation*}
+However, this definition doesn't work in multiple variables as $\mathbf{h}$ is a vector and can't be used to do division.\\
+Therefore we rewrite the definition as:\\
+Given $f: U \rightarrow \mathbf{R}$, $f$ is differenciable at $a$ with $f' = m$ if and only if:
+\begin{equation*}
+    \lim_{h\rightarrow 0} \frac{1}{h}((f(a+h)-f(a)) - mh) = 0
+\end{equation*}
+Because this limit equals $0$, we can further rewrite it to
+\begin{equation*}
+    \lim_{h\rightarrow 0} \frac{1}{|h|}((f(a+h)-f(a)) - mh) = 0
+\end{equation*}
+With this definition, it can be expanded to multiple variables.\\
+For $f: U \rightarrow \mathbb{R}^m, U \subseteq \mathbb{R}^n$, the linear transformation is defined by the \textbf{Jacobian matrix}:
+\begin{equation*}
+    Jf(a) = \begin{bmatrix}
+        D_1f_1(a)& ...& D_nf_1(a)\\
+        ...&&...\\
+        D_1f_m(a)& ...& D_nf_m(a)
+    \end{bmatrix}
+\end{equation*}
+However, it is possible for some $f$ to have all partial derivatives but can calculate $\lim_{h\rightarrow 0}(...)$.\\
+Therefore, we define the derivative of multiple variables as:\\
+Given $f: U \rightarrow \mathbb{R}^m, U \subseteq \mathbb{R}^n$, $U$ open, $a \in U$. If $\exists$ a linear transformation $L: \mathbb{R}^n \rightarrow \mathbb{R}^m$ such that
+\begin{equation*}
+    \lim_{h\rightarrow 0}\frac{1}{|h|}((f(a+h)-f(a)) - L(h)) = 0
+\end{equation*}
+Then $f$ differentiable at $a$, and such $L$ is represented by $Jf(a)$.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    NTS that $L = Jf(a)$. By definition we know that $L$ is represented by the matrix:
+    \begin{equation*}
+        \begin{bmatrix}
+            L(e_1) ... L(e_n)
+        \end{bmatrix}
+    \end{equation*}
+    Therefore, we only NTS $L(e_i) = D_if(a)$:\\
+    Let $h$ approach $0$ from $e_i$:
+    \begin{equation*}
+        \lim_{te_i -\rightarrow 0} \frac{1}{|te_i|}
+        ((f(a+te_i)-f(a)) - L(te_i)) = 0
+    \end{equation*}
+    Because $|e_i| = 1$, we know that $|te_i| = |t||e_i| = |t|$,
+    \begin{equation*}
+        \begin{split}
+            &\lim_{te_i\rightarrow 0}\frac{1}{|t|}((f(a+te_i) - f(a)) - L(te_i))\\
+            =& \lim_{te_i\rightarrow 0}\frac{f(a+te_i) - f(a)}{|t|} - \frac{L(te_i)}{|t|}
+        \end{split}
+    \end{equation*}
+    Because the limit goes to $0$, we can then replace $|t|$ with $t$:
+    \begin{equation*}
+        \begin{split}
+            &=\lim_{te_i\rightarrow 0}\frac{f(a+te_i)-f(a)}{t} - \lim_{te_i\rightarrow 0}\frac{tL(e_i)}{t}\\
+            &=\lim_{te_i\rightarrow 0}\frac{f(a+te_i)-f(a)}{t} - L(e_i)
+        \end{split}
+    \end{equation*}
+    Since $\lim_{te_i\rightarrow 0}\frac{f(a+te_i)-f(a)}{t}$ is by definition $D_if(a)$, therefore
+    \begin{equation*}
+        D_if(a) = L(e_i)
+    \end{equation*}
+    i.e. $Jf(a) = L$
+\end{addmargin}
+\subsubsection{Example using Jacobian Matrix}
+Take $f\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix} = \begin{pmatrix}
+    xy\\
+    x^2 - y^2
+\end{pmatrix}$, denote the increment $\mathbf{v} = \begin{bmatrix}
+    h\\
+    k
+\end{bmatrix}$, the Jacobian matrix is
+\begin{equation*}
+    \mathbf{Jf}=\begin{bmatrix}
+        y& x\\
+        2x& -2y
+    \end{bmatrix}
+\end{equation*}
+Using the definition, we have:
+\begin{equation*}
+    \lim_{\mathbf{v}\rightarrow 0} \frac{1}{|\mathbf{v}|=\sqrt{h^2+k^2}}
+    \left(
+        \begin{pmatrix}
+            (x+h)(y+h)\\
+            (x+h)^2 - (y+h)^2
+        \end{pmatrix} - \begin{pmatrix}
+            xy\\
+            x^2 - y^2
+        \end{pmatrix} - \begin{bmatrix}
+            y& x\\
+            2x& -2y
+        \end{bmatrix} \begin{bmatrix}
+            h\\
+            k
+        \end{bmatrix}
+    \right)
+\end{equation*}
+should equal to $0$.
+\begin{equation*}
+    \begin{split}
+        &= \frac{1}{\sqrt{h^2+k^2}}
+        \left(
+            \begin{bmatrix}
+                xy+hk+xk+hy-xy-yh-xk\\
+                x^2+h^2+2xh-y^2-k^2-2yk-x^2+y^2-2xh+2yk
+            \end{bmatrix}
+        \right)\\
+        &=\frac{1}{\sqrt{h^2+k^2}}\begin{bmatrix}
+            hk\\
+            h^2 - k^2
+        \end{bmatrix}
+    \end{split}
+\end{equation*}
+With $|h|, |k| \leq \sqrt{h^2+k^2}$, we have
+\begin{equation*}
+    \begin{split}
+        \frac{hk}{\sqrt{h^2+k^2}} &= \frac{h}{\sqrt{h^2+k^2}}\cdot k\\
+        &\leq \frac{|h|}{\sqrt{h^2+k^2}}\cdot |k|\\
+        &\leq 1\cdot \sqrt{h^2+k^2}
+    \end{split}
+\end{equation*}
+Since $\mathbf{v} = \begin{bmatrix}
+    h\\
+    k
+\end{bmatrix} \rightarrow 0$, we know $\frac{hk}{\sqrt{h^2+k^2}}\rightarrow 0$.\\
+Similarly,
+\begin{equation*}
+    \begin{split}
+        \frac{h^2-k^2}{\sqrt{h^2+k^2}} &= \frac{h^2}{\sqrt{h^2+k^2}} - \frac{k^2}{\sqrt{h^2+k^2}}\\
+        &\leq \frac{|h^2|}{\sqrt{h^2+k^2}} + \frac{|k^2|}{\sqrt{h^2+k^2}}\\
+        &\leq |h|\frac{|h|}{\sqrt{h^2+k^2}} + |k|\frac{|k|}{\sqrt{h^2+k^2}}\\
+        &\leq |h| + |k| \rightarrow 0
+    \end{split}
+\end{equation*}
+Therefore the limit above goes to $0$, i.e. $\mathbf{Jf}$ is the derivative we want.
+\subsection{Directional derivatives}
+Finding the direvative over s certain direction other than the elemental directions can be done with Jacobian matrix:\\
+Given $U \subseteq \mathbb{R}^n$ open, $f: U \rightarrow \mathbb{R}^m$ differenciable, the directional derivative of $f$ over direction $\mathbf{v}$ is:
+\begin{equation*}
+    \lim_{h\rightarrow 0}\frac{f(a+h\mathbf{v})-f(a)}{h}
+\end{equation*}
+and to compute this,
+\begin{equation*}
+    \lim_{h\rightarrow 0}\frac{f(a+h\mathbf{v})-f(a)}{h} = [\mathbf{Jf(a)}]\mathbf{v}
+\end{equation*}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    From the definition, we know that 
+    \begin{equation*}
+        \lim_{\mathbf{h\rightarrow 0}}\frac{1}{|\mathbf{h}|}\left(
+            f(a+h)-f(a) - Jf(a)h\mathbf{v}
+        \right) = 0
+    \end{equation*}
+    Substitute $\mathbf{h}$ with $h\mathbf{v}$, we have
+    \begin{equation*}
+        \begin{split}
+            \lim_{h\rightarrow 0}\frac{1}{|h\mathbf{v}|}(
+                f(a+h\mathbf{v}) - f(a) - Jf(a)h\mathbf{v}
+            ) &= 0 \\
+            \lim_{h\rightarrow 0}\frac{1}{h}(f(a+h\mathbf{v}) - f(a) - Jf(a)h\mathbf{v}) &= 0\cdot |\mathbf{v}| = 0
+        \end{split}
+    \end{equation*}
+    Therefore we can say that $\lim_{h\rightarrow 0}\frac{1}{h}(f(a+h\mathbf{v}) - f(a)) = Jf(a)\mathbf{v}$
+\end{addmargin}
+\subsubsection{Example of directional derivative}
+Given $f\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix} = \begin{pmatrix}
+    xy\\
+    x^2 - y^2
+\end{pmatrix}$ at $\mathbf{a} = \begin{bmatrix}
+    1\\
+    1
+\end{bmatrix}$ with dirction $\mathbf{v} = \begin{bmatrix}
+    2\\
+    1
+\end{bmatrix}$, then we have:
+\begin{equation*}
+    Jf = \begin{bmatrix}
+        y& x\\
+        2x& -2y
+    \end{bmatrix}, Jf(\mathbf{a}) = \begin{bmatrix}
+        1& 1\\
+        2& -2
+    \end{bmatrix}, Jf(\mathbf{a})\mathbf{v} = \begin{bmatrix}
+        1& 1\\
+        2& -1
+    \end{bmatrix}\begin{bmatrix}
+        2\\
+        1
+    \end{bmatrix} = \begin{bmatrix}
+        3\\
+        2
+    \end{bmatrix}
+\end{equation*}
+Given $f\begin{pmatrix}
+    x\\
+    y\\
+    z
+\end{pmatrix} = xy\sin z$ over direction $\mathbf{v} = \begin{bmatrix}
+    1\\
+    2\\
+    1
+\end{bmatrix}$ at $\mathbf{a} = \begin{bmatrix}
+    1\\
+    1\\
+    \pi / 2
+\end{bmatrix}$, the Jacobian matrix gives
+\begin{equation*}
+    Jf(\mathbf{a})\mathbf{v} = \begin{bmatrix}
+        1& 1& 1
+    \end{bmatrix}\cdot \begin{bmatrix}
+        1\\
+        2\\
+        1
+    \end{bmatrix} = 3
+\end{equation*}
+Using the definition, we have 
+\begin{equation*}
+    \begin{split}
+        \lim_{h\rightarrow 0}\frac{1}{|h|}\left(
+            f(\mathbf{a+h}) - f(\mathbf{a})
+        \right) &= \frac{1}{|h|}((1+h)(1+2h)\cos (h+\pi/2) - 1)\\
+        &= \frac{1}{|h|}((2h^2+3h+1)(\cos h\sin \pi/2 + \sin h\cos \pi/2) - 1)\\
+        &= \frac{1}{|h|}(2h^2 \cos h + 3h\cos h + (\cos h - 1))\\
+        &= 2|h| + 2\cos h + \frac{\cos h-1}{|h|}\\
+        &= 0 + 3 + 0 = 3
+    \end{split}
+\end{equation*}
+\subsection{Matrix derivatives}
+Sometimes matrix derivatives are easier to compute using
+\begin{equation*}
+    \lim_{\mathbf{h}\rightarrow 0}\frac{1}{|\mathbf{h}|}(
+        f(a+h)- f(a) - L(\mathbf{h})
+    )
+\end{equation*} than does using Jacobian matrix.\\
+Given $S: \mathrm{Mat}(n, n) \rightarrow \mathrm{Mat}(n, n), S(A) = A^2$, WTS $DS(A)$ is a linear transformation defined by $DS(A)H = AH + HA$:\\
+\begin{equation*}
+    \begin{split}
+        \lim_{H\rightarrow 0} \frac{1}{|H|}((A+H)^2 - A^2 - DS(A)H) &= \frac{1}{|H|}((A+H)^2 - A^2 - AH - HA)\\
+        &= \frac{1}{|H|}(H^2 + AH + HA - AH - HA)\\
+        &= |H| \rightarrow 0
+    \end{split}
+\end{equation*}
+Given $S: \mathrm{Mat}(n, n) \rightarrow \mathrm{Mat}(n, n), S(A) = A^{-1}$, WTS $DS(A)H = -A^{-1}HA^{-1}$:\\
+The definition gives:
+\begin{equation*}
+    \lim_{H\rightarrow 0}\frac{1}{|H|}((A+H)^{-1} - A^{-1} + A^{-1}HA^{-1})
+\end{equation*}
+Use the fact that if $|B| < 1 \Rightarrow I + B + B^2 + ... = (I-B)^{-1}$, we know as $|H| \rightarrow 0, |-A^{-1}H| < 1$, therefore,
+\begin{equation*}
+   \begin{split}
+        \lim_{H\rightarrow 0}(A+H)^{-1} &= (A (I - (-A^{-1}H)))^{-1}\\
+        &= (I - (-A^{-1}H))^{-1}A^{-1}\\
+        &= (I + (-A^{-1}H) + (-A^{-1}H)^2 + ...)A^{-1}\\
+        &= A^{-1} - A^{-1}HA^{-1} + ((-A^{-1}H)^2 + ...)A^{-1}
+   \end{split} 
+\end{equation*}
+The definition the becomes $\lim_{H\rightarrow 0}\frac{1}{|H|}((-A^{-1}H)^2 + ...)A^{-1}$, because all terms have $|H|$ more than $2$ degrees, this goes to $0$.
+\end{document}

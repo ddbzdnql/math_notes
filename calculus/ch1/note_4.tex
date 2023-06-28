@@ -1,0 +1,152 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Calculus\\
+\large{Notes on 2023/06/9}}
+\author{shaozewxy }
+\date{June 2023}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+
+\section{Five big theorems (Ch 1.6)}
+\textbf{Algebra is all about eqaulity, calculus is all about inequality.}
+\subsection{Convergent subsequence}
+The first theorem is \textbf{a sequence in a compact set has a convergent subsequence}.
+\subsubsection{Basic concepts}
+$X \subset \mathbb{R}^n$ is \textbf{bounded} if it is contained in a ball in $\mathbb{R}^n$ centered at origin, i.e.
+\begin{equation*}
+    X \subset B_R(0)
+\end{equation*}
+$C \subset \mathbb{R}^n$ is \textbf{compact} if it is closed and bounded.
+\subsubsection{Compact set contains convergent subsequences}
+$C \subset \mathbb{R}^n$ a compact set contains a sequence $i \mapsto x_i$, then $x_i$ contains a subsequence $j \mapsto (x_i)_j$ whose limit is in $C$.\\
+\textbf{Basic idea:}
+    Because the regoin is bouned, can infinitely divide into smaller regions where one region contains infinitely many points from $x_i$. Find an element $(x_i)j$ from each such region to create a subsequence, it will be convergent.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Now we need to show that the $(x_i)_j$ created above is convergent in $C$:\\
+    Divide each dimension by 10, so that each element in the same region will have the decimal places and so on.\\
+    Then we construct $x$ with the decimal place of each picked region, it is clear that $(x_i)_j \rightarrow x$.
+\end{addmargin}
+\subsubsection{Difficulty in finding actual box}
+Define $x_m = \sin 10^m$ to be contained in $[-1, 1]$, a compact space. Which box contains infinitely many points from $x_m$?\\
+Dividing $[-1, 1]$ into $[-1,0), [0,1), {1}$, either $[-1, 0)$ or $[0,1)$ could work. Say it is $[0,1)$.\\
+This means that $10^m = k\cdot 2\pi$, where the decimal place of $k < 5$(so that $\sin k\cdot 2\pi > 0$).\\
+This can be turned into $k = \frac{1}{2\pi}\cdot 10^m$, i.e. we are asking if there are infinitely many $0,1,2,3,4$ in $\frac{1}{2\pi}$.\\
+The last conclusion is very hard to prove, therefore picking an actual box is very difficult.
+\subsection{Bounded functions in compact set}
+To put formerly, given $C \subset \mathbb{R}^n$, and $f: C \rightarrow \mathbb{R}$ continuous, then $\exists a, b \in C, \forall x \in C, f(x) \geq f(b), f(x) \leq f(a)$.\\
+\textbf{Basic idea:} If $f$ is unbouned, then can create an ever increasing sequence. However then some subsequence would have to be convergent to a limit, i.e. all large indices correspond to a small ball around this limit, meaning $f$ is not continuous around this limit.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Suppose $f$ is unbounded, then we can create a sequence $i \mapsto x_i$ where $f(x_i) > i$, i.e. ever increasing sequence.\\
+    Since $x_i \subset C$ a compact set, we know that $\exists j \rightarrow (x_i)_j$ such that $(x_i)_j \rightarrow b \in C$.\\
+    Since $f$ continous at $b$, we know that $\forall \epsilon > 0, \exists \delta > 0$ such that $|x-b| < \delta \rightarrow |f(x) - f(b)| < \epsilon$.\\
+    Also because $(x_i)_j \rightarrow b$, we know for such $\delta, \exists N$ such that $\forall j > N, |(x_i)_j - b| < \delta$.\\
+    This means that $\forall j > N, |f((x_i)_j) - f(b)| < \epsilon$, which is a contradiction.\\
+    Now we have shown that $f$ is bounded. Then we NTS that $f$ achieves its maximum.\\
+    Denote $\sup f = M$, WTS $\exists a \in C, f(a) = M$.\\
+    By the definition of supremum, $\exists i \mapsto x_i$  such that $f(x_i) \rightarrow M$.\\
+    Then simply find a convergent subsequence $j \mapsto (x_i)_j$ that converges to $(x_i)_j \rightarrow a \in C$, then we know that $f((x_i)_j) \rightarrow f(a) = M$.
+\end{addmargin}
+\subsection{Uniform continuity in compact set}
+Given $X \subset \mathbb{R}^n$ a compact set, $f:X \rightarrow \mathbb{R}$ continuous, then $f$ uniformly continuous on $X$.\\
+\textbf{Basic idea:} Given $\epsilon$, non-uniform indicates for any $\delta$, exists some $x, y$ such that $|x-y| < \delta, |f(x) - f(y)| > \epsilon$. Create two sequences $x_i, y_i$ from these, then extract converging subsequences. The subsequences converge to the same point, because all the time the distance of $f(x)$ and $f(y)$ is larger than $\epsilon$, this contradicts that continuity.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Suppose $f$ is not uniformly continuous, this means that given $\epsilon, \forall \delta, \exists x, y \in C, |x-y| < delta, |f(x) - f(y)| > \epsilon$.\\
+    Create $i \mapsto x_i, y_i$ by $|x_i - y_i| < \frac{1}{i}, |f(x_i) - f(y_i)| > \epsilon$. Find the converging subsequence $(x_i)_j, (y_i)_j$. It is clear that $(x_i)j, (y_i)_k$ converge to the same point $a$.\\
+    Because $f$ continuous at $a$, for the same $\epsilon, \exists \delta > 0$ such that $|x - a| < \delta \Rightarrow |f(x) - f(a)| < \frac{\epsilon}{2}$.\\
+    Then for efficiently large $M$ such that $\frac{1}{M} < \delta$, we know that given $j > M, |f((x_i)_j) - f((y_i)j)| > \epsilon$ and $|(x_i)_j - (y_i)_j| < \frac{1}{j} < \delta$, i.e. $|f((x_i)_j) - f(a)| < \frac{\epsilon}{2}, |f((y_i)_j) - f(a)| < \frac{\epsilon}{2}$, contradiction.
+\end{addmargin}
+\subsection{Mean value theorem}
+The first result is that \textbf{the derivative at maximum or minimum of a function is zero}.\\
+This is easily proven by looking that the derivative from bot sides, one side $\geq 0$, one side $\leq 0$. Therefore the derivative $=0$.\\
+The \textbf{mean value theorem} states that given $f:[a, b] \rightarrow \mathbb{R}$ is continuous, and differentiable on $(a, b)$, then $\exists c \in (a, b)$ such that $f'(c) = \frac{f(a)-f(b)}{a-b}$.\\
+\textbf{Basic idea:} This is saying that $\exists c \in (a, b), f'(c) - \frac{f(a) - f(b)}{a-b} = 0$. Look at this value as the derivative of the difference between $f$ and a linear function from $a$ to $b$.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Define function $g:[a, b] \rightarrow \mathbb{R}$ by $g(x) = f(a) + \frac{x-a}{b-a} f(b)-f(a)$.\\
+    Then $f-g$ is clearly continuous and $(f-g)(a) = (f-g)(b) = 0$. Assuming $f-g$ is not $0$ everywhere, then there is a maxima $c$ of $f-g$, therefore $(f-g)'(c) = 0 = f'(c) - g'(c) = f'(c) - \frac{f(b) - f(a)}{b-a}$.
+\end{addmargin}
+\subsection{Fundamental theorem of algebra}
+\textbf{Basic idea:}
+\begin{enumerate}
+    \item Find a global minimum for $|p(z)|$. While $|p(z)|$ is not necessarily in a compact set, we find a circle $B_R(0)$ such that any point outside is larger than the minimum $z_0$ in the circle. Thus the local minimum in the circl will be global.
+    \item Divide the components of $p(z)$ into three parts, $M$, a fixed value $p(z_0)$, $R$, lowest term with non-zero coefficients, and $L$, the rest. Both $R$ and $L$ is controlled by $u = \rho(\cos\theta+i\sin\theta)$.
+    \item Find a $\theta$ that positions $R$ between $0$ and $M$, then find a $\rho$ such that $|L| < |R| < |M|$, thus $|p(u)| < |p(z+0)|$, contradiction.
+\end{enumerate}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    1. Global minimum. Need to find a circle $B_R(0)$ such that $\forall z \notin B_R(0), |p(z)| > |p(0)|$. Then a minimum $z_0 \in B_R(0)$ will be globally minimum.\\
+    Observe $p(z) = z^k + a_{k-1}z^{k-1} + ... + a_0$, the first term $z^k$ will domintate $p(z)$ as $z$ grows larger and therefore we will be able to find such $B_R(0)$.\\
+    Take $A = \max\{|a_{k-1}|, ..., |a_0|\}$,
+    \begin{equation*}
+        \begin{split}
+            |p(z)| &= |z^k + a_{k-1}z^{k-1} + ... + a_0|\\
+            &\geq |z^k| - (|a_{k-1}z^{k-1}| + |a_0|)\\
+            &\geq |z^k| - kA|z|^{k-1} = |z|^{k-1}(|z|-kA)
+        \end{split}
+    \end{equation*}
+    Therefore, take $z \geq \max \{(k+1)A, 1\}$, we have that $|p(z)| \geq A |z|^{k-1} \geq |a_0| = |p(0)|$.\\
+    i.e. the minimum $z_0 \in B_R(0)$ is globally minimum.\\
+    2. NTS $|p(z_0)| = 0$.\\
+    Take $z = z_0 + u$, then
+    \begin{equation*}
+        \begin{split}
+            p(z) &= z^k + a_{k-1}z^{k-1} + ... + a_0\\
+            &= (z_0 + u)^k + a_{k-1}(z_0+u)^{k-1} + ... + a_0\\
+            &= u^k + b_{k-1}u^{k-1} + ... + b_0 = q(u)
+        \end{split}
+    \end{equation*}
+    $q(u)$ has three parts, $F = b_0 = p(z_0)$ is a fixed value, $R = b_ju^j$ is the lowest term with non-zero coefficients, and $L = (b_{j+1}u^{j+1} + ... + u^k)$. Both $R$ and $L$ are controlled by $u = \rho(\cos \theta + i\sin \theta)$.\\
+    The general idea is that as $u$ gets smaller, $L$ gets smaller much quicker than does $R$.\\
+    We know that $M = F + R = b_0 + b_j\rho^j(\cos j\theta + i\sin j\theta)$, this says that regardless of $\rho$, $M$ revolves around $F = b_0$ as $\theta$ changes.\\
+    \textbf{Therefore we can find a $\theta$ that places $M$ between $F$ and $0$}.\\
+    Then fixing such $\theta$, find a $\rho$ small enough so that $|L| \leq |R|$. This way $D = q(u) = F + R + L$ will be closer to $0$ than $q(0) = b_0$, i.e. $|q(u)| < |b_0|$, contradictory to the fact that $|b_0|$ is the global minimum of $p(z)$.\\
+    Such $u$ is easy to find:\\
+    Take $A = \max \{b_{j+1}, ..., 1\}$
+    \begin{equation*}
+        \begin{split}
+            |R| - |L| &= |b_ju^j| - |b_{j+1}u^{j+1} + ... + u^{k}|\\
+            &\geq |b_ju^j| - (k-j)A|u|^{j+1}\\
+            &= |u|^j (b_ju - (k-j)A)
+        \end{split}
+    \end{equation*}
+    Then take $u$ to be sufficiently small, we have that $|R| \geq |L|$.
+\end{addmargin}
+\subsubsection*{Corollary of Fundamental Algebra Theorem}
+Given $p(z) = (z-c_1)^{k_1} ... (z-c_m)^{k_m}$ where $k_1 + ... + k_m = k$, $k_j$ is called the \textbf{multiplicity} of rott $c_j$.\\
+\textbf{Any complex $p(z)$ with degree $k$ can be factored into $p(z) = (z-c_1)^{k_1} ... (z-c_m)^{k_m}$ with $k_1 + ... + k_m = k$}.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Denote $\tilde{p}$ to be the monic polynomial with the highest degree that divides $p$ and is the product of 1 degree polynomials, $\tilde{p}$ has largest degree $\tilde{k}$.\\
+    We can then write $p(z) = \tilde{p}(z)q(z)$, with $q(z)$ having $k-\tilde{k}$ degrees.\\
+    NTS that $\tilde{k} = k$:\\
+    Suppose $\tilde{k} < k$, then $\exists c$ such that $q(c) = 0$, then we can write $q(z) = (z-c)\tilde{q}(z)$.\\
+    I.e., we can write $p(z) = ((z-c)\tilde{p}(z))\tilde{q}(z)$, so $\tilde{p}$ is not such polynomial with highest degrees, contradiction.\\
+    Therefore $\tilde{k} = k$.
+\end{addmargin}
+This corollary can be limited to real polynomials with a looser condition:\\
+\textbf{Any real polynomial can be factored as polynomials of 1 or 2 degrees.}\\
+\textbf{Basic idea:}
+Do the same thing as the complex case, if the root is complex, then transform it into a 2-degree real polynomial.\\
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    Define $\tilde{p}$ similar as above, \textbf{but real}.\\
+    Then $p(z) = \tilde{p}(z)q(z)$ and suppose $\tilde{k} < k$, then $\exists c$ such that $q(c) = 0$.\\
+    Now if $c$ is real then we are done. So suppose $c$ is complex.\\
+    Since $q$ is a polynomial, given $c = a + b i, \overline{c} = a - bi, (\overline{c})^2 = (a-bi)(a-bi) = a^2 - b^2 - 2abi = \overline{c^2}$. Therefore $q(\overline{c}) = \overline{q(c)} = \overline{0} = 0$.\\
+    Now we can say that $q(z) = (z-c)(z-\overline{c})\tilde{q}(z) = (z^2 - 2az + a^2 + b^2)\tilde{q}(z)$, therefore $p(z) = ((z^2 - 2az + a^2 + b^2)\tilde{p}(z))\tilde{q}(z)$, contradiction.
+\end{addmargin}
+\end{document}
