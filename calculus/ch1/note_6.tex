@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {../../images/} }
+
+\title{Calculus\\
+\large{Notes on 2023/06/15}}
+\author{shaozewxy }
+\date{June 2023}
+
+\doublespacing
+\begin{document}
+
+\maketitle
+\section*{1.8 Rules for derivatives}
+This chapter mainly uses the theorems to derive some results useful for calculating derivatives.
+\subsection*{1.8.1 Basic rules}
+Suppose $U \subseteq \mathbb{R}^n$ is open, then
+\begin{enumerate}
+    \item If $f: U \rightarrow \mathbb{R}^m$ is constant, then $f$ is differenciable and $\mathrm{D}f = [0]$.
+    \item If $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is linear, then $f$ is differenciable everywhere, and $[\mathrm{D}f(\mathbf{a})]\mathbf{v} = f(\mathbf{v})$.
+    \item Given $f_1, ..., f_m: U \rightarrow \mathbb{R}$ all differenciable at $a$, then
+    \begin{equation*}
+        f = \begin{pmatrix}
+            f_1\\
+            ...\\
+            f_m
+        \end{pmatrix}: U \rightarrow \mathbb{R}^m
+    \end{equation*}
+    is also differentiable at $a$ and
+    \begin{equation*}
+        [\mathrm{D}f(a)]v = \begin{bmatrix}
+            [\mathrm{D}f_1(a)]v\\
+            ...\\
+            [\mathrm{D}f_m(a)]v\\
+        \end{bmatrix}
+    \end{equation*}
+    \item Given $f, g: U \rightarrow \mathbb{R}^m$ differenciable at $a$, then so is $f+g$, and $[\mathrm{D}(f+g)(a)] = [\mathrm{D}f(a)]+[\mathrm{D}g(a)]$.
+    \item Given $f: U \rightarrow \mathbb{R}, g: U \rightarrow \mathbb{R}^m$ differenciable at $a$, then so is $fg$, and $[\mathrm{D}(fg)(a)]v = ([\mathbf{D}f(a)]v)g(a) + f(a)([\mathrm{D}g(a)]v)$.
+    \item Given $f: U \rightarrow \mathbb{R}, g: U \rightarrow \mathbb{R}^m$ both differenciable at $a$ and $f(a) \ne 0$, then
+    \begin{equation*}
+        [\mathrm{D}(\frac{g}{f})(a)]v = \frac{[\mathrm{D}g(a)]v}{f(a)} - \frac{([\mathrm{D}f(a)]v)g(a)}{(f(a))^2}
+    \end{equation*} 
+    \item Given $f, g: U \rightarrow \mathbb{R}^m$ both differenciable at $a$, then so is $f \cdot g: U \rightarrow \mathbb{R}$ with $[\mathrm{D}(f\cdot g)(a)]v = ([\mathrm{D}f(a)]v)\cdot g(a) + f(a)\cdot ([\mathrm{D}g(a)]v)$
+\end{enumerate}
+\textbf{Proof:}
+\begin{addmargin}[10px]{0px}
+    We employ the equality
+    \begin{equation*}
+        \lim_{\overrightarrow{h}\rightarrow \overrightarrow{0}} \frac{1}{|h|}(f(a+h)-f(a) - [\mathrm{D}f(a)]h) = 0
+    \end{equation*}
+    Using 2. as an example:\\
+    Given $f$ is linear, we know that $f(a+h) = f(a) + f(h)$, therefore,
+    \begin{equation*}
+        \begin{split}
+            &\lim_{\overrightarrow{h}\rightarrow \overrightarrow{0}} \frac{1}{|h|}(f(a+h) - f(a) - f(h))\\
+            =& \frac{1}{|h|}(f(a) + f(h) - f(a) - f(h)) = 0
+        \end{split}
+    \end{equation*}
+    Using this equality, 1 to 4 are easily proven.\\
+    For 5,
+    \begin{equation*}
+        \begin{split}
+            \lim_{h \rightarrow 0}& \frac{1}{|h|}((fg)(a+h) - (fg)(a) - [\mathrm{D}(fg)(a)]h)\\
+            =& \frac{1}{|h|}(f(a+h)g(a+h) - f(a)g(a) - f(a)g(a+h) + f(a)g(a+h) - [\mathrm{D}(fg)(a)]h)\\
+            =& \frac{1}{|h|}((f(a+h)-f(a))g(a+h) + f(a)(g(a+h)-g(a)) - f(a)([\mathrm{D}g(a)]h) - g(a)([\mathrm{D}f(a)]h))\\
+            =& \frac{1}{|h|}((g(a+h)-g(a)-[\mathrm{D}g(a)]h)f(a) - (f(a+h) - f(a) - [\mathrm{D}f(a)]h)g(a)\\
+            &+ ([\mathrm{D}f(a)]h)(g(a+h) - g(a)))
+        \end{split}
+    \end{equation*}
+    By definition, the first two terms vanish as $h \rightarrow 0$. We only NTS that
+    \begin{equation*}
+        \lim_{h \rightarrow 0} \frac{[\mathrm{D}f(a)h]}{|h|}(g(a+h) - g(a)) = 0
+    \end{equation*}
+    We use the fact that the first term is bounded while the second vanishes and therefore the whole term vanishes.\\
+    The fact that the second term vanishes comes from the fact that $g$ is differenciable and therefore continuous at $a$.\\
+    For the first term:
+    \begin{equation*}
+        \begin{split}
+            \left|\frac{[\mathrm{D}f(a)]h}{|h|}\right| &\leq |\mathrm{D}f(a)| \left|\frac{h}{|h|}\right| = |\mathrm{D}f(a)|
+        \end{split}
+    \end{equation*}
+    Therefore the first term is bounded and the whole term vanishes.\\
+    For 6,
+    6 comes from 5 and we only NTS that
+    \begin{equation*}
+        \left[\mathrm{D}\frac{1}{f}(a)\right]v = - \frac{[\mathrm{D}f(a)]v}{(f(a))^2}
+    \end{equation*}
+    Here we have
+    \begin{equation*}
+        \begin{split}
+            \lim_{h \rightarrow 0}& \frac{1}{|h|}\left(
+                \frac{1}{f(a+h)} - \frac{1}{f(a)} + \frac{[\mathrm{D}f(a)]h}{(f(a))^2}
+            \right)\\
+            =&\frac{1}{|h|}\left(
+                \frac{[\mathrm{D}f(a)]h - f(a+h) + f(a)}{(f(a))^2} + \frac{f(a+h)-f(a)}{(f(a))^2} - \frac{f(a+h) - f(a)}{f(a+h)f(a)}
+            \right)
+        \end{split}
+    \end{equation*}
+    The first term by definition vanishes, the second and third term can be rewritten as:
+    \begin{equation*}
+        \frac{f(a+h)-f(a)}{|h|}\left(\frac{1}{f(a)}\left(\frac{1}{f(a)} - \frac{1}{f(a+h)}\right)\right)
+    \end{equation*}
+    Since we already know $\frac{1}{|h|}[\mathrm{D}f(a)]h$ is bounded and that $\frac{1}{|h|}\left(
+        [\mathrm{D}f(a)]h - (f(a+h) - f(a))
+    \right)$ vanishes, therefore the first term also vanishes.
+    
+\end{addmargin}
+\end{document}
